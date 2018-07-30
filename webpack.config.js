@@ -8,22 +8,16 @@ module.exports = {
         rules: [
             {test: /\.(htm|html)$/, use: ['raw-loader']},
             {
-                test: /\.css$/,
-                use: [{loader: 'style-loader'}, {loader: 'css-loader', options: {modules: true}}]
-            },
-            /*{test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
-            {test: /\.(woff|woff2)$/, loader: "url?prefix=font/&limit=5000"},
-            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
-            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"}*/
-            { test: /\.woff$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-            { test: /\.ttf$/,  loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
-            { test: /\.eot$/,  loader: "file-loader" },
-            { test: /\.svg$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
-            /*{
-                test: /.woff|.woff2|.svg|.eot|.ttf/,
-                use: 'url-loader?prefix=font/&limit=10000'
-            }*/
-        ]
+                test: /\.(scss|css$)$/,
+                use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: function () {
+                            return [require('autoprefixer')];
+                        }
+                    }
+                }, {loader: 'sass-loader'}]
+            }]
     },
     output: {
         filename: 'index.[hash:8].min.js',

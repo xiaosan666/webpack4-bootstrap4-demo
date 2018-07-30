@@ -1,8 +1,5 @@
 import 'jquery'
-import 'bootstrap';
-import './scss/app.scss';
-import './index.scss'
-import './index.html'
+import './test.html'
 
 console.log('333');
 try {
