@@ -1,7 +1,8 @@
-import '../../assets/Common'
-import '../../assets/libs/myjs.min'
-import './index.scss'
-import './index.html'
+import '../../assets/Common';
+import '../../assets/Custom';
+import '../../assets/libs/myjs.min';
+import './index.scss';
+import './index.html';
 
 window.login = login;
 

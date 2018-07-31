@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>鉴票宝</title>
+</head>
+<body>
+<aside>
+    <!--<div class="icon-invoice">
+      <img src="../../assets/img/icon-invoice.png" alt="" title="这只是logo">
+    </div>
+    <div class="icon-invoice">
+      <img src="../../assets/img/icon-invoice1.png" alt="" title="这只是logo">
+    </div>-->
+</aside>
+<nav>
+    <div class="form-group">
+        <label for="invoiceQRCode" class="col-md-3 col-sm-5 control-label title hidden-xs"> <img
+            src="../../assets/img/logo.png" alt="">鉴票宝</label>
+        <div class="col-md-7 col-sm-5 col-xs-8">
+            <input id="invoiceQRCode" class="form-control input-lg invoice-code" type="text"
+                   placeholder="添加发票-请扫描发票二维码" autofocus>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            <button type="button" class="btn btn-link pull-right" style="margin-top: 6px;" id="logout">退出</button>
+            <img src="../../assets/img/avatar.png" alt="头像" class="avatar hidden-xs hidden-sm" title="这只是logo">
+        </div>
+    </div>
+</nav>
+<section>
+    <!--DataGrid ToolBar-->
+    <div id="tb" class="tb">
+        <form class="form-inline" role="form">
+            <button type="button" class="btn btn-danger btn-sm" id="btnDelete"><i class="fa fa-fw fa-trash-o"></i>&nbsp;删除
+            </button>
+            <button type="button" class="btn btn-success btn-sm" id="btnAdd"><i class="fa fa-fw fa-plus"></i>&nbsp;新增
+            </button>
+        </form>
+    </div>
+
+    <!--DataGrid-->
+    <div id="dg"></div>
+
+    <!--dialog-->
+    <div id="dlg" class="easyui-dialog" data-options="closed:true,border:false,modal:true,title:'添加发票'"
+         style="width:300px;height:400px;padding: 15px 10px 0 10px;display: none">
+        <form role="form" id="form" onsubmit="return invoice.create(form)">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group required">
+                        <label for="invoiceCode">发票代码</label>
+                        <input type="number" class="form-control" id="invoiceCode" name="invoiceCode"
+                               placeholder="发票代码（长度10位或者12位）"
+                               required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="invoiceNumber">发票号码</label>
+                        <input type="number" class="form-control" id="invoiceNumber" name="invoiceNumber"
+                               placeholder="发票号码（长度8位）"
+                               required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="billTime">开票日期</label>
+                        <input type="date" class="form-control" id="billTime" name="billTime" placeholder="请选择开票日期"
+                               required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="checkCode">校验码后六位</label>
+                        <input type="number" class="form-control" id="checkCode" name="checkCode"
+                               placeholder="校验码（检验码必须是后六位）"
+                               required>
+                    </div>
+                </div>
+            </div>
+            <div align="center" style="padding: 10px;">
+                <button type="button" class="btn btn-sm" onclick="javascript:$('#dlg').dialog('close');"><i
+                    class="fa fa-fw fa-close"></i>&nbsp;取消
+                </button>
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-save"></i>&nbsp;提交
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
