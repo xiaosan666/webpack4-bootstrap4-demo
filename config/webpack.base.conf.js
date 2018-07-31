@@ -26,7 +26,7 @@ plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
     root: path.resolve(__dirname, '../'),
     verbose: false
 }));
-// plugins.push(new extractTextPlugin("./static/css/[chunkhash].css"));
+// plugins.push(new extractTextPlugin("./static/style/[chunkhash].style"));
 plugins.push(new webpack.ProvidePlugin({
     "$": "jquery",
     "jQuery": "jquery",
@@ -36,7 +36,7 @@ plugins.push(new webpack.ProvidePlugin({
     chunks: "all",
     minSize: 0,
     cacheGroups: {
-        vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
+        vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .style` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
             test: /node_modules\//,
             name: 'page/vendor',
             priority: 10,
@@ -71,11 +71,11 @@ module.exports = {
         rules: [
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader',}]},
             /*{
-                test: /\.css$/,
+                test: /\.style$/,
                 use: extractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        {loader: 'css-loader', options: {importLoaders: 1}},
+                        {loader: 'style-loader', options: {importLoaders: 1}},
                         'postcss-loader'
                     ],
                     publicPath: "../../",
@@ -88,7 +88,7 @@ module.exports = {
                     fallback: "style-loader",
                     use: [
                         {
-                            loader: "css-loader"
+                            loader: "style-loader"
                         }, {
                             loader: "less-loader"
                         }, 'postcss-loader'
@@ -98,7 +98,7 @@ module.exports = {
             },*/
             {
                 test: /\.(scss|css$)$/,
-                use: [{loader: 'style-loader'}, {loader: 'css-loader'}, {
+                use: [{loader: 'style-loader'}, {loader: 'style-loader'}, {
                     loader: 'postcss-loader',
                     options: {
                         plugins: function () {

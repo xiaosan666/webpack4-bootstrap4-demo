@@ -1,7 +1,7 @@
 import 'jquery';
 import 'bootstrap';
-import './scss/app.scss';
 import swal from 'sweetalert2';
+import './style/app.scss';
 
 window.swal = swal;
 import './libs/sweetalert2/setting.css';
