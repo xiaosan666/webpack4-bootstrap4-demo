@@ -1,3 +1,6 @@
+window.Http = Http;
+
+
 function Http(opts) {
     this.type = opts.type || "POST";
     this.url = opts.url;

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>鉴票宝登录</title>
+</head>
+<body>
+<div class="main row">
+    <div class="col-md-7 d-none d-md-block left"></div>
+    <div class="col-md-5 row login-form">
+        <div class="logo"><img src="../../assets/img/logo.png" alt=""></div>
+        <form class="col-md-8 col-sm-10 col-xs-12" name="form"
+              onsubmit="return login(form.username.value,form.password.value)">
+            <div class="title">登录鉴票宝</div>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required
+                       value="admin">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required
+                       value="123456">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

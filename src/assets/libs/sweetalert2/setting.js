@@ -15,7 +15,7 @@ function isIE() {
 if (typeof swal != 'undefined') {
     var proxied = swal;
 }
-swal = function () {
+window.swal = function () {
     if (isIE() == '7' || isIE() == '8' || isIE() == '9') {
         if (typeof arguments[0]['showCancelButton'] == 'boolean') {
             var result = confirm(arguments[0]['title']);
