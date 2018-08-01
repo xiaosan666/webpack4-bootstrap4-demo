@@ -52,7 +52,7 @@ $.extend($.fn.datagrid.defaults.filters, {
             }));
 
             var p = input.combo('panel');
-            $('<div class="clearfix"><div class="c1" style="width:50%;float:left"></div><div class="c2" style="width:50%;float:right"></div></div>').appendTo(p);
+            $('<div class="clearfix"><div class="c1" css="width:50%;float:left"></div><div class="c2" css="width:50%;float:right"></div></div>').appendTo(p);
             var c1 = p.find('.c1').calendar();
             var c2 = p.find('.c2').calendar();
             var footer = $('<div></div>').appendTo(p);
@@ -65,14 +65,14 @@ $.extend($.fn.datagrid.defaults.filters, {
                 input.combo('hidePanel');
             };
 
-            var thisMonthBtn = $('<button type="button" style="margin: 2px;" class="btn btn-info btn-sm">本月</button>').appendTo(footer);
+            var thisMonthBtn = $('<button type="button" css="margin: 2px;" class="btn btn-info btn-sm">本月</button>').appendTo(footer);
             thisMonthBtn.bind('click', function () {
                 var v1 = formatter(new Date(new Date().setDate(1)));
                 var v2 = formatter(new Date());
                 setValue(v1, v2);
             });
 
-            var monthBtn = $('<button type="button" style="margin: 2px;" class="btn btn-info btn-sm">过去30天</button>').appendTo(footer);
+            var monthBtn = $('<button type="button" css="margin: 2px;" class="btn btn-info btn-sm">过去30天</button>').appendTo(footer);
             monthBtn.bind('click', function () {
                 var now = new Date(), newDate = new Date(now.setDate(now.getDate() - 30));
                 var v1 = formatter(newDate);
@@ -80,7 +80,7 @@ $.extend($.fn.datagrid.defaults.filters, {
                 setValue(v1, v2);
             });
 
-            var weekBtn = $('<button type="button" style="margin: 2px;" class="btn btn-info btn-sm">过去7天</button>').appendTo(footer);
+            var weekBtn = $('<button type="button" css="margin: 2px;" class="btn btn-info btn-sm">过去7天</button>').appendTo(footer);
             weekBtn.bind('click', function () {
                 var now = new Date(), newDate = new Date(now.setDate(now.getDate() - 7));
                 var v1 = formatter(newDate);
@@ -88,7 +88,7 @@ $.extend($.fn.datagrid.defaults.filters, {
                 setValue(v1, v2);
             });
 
-            var yesterdaybtn = $('<button type="button" style="margin: 2px;" class="btn btn-info btn-sm">昨天</button>').appendTo(footer);
+            var yesterdaybtn = $('<button type="button" css="margin: 2px;" class="btn btn-info btn-sm">昨天</button>').appendTo(footer);
             yesterdaybtn.bind('click', function () {
                 var now = new Date(), yesterday = new Date(now.setDate(now.getDate() - 1));
                 var v1 = formatter(yesterday);
@@ -96,7 +96,7 @@ $.extend($.fn.datagrid.defaults.filters, {
                 setValue(v1, v2);
             });
 
-            var todayBtn = $('<button type="button" style="margin: 2px;" class="btn btn-info btn-sm">今天</button>').appendTo(footer);
+            var todayBtn = $('<button type="button" css="margin: 2px;" class="btn btn-info btn-sm">今天</button>').appendTo(footer);
             todayBtn.bind('click', function () {
                 var now = new Date();
                 var v1 = formatter(now);
@@ -104,12 +104,12 @@ $.extend($.fn.datagrid.defaults.filters, {
                 setValue(v1, v2);
             });
 
-            var clearBtn = $('<button type="button" style="margin: 2px;" class="btn btn-primary btn-sm">不过滤</button>').appendTo(footer);
+            var clearBtn = $('<button type="button" css="margin: 2px;" class="btn btn-primary btn-sm">不过滤</button>').appendTo(footer);
             clearBtn.bind('click', function () {
                 input.combo('clear').combo('hidePanel');
             });
 
-            var okBtn = $('<button type="button" style="margin: 2px;" class="btn btn-primary btn-sm">确定</button>').appendTo(footer);
+            var okBtn = $('<button type="button" css="margin: 2px;" class="btn btn-primary btn-sm">确定</button>').appendTo(footer);
             okBtn.bind('click', function () {
                 var v1 = formatter(c1.calendar('options').current);
                 var v2 = formatter(c2.calendar('options').current);

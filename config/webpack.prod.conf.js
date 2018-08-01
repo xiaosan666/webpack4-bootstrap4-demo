@@ -9,14 +9,17 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = merge(baseWebpackConfig, {
     mode: 'production',
     plugins: [
-       /* new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
+        new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
             root: path.resolve(__dirname, '../'),
             verbose: false
         }),
         new OptimizeCssAssetsPlugin({
             cssProcessorOptions: {
-                safe: true
-            }
+                discardComments: {
+                    removeAll: true
+                }
+            },
+            canPrint: true
         }),
         new uglifyjsWebpackPlugin({
             uglifyOptions: {
@@ -25,6 +28,6 @@ module.exports = merge(baseWebpackConfig, {
                 }
             }
         }),
-        new webpack.BannerPlugin('CopyRight © 2015-2018 All Right Reserved Beijing Gongzhu Technology Co.,Ltd')*/
+        new webpack.BannerPlugin('CopyRight © 2015-2028 All Right Reserved Guangzhou Technology Co.,Ltd')
     ]
 });

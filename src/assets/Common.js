@@ -1,6 +1,6 @@
 import 'jquery';
 import 'bootstrap';
-import './style/app.scss';
+import './css/app.scss';
 import swalProxy from 'sweetalert2';
 swalProxy.setDefaults({
     allowOutsideClick: true,

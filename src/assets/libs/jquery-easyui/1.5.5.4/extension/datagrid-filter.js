@@ -707,15 +707,15 @@
         });
 
         function initCss(){
-            if (!$('#datagrid-filter-style').length){
+            if (!$('#datagrid-filter-css').length){
                 $('head').append(
-                    '<style id="datagrid-filter-style">' +
+                    '<css id="datagrid-filter-css">' +
                     'a.datagrid-filter-btn{display:inline-block;width:22px;height:22px;margin:0;vertical-align:top;cursor:pointer;opacity:0.6;filter:alpha(opacity=60);}' +
                     'a:hover.datagrid-filter-btn{opacity:1;filter:alpha(opacity=100);}' +
                     '.datagrid-filter-row .textbox,.datagrid-filter-row .textbox .textbox-text{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}' +
                     '.datagrid-filter-row input{margin:0;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}' +
                     '.datagrid-filter-cache{position:absolute;width:10px;height:10px;left:-99999px;}' +
-                    '</style>'
+                    '</css>'
                 );
             }
         }

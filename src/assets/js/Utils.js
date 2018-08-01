@@ -449,8 +449,8 @@ Utils.prototype = {
             return;
         }
         window.LoadingIsShow = true;
-        var html = ['<div class="js-loading" style="position:absolute;left:0;right:0;width:100%;height:100%;z-index:10000;display:flex;justify-content:center;align-items:center;background:rgba(204, 204, 204, 0.2);">'];
-        html.push('<i class="fa fa-spinner fa-pulse fa-lg" style=" font-size:28px"></i>');
+        var html = ['<div class="js-loading" css="position:absolute;left:0;right:0;width:100%;height:100%;z-index:10000;display:flex;justify-content:center;align-items:center;background:rgba(204, 204, 204, 0.2);">'];
+        html.push('<i class="fa fa-spinner fa-pulse fa-lg" css=" font-size:28px"></i>');
         html.push('</div>');
         $('body').prepend(html.join(''));
     },
@@ -497,8 +497,8 @@ Utils.prototype = {
                 timer: timeout || 3000
             })
         } else {
-            var html = ['<div class="js-message-warp" style="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
-            html.push('<div class="js-message" style="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
+            var html = ['<div class="js-message-warp" css="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
+            html.push('<div class="js-message" css="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
             html.push(message || '操作成功');
             html.push('</div>');
             html.push('</div>');

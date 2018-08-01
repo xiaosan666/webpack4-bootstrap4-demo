@@ -57,38 +57,32 @@ module.exports = {
             }
         }
     },
-    //模块：例如解读CSS,图片如何转换，压缩
     module: {
         rules: [
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader',}]},
-            /* {
-                 test: /\.(scss)$/,
-                 use: [{loader: 'style-loader'}, {loader: 'style-loader'}, {
-                     loader: 'postcss-loader',
-                     options: {
-                         plugins: function () {
-                             return [require('autoprefixer')];
-                         }
-                     }
-                 }, {loader: 'sass-loader'}]
-             },*/
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
                 use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',//&outputPath=static/img/&publicPath=../img/
             },
-             {
-                 test: /\.(scss|css)$/,
-                 use: ['style-loader', 'css-loader', 'sass-loader']
-             },
             {
                 test: /\.(scss|css)$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {}
-                    },
-                    "css-loader", 'sass-loader'
-                ]
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                }, {
+                    loader: 'css-loader'
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: function () {
+                            return [
+                                // require('precss'),
+                                require('autoprefixer')
+                            ];
+                        }
+                    }
+                }, {
+                    loader: 'sass-loader'
+                }]
             },
             {
                 test: /\.js$/,
