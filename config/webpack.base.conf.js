@@ -19,7 +19,7 @@ dirJSON.map(page => {
             chunks: ['commons', page.url],
             hash: true,
             minify: false,
-            xhtml: true,
+            xhtml: true
         })
     );
 });
