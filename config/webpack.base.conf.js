@@ -4,7 +4,7 @@ const dirJSON = require('../src/views/views.json');
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const extractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let entry = {};
 let plugins = [];
@@ -26,24 +26,15 @@ plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
     root: path.resolve(__dirname, '../'),
     verbose: false
 }));
-// plugins.push(new extractTextPlugin("./static/style/[chunkhash].style"));
+plugins.push(new MiniCssExtractPlugin({
+    filename: "[name].[hash:8].min.css",//static/css/
+    chunkFilename: "css/[id].chunk.min.css",
+}));
 plugins.push(new webpack.ProvidePlugin({
     "$": "jquery",
     "jQuery": "jquery",
     "window.jQuery": "jquery"
 }));
-/*plugins.push(new webpack.optimize.SplitChunksPlugin({
-    chunks: "all",
-    minSize: 0,
-    cacheGroups: {
-        vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .style` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
-            test: /node_modules\//,
-            name: 'page/vendor',
-            priority: 10,
-            enforce: true
-        }
-    }
-}));*/
 
 module.exports = {
     //入口文件的配置项
@@ -70,76 +61,35 @@ module.exports = {
     module: {
         rules: [
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader',}]},
-            /*{
-                test: /\.style$/,
-                use: extractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {loader: 'style-loader', options: {importLoaders: 1}},
-                        'postcss-loader'
-                    ],
-                    publicPath: "../../",
-                })
-
-            },
-            {
-                test: /\.less$/,
-                use: extractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: "style-loader"
-                        }, {
-                            loader: "less-loader"
-                        }, 'postcss-loader'
-                    ],
-                    publicPath: "../../"
-                })
-            },*/
-           /* {
-                test: /\.(scss)$/,
-                use: [{loader: 'style-loader'}, {loader: 'style-loader'}, {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: function () {
-                            return [require('autoprefixer')];
-                        }
-                    }
-                }, {loader: 'sass-loader'}]
-            },*/
-            {
-                test: /\.(scss)$/,
-                use:['style-loader','css-loader','sass-loader']
-            },
-            {
-                test: /\.(css)$/,
-                use:['style-loader','css-loader']
-            },
+            /* {
+                 test: /\.(scss)$/,
+                 use: [{loader: 'style-loader'}, {loader: 'style-loader'}, {
+                     loader: 'postcss-loader',
+                     options: {
+                         plugins: function () {
+                             return [require('autoprefixer')];
+                         }
+                     }
+                 }, {loader: 'sass-loader'}]
+             },*/
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',
+                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',//&outputPath=static/img/&publicPath=../img/
             },
-            /*{
-                test: /\.(png|jpg|gif|jpeg|svg)$/,
+             {
+                 test: /\.(scss|css)$/,
+                 use: ['style-loader', 'css-loader', 'sass-loader']
+             },
+            {
+                test: /\.(scss|css)$/,
                 use: [
                     {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'static/img/'
-                        }
-                    }
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {}
+                    },
+                    "css-loader", 'sass-loader'
                 ]
-            },*/
-           /* {
-                test: /\.(png|jpg|jpeg|gif|svg)/,
-                use: [{
-                    loader: 'file-loader?name=[name].[ext]?[hash:8]',
-                    options: {
-                        outputPath: 'static/img/',
-                    }
-                }]
-            },*/
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
