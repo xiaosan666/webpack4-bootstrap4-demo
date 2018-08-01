@@ -25,10 +25,12 @@ function Invoice() {
             that.$invoiceQRCode = $('#invoiceQRCode');
             that.$logout = $('#logout');
             that.$btnAdd = $('#btnAdd');
+            that.$btnExport = $('#btnExport');
 
             /*Dialog*/
             that.$dlg = $('#dlg');
             that.$form = $('#form');
+            that.$btnClose = $('#btnClose');
         },
         _initData: function () {
             var that = this;
@@ -46,11 +48,21 @@ function Invoice() {
             that.$logout.on('click', function () {
                 window.token = '';
                 Utils.setSessionStorageItem('token', '');
-                window.location.href = 'login.html';
+                window.location.href = document.location.origin;
             });
             that.$btnAdd.on('click', function () {
                 that.$dg.datagrid('uncheckAll');
                 that.$dlg.dialog('center').dialog('open');
+            });
+            that.$btnClose.on('click', function () {
+                that.$dlg.dialog('close');
+            });
+            that.$btnExport.on('click', function () {
+                that.$dg.datagrid('ExportExcel', {
+                    type: 'excel',
+                    ignoreField: [],
+                    excelName: '发票信息列表-' + Utils.dateFormat(new Date(), 'yyyy年MM月dd日HH时mm分ss秒')
+                });
             });
         },
         _invoiceQRCodeInput: function () {
@@ -220,22 +232,25 @@ function Invoice() {
                     type: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55'
-                }).then(function () {
-                    var rows = that.$dg.datagrid('getSelections'), ids = [];
-                    for (var i in rows) {
-                        var row = rows[i];
-                        ids.push(row.id);
-                    }
-                    new Http({
-                        url: '/v1/invoice/op/delete',
-                        data: {id: ids[0]},
-                        success: function () {
-                            Utils.showToast('删除成功！');
-                            that.$dg.datagrid('unselectAll').datagrid('reload');
-                            that.$invoiceQRCode.focus();
+                }).then(function (result) {
+                    if (result.value) {
+                        var rows = that.$dg.datagrid('getSelections'), ids = [];
+                        for (var i in rows) {
+                            var row = rows[i];
+                            ids.push(row.id);
                         }
-                    }).postFormData();
+                        new Http({
+                            url: '/v1/invoice/op/delete',
+                            data: {id: ids[0]},
+                            success: function () {
+                                Utils.showToast('删除成功！');
+                                that.$dg.datagrid('unselectAll').datagrid('reload');
+                                that.$invoiceQRCode.focus();
+                            }
+                        }).postFormData();
+                    }
                 }, function () {
+                    debugger;
                 });
             } else {
                 swal('请选择要删除的数据！', '', 'info');

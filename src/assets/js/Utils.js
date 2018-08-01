@@ -1,8 +1,5 @@
 /**
- * Created by yanxiaojun on 2016/4/12.
- */
-/**
- * 工具js文件。
+ * Utils类存放和业务无关的公共方法。
  * 公用的可复用的方法放在这里。
  * 大致分为4部分
  * 1。字符串
@@ -489,20 +486,32 @@ Utils.prototype = {
         $dg.datagrid('unselectAll').datagrid('doFilter');
     },
     showToast: function (message, timeout) {
-        var html = ['<div class="js-message-warp" style="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
-        html.push('<div class="js-message" style="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
-        html.push(message || '操作成功');
-        html.push('</div>');
-        html.push('</div>');
-        $('body').append(html.join(''));
-        var $message = $('.js-message'), $warp = $('.js-message-warp');
-        $message.animate({right: 0, bottom: 0}, 2000, function () {
-            setTimeout(() => {
-                $message.animate({right: '-100%', bottom: '-100%'}, 1500, function () {
-                    $warp.remove();
-                });
-            }, timeout || 2000);
-        });
+        if (swal) {
+            swal({
+                position: 'bottom-end',
+                type: 'success',
+                title: message,
+                showConfirmButton: false,
+                backdrop: false,
+                width: '420px',
+                timer: timeout || 3000
+            })
+        } else {
+            var html = ['<div class="js-message-warp" style="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
+            html.push('<div class="js-message" style="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
+            html.push(message || '操作成功');
+            html.push('</div>');
+            html.push('</div>');
+            $('body').append(html.join(''));
+            var $message = $('.js-message'), $warp = $('.js-message-warp');
+            $message.animate({right: 0, bottom: 0}, 2000, function () {
+                setTimeout(() => {
+                    $message.animate({right: '-100%', bottom: '-100%'}, 1500, function () {
+                        $warp.remove();
+                    });
+                }, timeout || 2000);
+            });
+        }
     },
     /**
      * 把url中的双斜杠替换为单斜杠

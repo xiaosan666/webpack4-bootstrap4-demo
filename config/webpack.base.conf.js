@@ -96,8 +96,8 @@ module.exports = {
                     publicPath: "../../"
                 })
             },*/
-            {
-                test: /\.(scss|css$)$/,
+           /* {
+                test: /\.(scss)$/,
                 use: [{loader: 'style-loader'}, {loader: 'style-loader'}, {
                     loader: 'postcss-loader',
                     options: {
@@ -106,17 +106,37 @@ module.exports = {
                         }
                     }
                 }, {loader: 'sass-loader'}]
+            },*/
+            {
+                test: /\.(scss)$/,
+                use:['style-loader','css-loader','sass-loader']
+            },
+            {
+                test: /\.(css)$/,
+                use:['style-loader','css-loader']
             },
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]?[hash:8]&outputPath=static/img/',
+                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',
             },
             /*{
+                test: /\.(png|jpg|gif|jpeg|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'static/img/'
+                        }
+                    }
+                ]
+            },*/
+           /* {
                 test: /\.(png|jpg|jpeg|gif|svg)/,
                 use: [{
-                    loader: 'file-loader?limit=1024&name=[name].[ext]?[hash:8]',
+                    loader: 'file-loader?name=[name].[ext]?[hash:8]',
                     options: {
-                        outputPath: 'static/images/',
+                        outputPath: 'static/img/',
                     }
                 }]
             },*/
