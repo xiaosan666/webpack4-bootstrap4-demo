@@ -1,0 +1,14 @@
+[
+    {
+        "url": "index",
+        "title": "首页"
+    },
+    {
+        "url": "invoice",
+        "title": "鉴票宝"
+    },
+    {
+        "url": "test",
+        "title": "测试"
+    }
+]

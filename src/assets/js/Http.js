@@ -1,3 +1,6 @@
+window.Http = Http;
+
+
 function Http(opts) {
     this.type = opts.type || "POST";
     this.url = opts.url;
@@ -103,7 +106,7 @@ $(document).ajaxError(function (event, xhr, settings, exception) {
                     title: '认证失败，请重新登录',
                     type: 'warning'
                 }).then(function () {
-                    window.location.href = 'login.html';
+                    window.location.href = document.location.origin;
                 });
             } else {
                 swal(result.msg, '', "warning");
