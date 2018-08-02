@@ -10,13 +10,18 @@ let entry = {};
 let plugins = [];
 dirJSON.map(page => {
     entry[page.url] = path.resolve(__dirname, `../src/views/${page.url}/index.js`);
+    let chunks = ['vendors', 'easyui', 'default', page.url];
+    if(page.excludeEasyui){
+        chunks.splice(chunks.indexOf('easyui'),1)
+    }
     plugins.push(
         new htmlPlugin({
             title: page.title,
             favicon: path.resolve(__dirname, `../src/assets/img/favicon.ico`),
             filename: path.resolve(__dirname, `../dist/${page.url}.html`),
             template: path.resolve(__dirname, `../src/views/${page.url}/index.html`),
-            chunks: ['commons', page.url],
+            chunks: chunks,
+            chunksSortMode: 'manual',
             hash: true,
             minify: false,
             xhtml: true
@@ -28,8 +33,8 @@ plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
     verbose: false
 }));
 plugins.push(new MiniCssExtractPlugin({
-    filename: "[name].[hash:8].min.css",//static/css/
-    chunkFilename: "css/[id].chunk.min.css",
+    filename: "[name].min.css",//static/css/
+    chunkFilename: "static/css/[id].chunk.min.css",
 }));
 plugins.push(new webpack.ProvidePlugin({
     "$": "jquery",
@@ -38,22 +43,32 @@ plugins.push(new webpack.ProvidePlugin({
 }));
 
 module.exports = {
-    //入口文件的配置项
     entry: entry,
-    //出口文件的配置项
     output: {
         publicPath: "",
         path: path.resolve(__dirname, '../dist'),
         filename: 'static/js/[name].[hash:8].min.js',
-        chunkFilename: 'js/[id].chunk.min.js',
+        chunkFilename: 'static/js/[id].chunk.min.js',
     },
     optimization: {
         splitChunks: {
+            chunks: "initial",
             cacheGroups: {
-                commons: {
-                    name: "commons",
-                    chunks: "initial",
-                    minChunks: 2
+                easyui: {
+                    test: /[\\/]src[\\/]assets[\\/]libs[\\/]jquery-easyui[\\/]/,
+                    priority: -5,
+                    name: 'easyui'
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                    name: 'vendors'
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    name: 'default',
+                    reuseExistingChunk: true
                 }
             }
         }
@@ -66,7 +81,15 @@ module.exports = {
                 use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',//&outputPath=static/img/&publicPath=../img/
             },
             {
-                test: /\.(scss|css)$/,
+                test: /\.(css)$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                }, {
+                    loader: 'css-loader'
+                }]
+            },
+            {
+                test: /\.(scss)$/,
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                 }, {
@@ -76,7 +99,6 @@ module.exports = {
                     options: {
                         plugins: function () {
                             return [
-                                // require('precss'),
                                 require('autoprefixer')
                             ];
                         }
@@ -98,6 +120,5 @@ module.exports = {
             },
             {test: /\.ejs$/, loader: 'ejs-loader?variable=data'}]
     },
-    //插件，用于生产模版和各项功能
     plugins: plugins
 };

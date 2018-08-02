@@ -1,5 +1,6 @@
-
-.swal2-container{
-  z-index: 9999;
+.swal2-container {
+    z-index: 9999 !important;
 }
+
+
 

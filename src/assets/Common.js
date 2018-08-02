@@ -11,3 +11,9 @@ window.swalProxy = swalProxy;
 import './libs/sweetalert2/setting.css';
 import './libs/sweetalert2/setting.js';
 
+import './css/base.scss';
+import './js/Constants.js';
+import './js/Utils.js';
+import './js/Helper.js';
+import './js/Http.js';
+

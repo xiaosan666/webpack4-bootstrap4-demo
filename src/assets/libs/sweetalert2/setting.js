@@ -1,8 +1,6 @@
 /**
  * 定义swal默认属性和处理swal ie 兼容性问题
  */
-
-
 function isIE() {
     var myNav = navigator.userAgent.toLowerCase();
     if ((myNav.indexOf('msie') != -1)) {
@@ -25,6 +23,9 @@ window.swal = function () {
             alert(arguments[0]);
         }
     } else {
-        return swalProxy.apply(this, arguments);
+        var result = swalProxy.apply(this, arguments);
+        $('body').removeClass('swal2-height-auto');
+        $('html').removeClass('swal2-height-auto');
+        return result;
     }
 };

@@ -490,7 +490,7 @@ Utils.prototype = {
             swal({
                 position: 'bottom-end',
                 type: 'success',
-                title: message,
+                title: message || '操作成功',
                 showConfirmButton: false,
                 backdrop: false,
                 width: '420px',

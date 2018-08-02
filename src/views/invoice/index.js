@@ -1,6 +1,5 @@
 import '../../assets/Common';
 import '../../assets/Easyui';
-import '../../assets/Custom';
 import './index.scss';
 import './index.html';
 
@@ -249,8 +248,6 @@ function Invoice() {
                             }
                         }).postFormData();
                     }
-                }, function () {
-                    debugger;
                 });
             } else {
                 swal('请选择要删除的数据！', '', 'info');

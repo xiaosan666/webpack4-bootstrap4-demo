@@ -1,7 +1,8 @@
 [
     {
         "url": "index",
-        "title": "首页"
+        "title": "首页",
+        "excludeEasyui": true
     },
     {
         "url": "invoice",

@@ -1,5 +1,4 @@
 import '../../assets/Common';
-import '../../assets/Custom';
 import '../../assets/libs/myjs.min';
 import './index.scss';
 import './index.html';
@@ -15,7 +14,6 @@ function login(username, password) {
             client_id: 'web'
         },
         success: function (token) {
-            debugger;
             window.token = token;
             Utils.setSessionStorageItem('token', token);
             window.location.href = 'invoice.html';
