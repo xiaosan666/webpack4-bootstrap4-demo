@@ -8,24 +8,14 @@
  * 4。日期
  */
 
-
-function Utils() {
-}
-
-Utils.prototype = {
-    document: window.document,
+let Utils = {
     /**
      * 判断字符是否null，undefined和空字符串
      */
     isEmpty: function (str) {
         return (typeof(str) == "undefined" || str == null || str == "") ? true : false;
     },
-    /**
-     * 格式“是”or“否”
-     */
-    formatYesOrNo: function (value) {
-        return value == 1 ? '是' : (value == '0' ? '否' : null);
-    },
+
     /**
      * 获得中文字符串的长度。
      *   Utils.getLength('你好ab')
@@ -264,46 +254,6 @@ Utils.prototype = {
         return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
     },
     /**
-     * 获得某年2月的天数
-     * obj:数字(如2012)或时间(如new Date())
-     */
-    daysInFebruary: function (obj) {
-        var year = 0;
-        if (obj instanceof Date) {
-            year = obj.getFullYear();
-        }
-        else if (typeof obj === "number") {
-            year = obj;
-        }
-        else {
-            return 0;
-        }
-        if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
-            return 29;
-        }
-        return 28;
-    },
-    /**
-     * 获得某个年份的天数
-     * obj:数字(如2012)或时间(如new Date())
-     */
-    daysInYear: function (obj) {
-        var year = 0;
-        if (obj instanceof Date) {
-            year = obj.getFullYear();
-        }
-        else if (typeof obj === "number") {
-            year = obj;
-        }
-        else {
-            return 0;
-        }
-        if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
-            return 366;
-        }
-        return 365;
-    },
-    /**
      * 格式化日期（月和星期）
      * sFormat：日期的格式(如yy-MM-dd)。年：y，月：M，日：d，时：h，分：m，秒：s
      * sLanguage:默认为中文。当为'en'的时候是英文。
@@ -365,54 +315,6 @@ Utils.prototype = {
         return sFormat;
     },
     /**
-     * 计算两个日期之间的间隔。
-     * 如果相差1分钟内，返回'x秒'；
-     * 如果相差1分钟到60分组，返回'x分钟'；
-     * 如果相差1小时到24小时，返回'x小时';
-     * 如果相差1天到7天，返回'x天';
-     * 如果相差7天到31天，返回'x周'；
-     * 如果相差31天到365天，返回'x月'；
-     * 相差1年或以上，返回'x年';
-     */
-    dateDiff: function (biggerDate, smallerDate) {
-        var intervalSeconds = parseInt((biggerDate - smallerDate) / 1000);
-        if (intervalSeconds < 60) {
-            return intervalSeconds + "秒";
-        }
-        else if (intervalSeconds < 60 * 60) {
-            return Math.floor(intervalSeconds / 60) + "分钟";
-        }
-        else if (intervalSeconds < 60 * 60 * 24) {
-            return Math.floor(intervalSeconds / (60 * 60)) + "小时";
-        }
-        else if (intervalSeconds < 60 * 60 * 24 * 7) {
-            return Math.floor(intervalSeconds / (60 * 60 * 24)) + "天";
-        }
-        else if (intervalSeconds < 60 * 60 * 24 * 31) {
-            return Math.floor(intervalSeconds / (60 * 60 * 24 * 7)) + "周";
-        }
-        else if (intervalSeconds < 60 * 60 * 24 * 365) {
-            return Math.floor(intervalSeconds / (60 * 60 * 24 * 30)) + "月";
-        }
-        else if (intervalSeconds < 60 * 60 * 24 * 365 * 1000) {
-            return Math.floor(intervalSeconds / (60 * 60 * 24 * 365)) + "年";
-        }
-        else {
-            return Math.floor(intervalSeconds / (60 * 60 * 24)) + "天";
-        }
-    },
-    /**
-     * 时间差，返回 0天:0小时:0分钟:0秒"
-     * */
-    dateInterval: function (biggerDate, smallerDate) {
-        var intervalSeconds = parseInt((biggerDate - smallerDate) / 1000),
-            day = Math.floor(intervalSeconds / (60 * 60 * 24)),
-            hour = Math.floor((intervalSeconds - day * 24 * 60 * 60) / 3600),
-            minute = Math.floor((intervalSeconds - day * 24 * 60 * 60 - hour * 3600) / 60),
-            second = Math.floor(intervalSeconds - day * 24 * 60 * 60 - hour * 3600 - minute * 60);
-        return day + "天:" + hour + "小时:" + minute + "分钟:" + second + "秒";
-    },
-    /**
      * 自定义表单验证显示错误信息位置
      * @param msg
      * @param o
@@ -442,78 +344,6 @@ Utils.prototype = {
         };
     })(),
     /**
-     * 打开loading模态窗口
-     * */
-    showLoading: function () {
-        if (window.LoadingIsShow) {
-            return;
-        }
-        window.LoadingIsShow = true;
-        var html = ['<div class="js-loading" style="position:absolute;left:0;right:0;width:100%;height:100%;z-index:10000;display:flex;justify-content:center;align-items:center;background:rgba(204, 204, 204, 0.2);">'];
-        html.push('<i class="fa fa-spinner fa-pulse fa-lg" style=" font-size:28px"></i>');
-        html.push('</div>');
-        $('body').prepend(html.join(''));
-    },
-    /**
-     * 关闭loading模态窗口
-     * */
-    hideLoading: function () {
-        if (!window.LoadingIsShow) {
-            return;
-        }
-        setTimeout(function () {
-            window.LoadingIsShow = false;
-            $('.js-loading').remove();
-        }, 0)
-    },
-    /**
-     * datagrid 执行查询过滤公共函数
-     * @param $dg
-     * @param field
-     * @param value
-     * @param op
-     */
-    doFilter: function ($dg, field, value, op) {
-        if (!value) {
-            $dg.datagrid('removeFilterRule', field);
-        } else {
-            $dg.datagrid('addFilterRule', {
-                field: field,
-                op: op || 'equal',
-                value: value
-            });
-        }
-        $dg.datagrid('unselectAll').datagrid('doFilter');
-    },
-    showToast: function (message, timeout) {
-        if (swal) {
-            swal({
-                position: 'bottom-end',
-                type: 'success',
-                title: message || '操作成功',
-                showConfirmButton: false,
-                backdrop: false,
-                width: '420px',
-                timer: timeout || 3000
-            })
-        } else {
-            var html = ['<div class="js-message-warp" style="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
-            html.push('<div class="js-message" style="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
-            html.push(message || '操作成功');
-            html.push('</div>');
-            html.push('</div>');
-            $('body').append(html.join(''));
-            var $message = $('.js-message'), $warp = $('.js-message-warp');
-            $message.animate({right: 0, bottom: 0}, 2000, function () {
-                setTimeout(() => {
-                    $message.animate({right: '-100%', bottom: '-100%'}, 1500, function () {
-                        $warp.remove();
-                    });
-                }, timeout || 2000);
-            });
-        }
-    },
-    /**
      * 把url中的双斜杠替换为单斜杠
      * 如:http://localhost:8080//api//demo.替换后http://localhost:8080/api/demo
      * @param url
@@ -526,8 +356,8 @@ Utils.prototype = {
         }
         return url.substring(0, index) + url.substring(index).replace(/\/\/*/g, '/');
     }
-};
 
-window.Utils = new Utils();
+};
+export default Utils;
 
 

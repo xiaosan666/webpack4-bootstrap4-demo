@@ -1,4 +1,4 @@
-import '../../assets/Common';
+import {Utils, Helper, Http} from '../../assets/Common';
 import '../../assets/Easyui';
 import './index.scss';
 import './index.html';
@@ -80,12 +80,11 @@ function Invoice() {
         },
         _createInvoice: function (qrCode) {
             var that = this;
-            console.log(qrCode);
-            new Http({
+            Http.config({
                 url: '/v1/invoice/op/createByQrCode',
                 data: {qrCode: qrCode},
                 success: function () {
-                    Utils.showToast('新增成功！');
+                    Helper.showToast('新增成功！');
                     that.$dg.datagrid('unselectAll').datagrid('reload');
                 },
                 beforeSend: function () {
@@ -130,7 +129,7 @@ function Invoice() {
                 onLoadSuccess: function (data) {
                 },
                 loader: function (param, success) {
-                    new Http({
+                    Http.config({
                         url: '/v1/invoice/view/page',
                         data: param,
                         isShowLoader: false,
@@ -184,7 +183,7 @@ function Invoice() {
                 type: 'dateRange',
                 options: {
                     onChange: function (value) {
-                        Utils.doFilter(that.$dg, $(this).attr('name'), value);
+                        Helper.doFilter(that.$dg, $(this).attr('name'), value);
                     }
                 }
             }, {
@@ -194,7 +193,7 @@ function Invoice() {
                     data: that.ListYesOrNo,
                     panelHeight: 'auto',
                     onChange: function (value) {
-                        Utils.doFilter(that.$dg, $(this).attr('name'), value);
+                        Helper.doFilter(that.$dg, $(this).attr('name'), value);
                     }
                 }
             }, {
@@ -202,7 +201,7 @@ function Invoice() {
                 type: 'dateRange',
                 options: {
                     onChange: function (value) {
-                        Utils.doFilter(that.$dg, $(this).attr('name'), value);
+                        Helper.doFilter(that.$dg, $(this).attr('name'), value);
                     }
                 }
             }, {
@@ -238,11 +237,11 @@ function Invoice() {
                             var row = rows[i];
                             ids.push(row.id);
                         }
-                        new Http({
+                        Http.config({
                             url: '/v1/invoice/op/delete',
                             data: {id: ids[0]},
                             success: function () {
-                                Utils.showToast('删除成功！');
+                                Helper.showToast('删除成功！');
                                 that.$dg.datagrid('unselectAll').datagrid('reload');
                                 that.$invoiceQRCode.focus();
                             }
@@ -263,7 +262,7 @@ function Invoice() {
                 swal('校验码必须为6位！', '', 'info');
                 return false;
             }
-            new Http({
+            Http.config({
                 url: '/v1/invoice/op/create',
                 data: {
                     invoiceCode: invoiceCode,
@@ -272,7 +271,7 @@ function Invoice() {
                     checkCode: checkCode
                 },
                 success: function () {
-                    Utils.showToast('新增成功！');
+                    Helper.showToast('新增成功！');
                     that.$dg.datagrid('unselectAll').datagrid('reload');
                     that.$dlg.dialog('close');
                 },

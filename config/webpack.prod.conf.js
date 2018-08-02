@@ -29,5 +29,5 @@ module.exports = merge(baseWebpackConfig, {
             }
         }),
         new webpack.BannerPlugin('CopyRight © 2015-2028 All Right Reserved GuangzhouYan Technology Co.,Ltd')
-    ]
+]
 });

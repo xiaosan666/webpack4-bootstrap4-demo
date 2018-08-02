@@ -1,4 +1,4 @@
-import '../../assets/Common';
+import {Utils, Http} from '../../assets/Common';
 import '../../assets/libs/myjs.min';
 import './index.scss';
 import './index.html';
@@ -6,7 +6,7 @@ import './index.html';
 window.login = login;
 
 function login(username, password) {
-    new Http({
+    Http.config({
         url: '/v1/login',
         data: {
             username: username,
@@ -17,7 +17,7 @@ function login(username, password) {
             window.token = token;
             Utils.setSessionStorageItem('token', token);
             window.location.href = 'invoice.html';
-            /*new Http({
+            /*Http.config({
                 url: '/v1/public/user/self',
                 success: function (user) {
                     debugger;
