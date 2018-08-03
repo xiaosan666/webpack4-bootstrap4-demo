@@ -351,7 +351,7 @@ let Utils = {
      */
     formatUrl: function (url) {
         var index = 0;
-        if (url.startsWith('http')) {
+        if (url.indexOf('http') !== -1) {
             index = 7;
         }
         return url.substring(0, index) + url.substring(index).replace(/\/\/*/g, '/');

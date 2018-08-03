@@ -38,7 +38,7 @@ $.extend($.fn.datagrid.defaults.filters, {
             var input = $('<input>').appendTo(container);
             input.combo($.extend({
                 panelWidth: 330,
-                panelHeight: 210,
+                panelHeight: 254,
                 editable: false
             }, options, {
                 onShowPanel: function () {

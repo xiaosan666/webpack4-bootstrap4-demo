@@ -1,7 +1,7 @@
 import {API, Utils, Helper} from '../Common';
 
 let Http = {
-    config: function(opts) {
+    config: function (opts) {
         this.type = opts.type || "POST";
         this.url = opts.url;
         this.data = opts.data || {};
@@ -50,7 +50,7 @@ let Http = {
     defaultApiRequest: function () {
         this.headers = this.headers || {};
         this.headers.Authorization = 'Bearer ' + (window.token || Utils.getSessionStorageItem('token'));
-        this.url = Utils.formatUrl(this.url.startsWith('http') ? this.url : API + this.url);
+        this.url = Utils.formatUrl(this.url.indexOf('http') !== -1 ? this.url : API + this.url);
         this.request();
     },
     post: function () {
