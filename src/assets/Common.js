@@ -2,8 +2,7 @@ import 'jquery';
 import 'bootstrap';
 import './css/app.scss';
 
-import './libs/sweetalert2/setting.css';
-import './libs/sweetalert2/setting.js';
+import './libs/sweetalert2/sweetalert2.js';
 
 import {API} from './js/Constants.js';
 import Utils from './js/Utils.js';
