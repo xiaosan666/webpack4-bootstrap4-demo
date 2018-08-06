@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-let glob = require("glob");
 const dirJSON = require('../src/views/views.json');
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
@@ -11,8 +10,8 @@ let plugins = [];
 dirJSON.map(page => {
     entry[page.url] = path.resolve(__dirname, `../src/views/${page.url}/index.js`);
     let chunks = ['vendors', 'easyui', 'default', page.url];
-    if(page.excludeEasyui){
-        chunks.splice(chunks.indexOf('easyui'),1)
+    if (page.excludeEasyui) {
+        chunks.splice(chunks.indexOf('easyui'), 1)
     }
     plugins.push(
         new htmlPlugin({
@@ -113,12 +112,12 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['babel-preset-env'],
+                        presets: ['es2015-nostrict'],
                         plugins: ['transform-runtime']
                     }
                 }
-            },
-            {test: /\.ejs$/, loader: 'ejs-loader?variable=data'}]
+            }
+        ]
     },
     plugins: plugins
 };
