@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const dirJSON = require('./src/views/views.json');
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = (process.env.NODE_ENV === 'prod');
 
 let entry = {};
@@ -31,24 +31,26 @@ dirJSON.map(page => {
 module.exports = {
     entry: entry,
     output: {
-        publicPath: "",
+        publicPath: '',
         path: path.resolve(__dirname, './dist'),
         filename: 'static/js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
         chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
     },
     optimization: {
         splitChunks: {
-            chunks: "initial",
+            chunks: 'initial',
             cacheGroups: {
                 easyui: {
                     test: /[\\/]src[\\/]assets[\\/]libs[\\/]jquery-easyui[\\/]/,
                     priority: -5,
-                    name: 'easyui'
+                    name: 'easyui',
+                    reuseExistingChunk: true
                 },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
-                    name: 'vendors'
+                    name: 'vendors',
+                    reuseExistingChunk: true
                 },
                 default: {
                     minChunks: 2,
@@ -61,23 +63,22 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader',}]},
+            {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
                 use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',//&outputPath=static/img/&publicPath=../img/
             },
             {
                 test: /\.(css)$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,
-                }, {
-                    loader: 'css-loader'
-                }]
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
             },
             {
                 test: /\.(scss)$/,
                 use: [{
-                    loader: MiniCssExtractPlugin.loader,
+                    loader: MiniCssExtractPlugin.loader
                 }, {
                     loader: 'css-loader'
                 }, {
@@ -108,13 +109,13 @@ module.exports = {
     },
     plugins: plugins.concat([
         new webpack.ProvidePlugin({
-            "$": "jquery",
-            "jQuery": "jquery",
-            "window.jQuery": "jquery"
+            '$': 'jquery',
+            'jQuery': 'jquery',
+            'window.jQuery': 'jquery'
         }),
         new MiniCssExtractPlugin({
             filename: isProd ? '[name].[contenthash:8].min.css' : '[name].css', //static/css/
-            chunkFilename: "static/css/" + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
+            chunkFilename: 'static/css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
     ])
 };

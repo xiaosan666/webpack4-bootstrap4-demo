@@ -1,8 +1,7 @@
 const baseWebpackConfig = require('./webpack.base.conf');
 const webpack = require('webpack');
 const path = require('path');
-const merge = require("webpack-merge");
-const uglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const merge = require('webpack-merge');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -14,19 +13,7 @@ if (process.env.NODE_ENV === 'prod') {
                 root: path.resolve(__dirname, './'),
                 verbose: false
             }),
-            new OptimizeCssAssetsPlugin({
-                assetNameRegExp: /\.style\.css$/g,
-                cssProcessor: require('cssnano'),
-                cssProcessorOptions: {discardComments: {removeAll: true}},
-                canPrint: true
-            }),
-            new uglifyjsWebpackPlugin({
-                uglifyOptions: {
-                    output: {
-                        comments: false
-                    }
-                }
-            }),
+            new OptimizeCssAssetsPlugin(),
             new webpack.BannerPlugin('CopyRight © 2015-2028 All Right Reserved GuangzhouYan Technology Co.,Ltd')
         ]
     });
@@ -40,7 +27,7 @@ if (process.env.NODE_ENV === 'prod') {
         // devtool: 'eval-source-map',
         devServer: {
             // open: true, // 自动打开浏览器
-            contentBase: path.join(__dirname, "dist"),
+            contentBase: path.join(__dirname, 'dist'),
             publicPath: '',
             compress: true,
             hot: true,
@@ -62,18 +49,13 @@ if (process.env.NODE_ENV === 'prod') {
     });
 } else if (process.env.NODE_ENV === 'buildDev') {
     module.exports = merge(baseWebpackConfig, {
-        mode: 'development',
+        mode: 'production', // production
         plugins: [
             new CleanWebpackPlugin(path.resolve(__dirname, './dist'), {
                 root: path.resolve(__dirname, './'),
                 verbose: false
             }),
-            new OptimizeCssAssetsPlugin({
-                assetNameRegExp: /\.style\.css$/g,
-                cssProcessor: require('cssnano'),
-                cssProcessorOptions: {discardComments: {removeAll: true}},
-                canPrint: true
-            })
+            new OptimizeCssAssetsPlugin(),
         ]
     });
 }
