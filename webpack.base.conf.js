@@ -21,7 +21,6 @@ dirJSON.map(page => {
             template: path.resolve(__dirname, `./src/views/${page.url}/index.html`),
             chunks: chunks,
             chunksSortMode: 'manual',
-            hash: true,
             minify: false,
             xhtml: true
         })
@@ -80,7 +79,7 @@ module.exports = {
                 test: /\.(scss)$/,
                 use: [{
                     loader: 'css-hot-loader'
-                },{
+                }, {
                     loader: MiniCssExtractPlugin.loader
                 }, {
                     loader: 'css-loader'
@@ -117,7 +116,7 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new MiniCssExtractPlugin({
-            filename: isProd ? '[name].[contenthash:8].min.css' : '[name].css', //static/css/
+            filename: (isProd ? '[name].[contenthash:8].min.css' : '[name].css'), // 'static/css/' +
             chunkFilename: 'static/css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
     ])
