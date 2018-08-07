@@ -1,0 +1,11 @@
+.right {
+    position: relative;
+    .logo {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+    }
+    form {
+        width: 90%;
+    }
+}

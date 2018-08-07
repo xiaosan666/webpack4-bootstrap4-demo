@@ -8,16 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <!--针对ie,如果ie版本小于ie11则提示升级浏览器-->
     <script>/*@cc_on @*//*@ window.location.href="http://www.goody.com.cn/2014/updatebrowser/?referrer="+encodeURIComponent(window.location.href); @*/</script>
-    <title>鉴票宝登录</title>
+    <title>鉴票宝</title>
 </head>
-<body>
-<div class="main row">
-    <div class="col-md-7 d-none d-md-block left"></div>
-    <div class="col-md-5 row login-form">
-        <div class="logo"><img src="../../assets/img/logo.png" alt=""></div>
-        <form class="col-md-8 col-sm-10 col-xs-12" name="form"
-              onsubmit="return login(form.username.value,form.password.value)">
-            <div class="title">登录鉴票宝</div>
+
+<body class="container-fluid">
+<div class="row h-100">
+    <div class="h-100 d-none d-xl-block col-xl-7 no-padding">
+        <div class="h-100 d-flex align-items-center"><img src="../../assets/img/login.png" alt=""></div>
+    </div>
+    <div class="col-xl-5 col-12 d-flex justify-content-center align-items-center right">
+        <img src="../../assets/img/logo.png" alt="" class="logo">
+        <form name="form" onsubmit="return login(form.username.value,form.password.value)">
+            <h3 class="text-center mb-5">登录鉴票宝</h3>
             <div class="form-group">
                 <label for="username">用户名</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required
@@ -28,7 +30,9 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required
                        value="123456">
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
+            </div>
         </form>
     </div>
 </div>

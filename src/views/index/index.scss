@@ -1,44 +1,11 @@
-body {
+.right {
     position: relative;
-}
-
-.main {
-    max-height: 768px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
-.left {
-    background: url("../../assets/img/login.png") no-repeat top left;
-    height: 100%;
-}
-
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo {
-    position: absolute;
-    right: 50px;
-    top: 0;
-}
-
-form {
-    height: 350px;
-    position: absolute !important;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-
-.login-form {
-    height: 100%;
-    position: relative;
+    .logo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    form {
+        width: 80%;
+    }
 }

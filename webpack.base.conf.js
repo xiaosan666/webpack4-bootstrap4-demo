@@ -1,14 +1,14 @@
 const webpack = require('webpack');
-const dirJSON = require('../src/views/views.json');
+const dirJSON = require('./src/views/views.json');
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const isProd = (process.env.NODE_ENV === 'prod');
 
 let entry = {};
 let plugins = [];
 dirJSON.map(page => {
-    entry[page.url] = path.resolve(__dirname, `../src/views/${page.url}/index.js`);
+    entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
     let chunks = ['vendors', 'easyui', 'default', page.url];
     if (page.excludeEasyui) {
         chunks.splice(chunks.indexOf('easyui'), 1)
@@ -16,9 +16,9 @@ dirJSON.map(page => {
     plugins.push(
         new htmlPlugin({
             title: page.title,
-            favicon: path.resolve(__dirname, `../src/assets/img/favicon.ico`),
-            filename: path.resolve(__dirname, `../dist/${page.url}.html`),
-            template: path.resolve(__dirname, `../src/views/${page.url}/index.html`),
+            favicon: path.resolve(__dirname, `./src/assets/img/favicon.ico`),
+            filename: path.resolve(__dirname, `./dist/${page.url}.html`),
+            template: path.resolve(__dirname, `./src/views/${page.url}/index.html`),
             chunks: chunks,
             chunksSortMode: 'manual',
             hash: true,
@@ -27,27 +27,14 @@ dirJSON.map(page => {
         })
     );
 });
-plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
-    root: path.resolve(__dirname, '../'),
-    verbose: false
-}));
-plugins.push(new MiniCssExtractPlugin({
-    filename: "[name].min.css",//static/css/
-    chunkFilename: "static/css/[id].chunk.min.css",
-}));
-plugins.push(new webpack.ProvidePlugin({
-    "$": "jquery",
-    "jQuery": "jquery",
-    "window.jQuery": "jquery"
-}));
 
 module.exports = {
     entry: entry,
     output: {
         publicPath: "",
-        path: path.resolve(__dirname, '../dist'),
-        filename: 'static/js/[name].[hash:8].min.js',
-        chunkFilename: 'static/js/[id].chunk.min.js',
+        path: path.resolve(__dirname, './dist'),
+        filename: 'static/js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
+        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
     },
     optimization: {
         splitChunks: {
@@ -119,5 +106,15 @@ module.exports = {
             }
         ]
     },
-    plugins: plugins
+    plugins: plugins.concat([
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery",
+            "window.jQuery": "jquery"
+        }),
+        new MiniCssExtractPlugin({
+            filename: isProd ? '[name].[contenthash:8].min.css' : '[name].css', //static/css/
+            chunkFilename: "static/css/" + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
+        })
+    ])
 };
