@@ -65,7 +65,7 @@ module.exports = {
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/', // &publicPath=/static/img/
+                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/' // &publicPath=/static/img/
             },
             {
                 test: /\.(css)$/,

@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'prod') {
             }
         }
     });
-} else if (process.env.NODE_ENV === 'buildDev') {
+} else if (process.env.NODE_ENV === 'devBuild') {
     module.exports = merge(baseWebpackConfig, {
         mode: 'development', // development production
         plugins: [
