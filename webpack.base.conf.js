@@ -116,7 +116,7 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new MiniCssExtractPlugin({
-            filename: 'static/css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'), // 'static/css/' +
+            filename: 'static/css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
             chunkFilename: 'static/css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
     ])
