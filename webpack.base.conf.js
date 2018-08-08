@@ -30,7 +30,7 @@ dirJSON.map(page => {
 module.exports = {
     entry: entry,
     output: {
-        publicPath: './',
+        publicPath: '/',
         path: path.resolve(__dirname, './dist'),
         filename: 'static/js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
         chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
@@ -65,7 +65,7 @@ module.exports = {
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/',//&outputPath=static/img/&publicPath=../img/
+                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=/static/img/&publicPath=/static/img/',
             },
             {
                 test: /\.(css)$/,
@@ -116,7 +116,7 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new MiniCssExtractPlugin({
-            filename: (isProd ? '[name].[contenthash:8].min.css' : '[name].css'), // 'static/css/' +
+            filename: 'static/css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'), // 'static/css/' +
             chunkFilename: 'static/css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
     ])
