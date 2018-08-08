@@ -1,6 +1,18 @@
-import {API, Utils, Helper} from '../Common';
-
-let Http = {
+/**
+ * 封装jquery Ajax
+ * 1.统一异常处理
+ * 2.添加默认api
+ * 3.注意post方法的请求头为application/json，不需要此请求头则调用postFormData()
+ * 示例：
+ Http.config({
+    url: '',
+    data: {},
+    success: function (data) {
+        console.log(data);
+    }
+ }).post();
+ */
+window.Http = {
     config: function (opts) {
         this.type = opts.type || "POST";
         this.url = opts.url;
@@ -15,7 +27,7 @@ let Http = {
         return this;
     },
     request: function () {
-        var that = this;
+        let that = this;
         $.ajax({
             type: this.type,
             url: this.url,
@@ -78,24 +90,22 @@ let Http = {
     }
 };
 
-export default Http;
-
 // Ajax统一异常处理
 $(document).ajaxError(function (event, xhr, settings, exception) {
     if (exception === 'abort') {
         return;
     }
-    var state = xhr.status;
+    let state = xhr.status;
     if (state === 404) {
         swal('找不到页面', '', "error");
     } else if (state === 500) {
         swal('服务器处理失败', '', "error");
     } else if (state === 400) { // 业务异常
-        var result = xhr.responseJSON;
+        let result = xhr.responseJSON;
         if (result && result.msg) {
             // 发票已存在
             if (result.code === 601) {
-                var data = JSON.parse(result.msg);
+                let data = JSON.parse(result.msg);
                 swal({
                     title: '该发票已经存在',
                     text: '发票号码：' + data.invoiceNumber + '，添加时间：' + Utils.formatDateTime(data.createTime),

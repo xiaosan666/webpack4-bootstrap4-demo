@@ -12,7 +12,7 @@
         "type": "git",
         "url": "git+https://github.com/yanxiaojun617/webpack4-bootstrap4-demo.git"
     },
-    "author": "",
+    "author": "xiaojun617",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/yanxiaojun617/webpack4-bootstrap4-demo/issues"

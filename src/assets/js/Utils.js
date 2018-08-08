@@ -1,14 +1,8 @@
 /**
- * Utils类存放和业务无关的公共方法。
- * 公用的可复用的方法放在这里。
- * 大致分为4部分
- * 1。字符串
- * 2。数组
- * 3。Cookie/Storage
- * 4。日期
+ * Utils类存放和业务无关的公共方法；Helper类存放和业务有关的公共方法；
  */
 
-let Utils = {
+window.Utils = {
     /**
      * 判断字符是否null，undefined和空字符串
      */
@@ -22,8 +16,8 @@ let Utils = {
      *   return 6；
      */
     getLength: function (str, chineseDouble) {
-        // var chineseRegex = /[\u4e00-\u9fa5]/g;
-        var chineseRegex = /[\u4E00-\u9FA5\uf900-\ufa2d]/g;
+        // let chineseRegex = /[\u4e00-\u9fa5]/g;
+        let chineseRegex = /[\u4E00-\u9FA5\uf900-\ufa2d]/g;
         if (chineseDouble != undefined && chineseDouble === false) {
             return str.length;
         }
@@ -55,12 +49,12 @@ let Utils = {
      * 将html代码的html修饰去除。
      */
     htmlDecode: function (html) {
-        var div = this.document.createElement("div");
+        let div = this.document.createElement("div");
         div.innerHTML = html;
         return div.innerText || div.textContent;
     },
     resource_serialize: function (form) {
-        var o = {};
+        let o = {};
         $.each(form.serializeArray(), function (index) {
             if (o[this['name']]) {
                 o[this['name']] = o[this['name']] + "," + $.trim(this['value']);
@@ -75,16 +69,16 @@ let Utils = {
      * @returns {String}
      */
     createUuid: function () {
-        var s = [];
-        var hexDigits = "0123456789abcdef";
-        for (var i = 0; i < 32; i++) {
+        let s = [];
+        let hexDigits = "0123456789abcdef";
+        for (let i = 0; i < 32; i++) {
             s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
         }
         s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
         s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
         //s[8] = s[13] = s[18] = s[23] = "-";
 
-        var uuid = s.join("");
+        let uuid = s.join("");
         return uuid;
     },
     /**
@@ -92,7 +86,7 @@ let Utils = {
      * @returns {String}
      */
     chinsesNumFormat: function (value) {
-        var numberMap = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+        let numberMap = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
         if (value <= 10) {
             return numberMap[value];
         } else {
@@ -103,8 +97,8 @@ let Utils = {
      * 删除数组重复的数据
      */
     arrayDistinct: function (arr) {
-        var tempArr = {};
-        for (var i = 0; i < arr.length; i++) {
+        let tempArr = {};
+        for (let i = 0; i < arr.length; i++) {
             if (tempArr[arr[i] + 1]) {
                 arr.splice(i, 1);
                 i--;
@@ -122,12 +116,12 @@ let Utils = {
         if (!sKey) {
             return "";
         }
-        var cookie = document.cookie;
+        let cookie = document.cookie;
         if (cookie.length > 0) {
-            var startIndex = cookie.indexOf(sKey + "=");
+            let startIndex = cookie.indexOf(sKey + "=");
             if (startIndex != -1) {
                 startIndex = startIndex + sKey.length + 1;
-                var endIndex = cookie.indexOf(";", startIndex);
+                let endIndex = cookie.indexOf(";", startIndex);
                 if (endIndex == -1) {
                     endIndex = cookie.length;
                 }
@@ -146,7 +140,7 @@ let Utils = {
             return;
         }
         iExpireSeconds = iExpireSeconds ? iExpireSeconds : 60 * 60 * 24 * 30;
-        var expireDate = new Date();
+        let expireDate = new Date();
         expireDate.setTime(expireDate.getTime() + iExpireSeconds * 1000);
         this.document.cookie = sKey + "=" + encodeURIComponent(sValue) + ";expires=" + expireDate.toGMTString() + ";";
     },
@@ -164,7 +158,7 @@ let Utils = {
         if (!sKey) {
             return;
         }
-        var result = '';
+        let result = '';
         if (window.localStorage) {
             result = decodeURIComponent(localStorage.getItem(sKey) || '');
         }
@@ -197,7 +191,7 @@ let Utils = {
         }
     },
     getSessionStorageItem: function (key) {
-        var jsonString = sessionStorage.getItem(key);
+        let jsonString = sessionStorage.getItem(key);
         if (jsonString) {
             return JSON.parse(jsonString);
         }
@@ -217,10 +211,7 @@ let Utils = {
         if (typeof day == 'string' && day.indexOf('-')) {
             day = Date.parse(day.replace(/-/g, "\/"));
         }
-        var date = new Date(day), year = date.getFullYear(), month = date.getMonth() + 1, day = date.getDate();
-        day = day < 10 ? '0' + day : day;
-        month = month < 10 ? '0' + month : month;
-        return [year, month, day].join('-');
+        return this.dateFormat(new Date(day), 'yyyy-MM-dd');
     },
     /**
      * 格式化时间 09:09
@@ -230,7 +221,7 @@ let Utils = {
         if (typeof day == 'string' && day.indexOf('-')) {
             day = Date.parse(day.replace(/-/g, "\/"));
         }
-        var date = new Date(day), hours = date.getHours(), minutes = date.getMinutes();
+        let date = new Date(day), hours = date.getHours(), minutes = date.getMinutes();
         hours = hours < 10 ? '0' + hours : hours;
         minutes = minutes < 10 ? '0' + minutes : minutes;
         return [hours, minutes].join(':');
@@ -259,7 +250,7 @@ let Utils = {
      * sLanguage:默认为中文。当为'en'的时候是英文。
      */
     dateFormat: function (date, sFormat, sLanguage) {
-        var time = {};
+        let time = {};
         time.Year = date.getFullYear();
         time.TYear = ("" + time.Year).substr(2);
         time.Month = date.getMonth() + 1;
@@ -277,7 +268,7 @@ let Utils = {
         time.Millisecond = date.getMilliseconds();
         time.Week = date.getDay();
 
-        var MMMArrEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        let MMMArrEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             MMMArr = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             WeekArrEn = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"],
             WeekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
@@ -321,7 +312,7 @@ let Utils = {
      * @param cssctl
      */
     tiptype: function (msg, o, cssctl) {
-        var $p = o.obj.parent(),
+        let $p = o.obj.parent(),
             $span = $p.find('.Validform_checktip').length == 1 ? $p.find('.Validform_checktip') : $p.parent().find('.Validform_checktip');
         if (o.type != 2) {//2：通过验证；不显示‘通过信息验证！’
             $span.text(msg)
@@ -338,7 +329,7 @@ let Utils = {
      * Utils.getSequence()//10003
      */
     getSequence: (function () {
-        var sequence = 10000;
+        let sequence = 10000;
         return function () {
             return ++sequence;
         };
@@ -350,7 +341,7 @@ let Utils = {
      * @returns {string}
      */
     formatUrl: function (url) {
-        var index = 0;
+        let index = 0;
         if (url.indexOf('http') !== -1) {
             index = 7;
         }
@@ -358,6 +349,5 @@ let Utils = {
     }
 
 };
-export default Utils;
 
 

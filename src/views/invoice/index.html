@@ -16,7 +16,7 @@
             </label>
             <div class="col-6 d-none d-md-block">
                 <input id="invoiceQRCode" class="form-control form-control-lg invoice-code" type="text"
-                       placeholder="添加发票-请扫描发票二维码" autofocus>
+                       placeholder="添加发票-请用扫描器扫描发票二维码" autofocus>
             </div>
             <div class="col avatar">
                 <img src="../../assets/img/avatar.png" alt="头像" title="这只是logo">
@@ -43,7 +43,7 @@
         <!--dialog-->
         <div id="dlg" class="easyui-dialog" data-options="closed:true,border:false,modal:true,title:'添加发票'"
              style="display: none;width:300px;height:430px;padding: 15px 10px 0 10px">
-            <form role="form" id="form" onsubmit="return invoice.create(form)">
+            <form role="form" id="form" onsubmit="return Invoice.create(form)">
                 <div class="form-group required">
                     <label for="invoiceCode">发票代码</label>
                     <input type="number" class="form-control" id="invoiceCode" name="invoiceCode"
