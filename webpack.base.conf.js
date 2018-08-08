@@ -21,7 +21,10 @@ dirJSON.map(page => {
             template: path.resolve(__dirname, `./src/views/${page.url}/index.html`),
             chunks: chunks,
             chunksSortMode: 'manual',
-            minify: false,
+            minify: isProd ? {
+                collapseWhitespace: true,
+                removeComments: true
+            } : false,
             xhtml: true
         })
     );
