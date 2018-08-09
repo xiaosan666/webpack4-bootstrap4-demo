@@ -4,252 +4,22 @@
 
 window.Utils = {
     /**
-     * 判断字符是否null，undefined和空字符串
-     */
-    isEmpty: function (str) {
-        return (typeof(str) == "undefined" || str == null || str == "") ? true : false;
-    },
-
-    /**
-     * 获得中文字符串的长度。
-     *   Utils.getLength('你好ab')
-     *   return 6；
-     */
-    getLength: function (str, chineseDouble) {
-        // let chineseRegex = /[\u4e00-\u9fa5]/g;
-        let chineseRegex = /[\u4E00-\u9FA5\uf900-\ufa2d]/g;
-        if (chineseDouble != undefined && chineseDouble === false) {
-            return str.length;
-        }
-        else {
-            if (chineseRegex.test(str)) {
-                return str.replace(chineseRegex, "zz").length;
-            }
-            return str.length;
-        }
-    },
-    trim: function (str) {
-        str = Utils.lTrim(str);
-        str = Utils.rTrim(str);
-        return str;
-    },
-    lTrim: function (str) {
-        if (Utils.isEmpty(str)) return "";
-        str = str.toString(10);
-        str = str.replace(/^\s*/ig, "");
-        return str;
-    },
-    rTrim: function (str) {
-        if (Utils.isEmpty(str)) return "";
-        str = str.toString(10);
-        str = str.replace(/\s*$/ig, "");
-        return str;
-    },
-    /**
-     * 将html代码的html修饰去除。
-     */
-    htmlDecode: function (html) {
-        let div = this.document.createElement("div");
-        div.innerHTML = html;
-        return div.innerText || div.textContent;
-    },
-    resource_serialize: function (form) {
-        let o = {};
-        $.each(form.serializeArray(), function (index) {
-            if (o[this['name']]) {
-                o[this['name']] = o[this['name']] + "," + $.trim(this['value']);
-            } else {
-                o[this['name']] = $.trim(this['value']);
-            }
-        });
-        return o;
-    },
-    /**
-     * 创建UUID
-     * @returns {String}
-     */
-    createUuid: function () {
-        let s = [];
-        let hexDigits = "0123456789abcdef";
-        for (let i = 0; i < 32; i++) {
-            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-        }
-        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
-        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
-        //s[8] = s[13] = s[18] = s[23] = "-";
-
-        let uuid = s.join("");
-        return uuid;
-    },
-    /**
-     * 阿拉伯数字转中文数字
-     * @returns {String}
-     */
-    chinsesNumFormat: function (value) {
-        let numberMap = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-        if (value <= 10) {
-            return numberMap[value];
-        } else {
-            return value;
-        }
-    },
-    /**
-     * 删除数组重复的数据
-     */
-    arrayDistinct: function (arr) {
-        let tempArr = {};
-        for (let i = 0; i < arr.length; i++) {
-            if (tempArr[arr[i] + 1]) {
-                arr.splice(i, 1);
-                i--;
-                continue;
-            }
-            tempArr[arr[i] + 1] = true;
-        }
-        tempArr = null;
-        return arr;
-    },
-    /**
-     * 通过cookie的名字获得其内容
-     */
-    getCookie: function (sKey) {
-        if (!sKey) {
-            return "";
-        }
-        let cookie = document.cookie;
-        if (cookie.length > 0) {
-            let startIndex = cookie.indexOf(sKey + "=");
-            if (startIndex != -1) {
-                startIndex = startIndex + sKey.length + 1;
-                let endIndex = cookie.indexOf(";", startIndex);
-                if (endIndex == -1) {
-                    endIndex = cookie.length;
-                }
-                return decodeURIComponent(cookie.substring(startIndex, endIndex));
-            }
-        }
-        return "";
-    },
-    /**
-     *  sKey
-     *  sValue
-     *  iExpireSeconds 过期时间秒数，默认30天
-     */
-    setCookie: function (sKey, sValue, iExpireSeconds) {
-        if (!sKey) {
-            return;
-        }
-        iExpireSeconds = iExpireSeconds ? iExpireSeconds : 60 * 60 * 24 * 30;
-        let expireDate = new Date();
-        expireDate.setTime(expireDate.getTime() + iExpireSeconds * 1000);
-        this.document.cookie = sKey + "=" + encodeURIComponent(sValue) + ";expires=" + expireDate.toGMTString() + ";";
-    },
-    deleteCookie: function (sKey) {
-        if (!sKey)
-            return;
-        this.document.cookie = sKey + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    },
-    /**
-     * 查询浏览器存储信息
-     * @param sKey
-     * @returns {string}
-     */
-    getStorage: function (sKey) {
-        if (!sKey) {
-            return;
-        }
-        let result = '';
-        if (window.localStorage) {
-            result = decodeURIComponent(localStorage.getItem(sKey) || '');
-        }
-        return result ? result : this.getCookie(sKey);
-    },
-    /**
-     * 浏览器不支持Storage存在Cookie中
-     * @param sKey
-     * @param sValue
-     * @param iExpireSeconds  过期时间秒数，默认30天
-     */
-    setStorage: function (sKey, sValue, iExpireSeconds) {
-        if (!sKey)
-            return;
-        if (window.localStorage) {
-            localStorage.setItem(sKey, encodeURIComponent(sValue));
-        }
-        else {
-            this.setCookie(sKey, sValue, iExpireSeconds);
-        }
-    },
-    deleteStorage: function (sKey) {
-        if (!sKey)
-            return;
-        if (window.localStorage) {
-            localStorage.removeItem(sKey);
-        }
-        else {
-            this.deleteCookie(sKey);
-        }
-    },
-    getSessionStorageItem: function (key) {
-        let jsonString = sessionStorage.getItem(key);
-        if (jsonString) {
-            return JSON.parse(jsonString);
-        }
-        return null;
-    },
-    setSessionStorageItem: function (key, value) {
-        sessionStorage.setItem(key, JSON.stringify(value));
-    },
-    removeSessionStorageItem: function (key) {
-        sessionStorage.removeItem(key);
-    },
-    /**.replace(/-/g, "\/")
-     * 格式化日期 2014-09-09
-     */
-    formatDate: function (day) {
-        if (!day) return null;
-        if (typeof day == 'string' && day.indexOf('-')) {
-            day = Date.parse(day.replace(/-/g, "\/"));
-        }
-        return this.dateFormat(new Date(day), 'yyyy-MM-dd');
-    },
-    /**
-     * 格式化时间 09:09
-     */
-    formatTime: function (day) {
-        if (!day) return null;
-        if (typeof day == 'string' && day.indexOf('-')) {
-            day = Date.parse(day.replace(/-/g, "\/"));
-        }
-        let date = new Date(day), hours = date.getHours(), minutes = date.getMinutes();
-        hours = hours < 10 ? '0' + hours : hours;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        return [hours, minutes].join(':');
-    },
-
-    /**
-     * 格式化日期时间 2014-09-09 09:09:09
-     */
-    formatDateTime: function (day) {
-        if (!day) return null;
-        if (typeof day == 'string' && day.indexOf('-')) {
-            day = Date.parse(day.replace(/-/g, "\/"));
-        }
-        var date = new Date(day), year = date.getFullYear(), month = date.getMonth() + 1, day = date.getDate(),
-            hours = date.getHours(), minutes = date.getMinutes(), seconds = date.getSeconds();
-        day = day < 10 ? '0' + day : day;
-        month = month < 10 ? '0' + month : month;
-        hours = hours < 10 ? '0' + hours : hours;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
-    },
-    /**
      * 格式化日期（月和星期）
-     * sFormat：日期的格式(如yy-MM-dd)。年：y，月：M，日：d，时：h，分：m，秒：s
-     * sLanguage:默认为中文。当为'en'的时候是英文。
+     * @param date：日期参数，默认为new Date()，可以是任何类日期格式，如1533779172927 '1533779172927' '2018-08-09'
+     * @param sFormat：日期的格式,默认为 yyyy-MM-dd
+     * @param sLanguage：默认为中文。当为'en'的时候是英文
+     *
+     * @example  Utils.dateFormat()                                      "2018-08-09"
+     * @example  Utils.dateFormat(new Date(),'yyyy-MM-dd HH:mm:ss')      "2018-08-09 09:06:06"
+     * @example  Utils.dateFormat(new Date(),'yy-M-d H:m:s')             "18-8-9 9:6:6"
+     * @example  Utils.dateFormat(new Date(),'yyyy年MM月dd日 HH:mm:ss')  "2018年08月09日 09:06:06"
+     * @example  Utils.dateFormat(new Date(),'MM月dd日 EEE')             "08月09日 星期四"
+     * @example  Utils.dateFormat(new Date(),'MMM')                      "八月"
+     * @example  Utils.dateFormat(new Date(),'MMM','en')                 "Aug"
+     *
      */
-    dateFormat: function (date, sFormat, sLanguage) {
+    dateFormat: function (date = new Date(), sFormat = 'yyyy-MM-dd', sLanguage) {
+        date = Utils.toDate(date);
         let time = {};
         time.Year = date.getFullYear();
         time.TYear = ("" + time.Year).substr(2);
@@ -274,53 +44,240 @@ window.Utils = {
             WeekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
             oNumber = time.Millisecond / 1000;
 
-        if (sFormat != undefined && sFormat.replace(/\s/g, "").length > 0) {
-            if (sLanguage != undefined && sLanguage === "en") {
-                MMMArr = MMMArrEn.slice(0);
-                WeekArr = WeekArrEn.slice(0);
-            }
-            sFormat = sFormat.replace(/yyyy/ig, time.Year)
-                .replace(/yyy/ig, time.Year)
-                .replace(/yy/ig, time.TYear)
-                .replace(/y/ig, time.TYear)
-                .replace(/MMM/g, MMMArr[time.Month - 1])
-                .replace(/MM/g, time.TMonth)
-                .replace(/M/g, time.Month)
-                .replace(/dd/ig, time.TDay)
-                .replace(/d/ig, time.Day)
-                .replace(/HH/g, time.THour)
-                .replace(/H/g, time.Hour)
-                .replace(/hh/g, time.Thour)
-                .replace(/h/g, time.hour)
-                .replace(/mm/g, time.TMinute)
-                .replace(/m/g, time.Minute)
-                .replace(/ss/ig, time.TSecond)
-                .replace(/s/ig, time.Second)
-                .replace(/fff/ig, time.Millisecond)
-                .replace(/ff/ig, oNumber.toFixed(2) * 100)
-                .replace(/f/ig, oNumber.toFixed(1) * 10)
-                .replace(/EEE/g, WeekArr[time.Week]);
-        } else {
-            sFormat = time.Year + "-" + time.Month + "-" + time.Day + " " + time.Thour + ":" + time.TMinute + ":" + time.TSecond;
+        if (sLanguage === "en") {
+            MMMArr = MMMArrEn.slice(0);
+            WeekArr = WeekArrEn.slice(0);
         }
-        return sFormat;
+        return sFormat.replace(/yyyy/ig, time.Year)
+            .replace(/yy/ig, time.TYear)
+            .replace(/MMM/g, MMMArr[time.Month - 1])
+            .replace(/MM/g, time.TMonth)
+            .replace(/M/g, time.Month)
+            .replace(/dd/ig, time.TDay)
+            .replace(/d/ig, time.Day)
+            .replace(/HH/g, time.THour)
+            .replace(/H/g, time.Hour)
+            .replace(/hh/g, time.Thour)
+            .replace(/h/g, time.hour)
+            .replace(/mm/g, time.TMinute)
+            .replace(/m/g, time.Minute)
+            .replace(/ss/ig, time.TSecond)
+            .replace(/s/ig, time.Second)
+            .replace(/fff/ig, time.Millisecond)
+            .replace(/ff/ig, oNumber.toFixed(2) * 100)
+            .replace(/f/ig, oNumber.toFixed(1) * 10)
+            .replace(/EEE/g, WeekArr[time.Week]);
     },
     /**
-     * 自定义表单验证显示错误信息位置
-     * @param msg
-     * @param o
-     * @param cssctl
+     * 将类日期参数转为Date类型
+     * @param obj 日期参数
+     * @example  Utils.toDate(1533779172927)
+     * @example  Utils.toDate('1533779172927')
+     * @example  Utils.toDate('2018-08-09')
      */
-    tiptype: function (msg, o, cssctl) {
-        let $p = o.obj.parent(),
-            $span = $p.find('.Validform_checktip').length == 1 ? $p.find('.Validform_checktip') : $p.parent().find('.Validform_checktip');
-        if (o.type != 2) {//2：通过验证；不显示‘通过信息验证！’
-            $span.text(msg)
-            cssctl($span, o.type);
-        } else {
-            $span.text('');
-            $span.removeClass('Validform_wrong');
+    toDate: function (obj) {
+        if (!obj) {
+            throw new Error('obj参数不允许为空');
         }
+        // 将时间毫秒数string类型转为number类型
+        !isNaN(obj) && (obj = Number(obj));
+        // 兼容Safari和ie8处理，详情：https://www.jianshu.com/p/dc83b45a9480
+        typeof obj === 'string' && obj.indexOf('-') && (obj = obj.replace(/-/g, "\/"));
+        try {
+            obj = new Date(obj);
+            // 判断obj是否为Invalid Date
+            if (obj instanceof Date && isNaN(obj.getTime())) {
+                throw new Error();
+            }
+            return new Date(obj);
+        } catch (e) {
+            throw new Error('obj参数格式不正确');
+        }
+    },
+    /**
+     * 表单数据序列化，返回数据对象
+     * @param form：字符串格式表示表单id，否则表示表单对象
+     */
+    formSerialize: function (form) {
+        typeof form === 'string' && (form = document.getElementById(form));
+        let arr = {};
+        for (let i = 0; i < form.elements.length; i++) {
+            let feled = form.elements[i];
+            switch (feled.type) {
+                case undefined:
+                case 'button':
+                case 'file':
+                case 'reset':
+                case 'submit':
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    if (!feled.checked) {
+                        break;
+                    }
+                default:
+                    if (arr[feled.name]) {
+                        arr[feled.name] = arr[feled.name] + ',' + feled.value;
+                    } else {
+                        arr[feled.name] = feled.value;
+                    }
+            }
+        }
+        return arr
+    },
+    /**
+     * 获得字符串的长度，中文字符默认按2个长度
+     * @param str 字符串参数
+     * @example  Utils.getLength('你好ab')        6
+     * @example  Utils.getLength('你好ab',false)  4
+     */
+    getLength: function (str, chineseDouble) {
+        if (chineseDouble === false) {
+            return str.length;
+        } else {
+            let chineseRegex = /[\u4E00-\u9FA5\uf900-\ufa2d]/g;
+            if (chineseRegex.test(str)) {
+                return str.replace(chineseRegex, "zz").length;
+            }
+            return str.length;
+        }
+    },
+    /**
+     * 去除字符串两边空格
+     */
+    trim: function (str) {
+        str = Utils.lTrim(str);
+        str = Utils.rTrim(str);
+        return str;
+    },
+    /**
+     * 去除字符串左边空格
+     */
+    lTrim: function (str) {
+        if (!str) return "";
+        return str.replace(/^\s*/ig, "");
+    },
+    /**
+     * 去除字符串右边空格
+     */
+    rTrim: function (str) {
+        if (!str) return "";
+        return str.replace(/\s*$/ig, "");
+    },
+    /**
+     * 将html代码的html修饰去除。
+     */
+    htmlDecode: function (html) {
+        let div = this.document.createElement("div");
+        div.innerHTML = html;
+        return div.innerText || div.textContent;
+    },
+    /**
+     * 创建UUID
+     * @returns {String}
+     */
+    createUuid: function () {
+        let s = [];
+        let hexDigits = "0123456789abcdef";
+        for (let i = 0; i < 32; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        //s[8] = s[13] = s[18] = s[23] = "-";
+        return s.join("");
+    },
+    /**
+     * 保存数据到Cookie中
+     *  expireSeconds 过期时间秒数，默认30天
+     */
+    setCookie: function (key, value, expireSeconds) {
+        if (key && value) {
+            expireSeconds = expireSeconds ? expireSeconds : 60 * 60 * 24 * 30;
+            let expireDate = new Date();
+            expireDate.setTime(expireDate.getTime() + expireSeconds * 1000);
+            this.document.cookie = key + "=" + JSON.stringify(value) + ";expires=" + expireDate.toGMTString() + ";";
+        }
+    },
+    /**
+     * 通过key从Cookie中获取内容
+     */
+    getCookie: function (key) {
+        if (key) {
+            let cookie = document.cookie;
+            if (cookie.length > 0) {
+                let startIndex = cookie.indexOf(key + "=");
+                if (startIndex !== -1) {
+                    startIndex = startIndex + key.length + 1;
+                    let endIndex = cookie.indexOf(";", startIndex);
+                    if (endIndex === -1) {
+                        endIndex = cookie.length;
+                    }
+                    let result = cookie.substring(startIndex, endIndex);
+                    return result ? JSON.parse(result) : null;
+                }
+            }
+            return null;
+        }
+    },
+    /**
+     * 根据key删除Cookie保存的内容
+     */
+    deleteCookie: function (key) {
+        key && (this.document.cookie = key + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;');
+    },
+    /**
+     * 保存数据到Storage中，浏览器不支持Storage则存在Cookie中
+     */
+    setStorage: function (key, value, expireSeconds) {
+        if (key && value) {
+            if (window.localStorage) {
+                localStorage.setItem(key, JSON.stringify(value));
+            } else {
+                this.setCookie(key, value, expireSeconds);
+            }
+        }
+    },
+    /**
+     * 从Storage获取缓存的内容
+     */
+    getStorage: function (key) {
+        if (key) {
+            let result = '';
+            if (window.localStorage) {
+                result = localStorage.getItem(key)
+            }
+            return result ? JSON.parse(result) : this.getCookie(key);
+        }
+    },
+    /**
+     * 根据key从Storage删除缓存内容
+     */
+    deleteStorage: function (key) {
+        key && (window.localStorage ? localStorage.removeItem(key) : this.deleteCookie(key));
+    },
+    /**
+     * 保存数据到SessionStorage中
+     */
+    setSessionStorage: function (key, value) {
+        if (key && value) {
+            sessionStorage.setItem(key, JSON.stringify(value));
+        }
+    },
+    /**
+     * 从SessionStorage获取缓存的内容
+     */
+    getSessionStorage: function (key) {
+        if (key) {
+            let jsonString = sessionStorage.getItem(key);
+            return jsonString ? JSON.parse(jsonString) : null;
+        }
+    },
+    /**
+     * 根据key从SessionStorage删除缓存内容
+     */
+    deleteSessionStorage: function (key) {
+        key && sessionStorage.removeItem(key);
     },
     /**
      * 每次调用递增

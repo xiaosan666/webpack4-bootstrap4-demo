@@ -14,10 +14,11 @@
  */
 window.Http = {
     config: function (opts) {
-        this.type = opts.type || "POST";
         this.url = opts.url;
+        this.type = opts.type || 'POST';
         this.data = opts.data || {};
-        this.dataType = opts.dataType || "json";
+        this.dataType = opts.dataType || 'json';
+        this.headers = opts.headers || {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"};
         this.beforeSend = opts.beforeSend;
         this.success = opts.success;
         this.error = opts.error;
@@ -32,8 +33,8 @@ window.Http = {
             type: this.type,
             url: this.url,
             data: this.data,
-            dataType: this.dataType || 'json',
-            headers: this.headers || {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+            dataType: this.dataType,
+            headers: this.headers,
             crossDomain: !(document.all),
             beforeSend: function (xhr) {
                 that.showLoader();
@@ -61,7 +62,7 @@ window.Http = {
     },
     defaultApiRequest: function () {
         this.headers = this.headers || {};
-        this.headers.Authorization = 'Bearer ' + (window.token || Utils.getSessionStorageItem('token'));
+        this.headers.Authorization = 'Bearer ' + (window.token || Utils.getSessionStorage('token'));
         this.url = Utils.formatUrl(this.url.indexOf('http') !== -1 ? this.url : API + this.url);
         this.request();
     },
@@ -108,7 +109,7 @@ $(document).ajaxError(function (event, xhr, settings, exception) {
                 let data = JSON.parse(result.msg);
                 swal({
                     title: '该发票已经存在',
-                    text: '发票号码：' + data.invoiceNumber + '，添加时间：' + Utils.formatDateTime(data.createTime),
+                    text: '发票号码：' + data.invoiceNumber + '，添加时间：' + Utils.dateFormat(data.createTime, 'yyyy-MM-dd HH:mm:ss'),
                     type: 'warning'
                 });
             } else if (result.code === 401) {

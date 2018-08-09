@@ -18,7 +18,7 @@ window.Login = function (username, password) {
         },
         success: function (token) {
             window.token = token;
-            Utils.setSessionStorageItem('token', token);
+            Utils.setSessionStorage('token', token);
             window.location.href = 'invoice.html';
             /*Http.config({
                 url: '/v1/public/user/self',

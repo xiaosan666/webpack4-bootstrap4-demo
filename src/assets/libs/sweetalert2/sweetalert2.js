@@ -11,7 +11,7 @@ swal.setDefaults({
 });
 
 window.swal = function () {
-    var result = swal.apply(this, arguments);
+    let result = swal.apply(this, arguments);
     // swal2-height-auto 这个class会影响页面布局，所以通过js删掉
     $('body').removeClass('swal2-height-auto');
     $('html').removeClass('swal2-height-auto');

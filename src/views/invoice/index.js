@@ -35,7 +35,7 @@ Invoice.prototype = {
     _initData: function () {
         let that = this;
         that.ListYesOrNo = [{text: '作废', value: '1'}, {text: '正常', value: '0'}];
-        $('#billTime').val(Utils.formatDate(new Date()));
+        $('#billTime').val(Utils.dateFormat());
     },
     _bindEven: function () {
         let that = this;
@@ -47,7 +47,7 @@ Invoice.prototype = {
         });
         that.$logout.on('click', function () {
             window.token = '';
-            Utils.setSessionStorageItem('token', '');
+            Utils.setSessionStorage('token', '');
             window.location.href = document.location.origin;
         });
         that.$btnAdd.on('click', function () {
@@ -268,27 +268,20 @@ Invoice.prototype = {
         }
     },
     create: function (form) {
-        let that = this;
-        let invoiceCode = form.invoiceCode.value;
-        let invoiceNumber = form.invoiceNumber.value;
-        let billTime = form.billTime.value;
-        let checkCode = form.checkCode.value;
-        if (checkCode.length !== 6) {
-            swal('校验码必须为6位！', '', 'info');
-            return false;
-        }
         if (TEST) {
             swal('测试模式，不能新增！', '', 'warning');
             return false;
         }
+        let that = this;
+        let formData = Utils.formSerialize(form);
+        if (formData.checkCode.length !== 6) {
+            swal('校验码必须为6位！', '', 'info');
+            return false;
+        }
+        formData.billTime = Utils.toDate(formData.billTime).getTime();
         Http.config({
             url: '/v1/invoice/op/create',
-            data: {
-                invoiceCode: invoiceCode,
-                invoiceNumber: invoiceNumber,
-                billTime: new Date(billTime).getTime(),
-                checkCode: checkCode
-            },
+            data: formData,
             success: function () {
                 Helper.showToast('新增成功！');
                 that.$dg.datagrid('unselectAll').datagrid('reload');

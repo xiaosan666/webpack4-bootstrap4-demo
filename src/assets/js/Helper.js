@@ -6,7 +6,7 @@ window.Helper = {
      * 格式“是”or“否”
      */
     formatYesOrNo: function (value) {
-        return value == 1 ? '是' : (value == '0' ? '否' : null);
+        return (value === 1 || value === '1') ? '是' : ((value === 0 || value === '0') ? '否' : null);
     },
     /**
      * 打开loading模态窗口
@@ -34,24 +34,8 @@ window.Helper = {
         }, 0)
     },
     /**
-     * datagrid 执行查询过滤公共函数
-     * @param $dg
-     * @param field
-     * @param value
-     * @param op
+     *  消息提示框，自动关闭，一般用于成功操作消息提示
      */
-    doFilter: function ($dg, field, value, op) {
-        if (!value) {
-            $dg.datagrid('removeFilterRule', field);
-        } else {
-            $dg.datagrid('addFilterRule', {
-                field: field,
-                op: op || 'equal',
-                value: value
-            });
-        }
-        $dg.datagrid('unselectAll').datagrid('doFilter');
-    },
     showToast: function (message, timeout) {
         if (swal) {
             swal({
@@ -79,7 +63,26 @@ window.Helper = {
                 }, timeout || 2000);
             });
         }
-    }
+    },
+    /**
+     * easyui datagrid 执行查询过滤公共函数
+     * @param $dg
+     * @param field
+     * @param value
+     * @param op
+     */
+    doFilter: function ($dg, field, value, op) {
+        if (!value) {
+            $dg.datagrid('removeFilterRule', field);
+        } else {
+            $dg.datagrid('addFilterRule', {
+                field: field,
+                op: op || 'equal',
+                value: value
+            });
+        }
+        $dg.datagrid('unselectAll').datagrid('doFilter');
+    },
 };
 
 
