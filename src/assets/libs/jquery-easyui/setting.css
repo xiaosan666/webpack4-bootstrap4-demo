@@ -30,8 +30,12 @@
     color: #333;
 }
 
-.datagrid-header-row, .datagrid-row {
+.datagrid-header-row {
     height: 40px;
+}
+
+.datagrid-row {
+    height: 45px;
 }
 
 .datagrid-filter-row {
@@ -43,6 +47,6 @@
     color: #000;
 }
 
-.window-body-noheader{
-  font-size: 22px;
+.window-body-noheader {
+    font-size: 22px;
 }

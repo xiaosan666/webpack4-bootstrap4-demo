@@ -19,15 +19,15 @@ Invoice.prototype = {
     },
     _cacheParam: function () {
         let that = this;
-        that.$btnDelete = $('#btnDelete');
+        that.$logout = $('#logout');
+        that.$invoiceQRCode = $('#invoiceQRCode');
+
         that.$dg = $('#dg');
         that.$dt = $('#dt');
-        that.$invoiceQRCode = $('#invoiceQRCode');
-        that.$logout = $('#logout');
+        that.$btnDelete = $('#btnDelete');
         that.$btnAdd = $('#btnAdd');
         that.$btnExport = $('#btnExport');
 
-        /!*Dialog*!/
         that.$dlg = $('#dlg');
         that.$form = $('#form');
         that.$btnClose = $('#btnClose');
@@ -39,9 +39,6 @@ Invoice.prototype = {
     },
     _bindEven: function () {
         let that = this;
-        that.$btnDelete.on('click', function () {
-            that.delete();
-        });
         that.$invoiceQRCode.on('input', function () {
             that._invoiceQRCodeInput();
         });
@@ -54,6 +51,9 @@ Invoice.prototype = {
             that.$dg.datagrid('uncheckAll');
             that.$dlg.dialog('center').dialog('open');
         });
+        that.$btnDelete.on('click', function () {
+            that._delete();
+        });
         that.$btnClose.on('click', function () {
             that.$dlg.dialog('close');
         });
@@ -65,45 +65,13 @@ Invoice.prototype = {
             });
         });
     },
-    _invoiceQRCodeInput: function () {
-        let that = this;
-        clearTimeout(that.timer);
-        let ms = 500; // 延迟500毫秒执行后续操作
-        that.timer = setTimeout(function () {
-            let val = that.$invoiceQRCode.val();
-            if (val.length < 60 || val.length > 80) {
-                return;
-            }
-            that._createInvoice(val);
-            that.$invoiceQRCode.val('');
-            that.$invoiceQRCode.focus();
-        }, ms);
-    },
-    _createInvoice: function (qrCode) {
-        let that = this;
-        Http.config({
-            url: '/v1/invoice/op/createByQrCode',
-            data: {qrCode: qrCode},
-            success: function () {
-                Helper.showToast('新增成功！');
-                that.$dg.datagrid('unselectAll').datagrid('reload');
-            },
-            beforeSend: function () {
-                that.$invoiceQRCode.attr('disabled', true);
-            },
-            complete: function () {
-                that.$invoiceQRCode.attr('disabled', false);
-                that.$invoiceQRCode.focus();
-            }
-        }).postFormData();
-    },
     _grid: function () {
         let that = this;
         that.$dg.datagrid({
             fit: true,
             striped: true,
             singleSelect: true,
-            // nowrap: false,
+            nowrap: false,
             pagination: true,
             rownumbers: true,
             toolbar: '#tb',
@@ -155,7 +123,7 @@ Invoice.prototype = {
                         return value ? Utils.dateFormat(new Date(value), 'yyyy年MM月dd日') : null;
                     }
                 },
-                {field: 'checkCode', title: '校验码', width: 100},
+                {field: 'checkCode', title: '校验码', width: 150},
                 {field: 'invoiceAmount', title: '开具金额(元)', width: 100, sortable: true},
                 {field: 'totalTaxNum', title: '税额(元)', width: 100, sortable: true},
                 {field: 'totalTaxSum', title: '价税合计(元)', width: 100, sortable: true},
@@ -164,20 +132,20 @@ Invoice.prototype = {
                         return value ? (value === '1' ? '作废' : '正常') : null;
                     }
                 },
-                {field: 'purchaserName', title: '购买方', width: 160},
-                {field: 'taxpayerNumber', title: '购买方税号', width: 160},
+                {field: 'purchaserName', title: '购买方', width: 140},
+                {field: 'taxpayerNumber', title: '购买方税号', width: 140},
                 // {field:'taxpayerAddressOrId',title:'购买方地址',width:160},
                 // {field:'taxpayerBankAccount',title:'购买方银行信息',width:160},
-                {field: 'salesName', title: '销售方名称', width: 160},
-                {field: 'salesTaxpayerNum', title: '销售方税号', width: 160},
-                {field: 'salesTaxpayerAddress', title: '销售方地址', width: 160},
-                {field: 'salesTaxpayerBankAccount', title: '销售方银行信息', width: 160},
-                {field: 'invoiceRemarks', title: '备注', width: 160},
+                {field: 'salesName', title: '销售方名称', width: 140},
+                {field: 'salesTaxpayerNum', title: '销售方税号', width: 140},
+                {field: 'salesTaxpayerAddress', title: '销售方地址', width: 190},
+                {field: 'salesTaxpayerBankAccount', title: '销售方银行信息', width: 190},
+                {field: 'invoiceRemarks', title: '备注', width: 140},
                 // {field: 'taxDiskCode', title: '机器编号', width: 160},
                 // {field:'isBillMark',title:'是否为清单票  Y：是，N：否可以根据该字段展示清单票和正常票',width:160},
                 // {field:'tollSign',title:'收费标志字段（06：可抵扣通行费 07：不可抵扣通行费，08：成品油）',width:160},
                 // {field:'tollSignName',title:'收费标志名称',width:160}，
-                {field: 'createTime', title: '记录创建时间', width: 160, sortable: true}
+                {field: 'createTime', title: '记录创建时间', width: 140, sortable: true}
             ]]
         });
     },
@@ -226,7 +194,7 @@ Invoice.prototype = {
             options: {}
         }]);
     },
-    delete: function () {
+    _delete: function () {
         let that = this, rows = that.$dg.datagrid('getSelections');
         if (rows.length > 0) {
             swal({
@@ -266,6 +234,38 @@ Invoice.prototype = {
         } else {
             swal('请选择要删除的数据！', '', 'info');
         }
+    },
+    _invoiceQRCodeInput: function () {
+        let that = this;
+        clearTimeout(that.timer);
+        let ms = 500; // 延迟500毫秒执行后续操作
+        that.timer = setTimeout(function () {
+            let val = that.$invoiceQRCode.val();
+            if (val.length < 60 || val.length > 80) {
+                return;
+            }
+            that._createInvoice(val);
+            that.$invoiceQRCode.val('');
+            that.$invoiceQRCode.focus();
+        }, ms);
+    },
+    _createInvoice: function (qrCode) {
+        let that = this;
+        Http.config({
+            url: '/v1/invoice/op/createByQrCode',
+            data: {qrCode: qrCode},
+            success: function () {
+                Helper.showToast('新增成功！');
+                that.$dg.datagrid('unselectAll').datagrid('reload');
+            },
+            beforeSend: function () {
+                that.$invoiceQRCode.attr('disabled', true);
+            },
+            complete: function () {
+                that.$invoiceQRCode.attr('disabled', false);
+                that.$invoiceQRCode.focus();
+            }
+        }).postFormData();
     },
     create: function (form) {
         if (TEST) {
