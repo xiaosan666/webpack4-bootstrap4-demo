@@ -5,8 +5,14 @@
         "excludeEasyui": true
     },
     {
-        "url": "invoice",
-        "title": "鉴票宝"
+        "url": "product",
+        "title": "產品介紹",
+        "excludeEasyui": true
+    },
+    {
+        "url": "weiweiwei",
+        "title": "WeiWeiWei",
+        "excludeEasyui": true
     },
     {
         "url": "test",

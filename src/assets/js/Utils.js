@@ -99,7 +99,8 @@ window.Utils = {
      * @param form：字符串格式表示表单id，否则表示表单对象
      */
     formSerialize: function (form) {
-        typeof form === 'string' && (form = document.getElementById(form));
+        (form instanceof $) && (form = form[0]);
+        (typeof form === 'string') && (form = document.getElementById(form));
         let arr = {};
         for (let i = 0; i < form.elements.length; i++) {
             let feled = form.elements[i];
