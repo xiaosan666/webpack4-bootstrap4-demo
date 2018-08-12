@@ -14,12 +14,20 @@
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <img src="../../assets/img/logo.png" alt="" style="width: 50px;margin: 0 10px">
-    <h6 class="my-0 mr-md-auto font-weight-normal">智威集團控股有限公司<br>Wiseway Group Holdings Limited</h6>
+    <h6 class="my-0 mr-md-auto font-weight-normal text-center text-md-left">智威集團控股有限公司<br>Wiseway Group Holdings Limited</h6>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#home">首頁</a>
-        <a class="p-2 text-dark" href="#about">關於我們</a>
-        <a class="p-2 text-dark" href="#product">產品介紹</a>
-        <a class="p-2 text-dark" href="#contact">聯繫我們</a>
+        <div class="btn-group">
+            <a class="pr-2 text-dark" href="#home">首頁</a>
+            <a class="pr-2 text-dark" href="#about">關於我們</a>
+            <a class="text-dark" href="#product">產品介紹</a>
+            <a class="text-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false"></a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="product.html">Get Aider 愛心服務平臺</a>
+                <a class="dropdown-item" href="weiweiwei.html">【喂喂喂】服務</a>
+            </div>
+            <a class="text-dark" href="#contact">聯繫我們</a>
+        </div>
     </nav>
 </div>
 <div class="container">
@@ -29,23 +37,23 @@
     <div id="about" class="pt-5 pb-5">
         <h1 class="text-center">關於我們</h1>
         <div class="row">
-            <div class="col-6 pt-5">
+            <div class="col-md-6 pt-4">
                 <p>公司成立於2007年，從成立至今壹直致力於移動互聯網微信、APP行業應用的開發、銷售等業務領域，在移動互聯網有著廣泛的客戶群。</p>
                 <p>公司著眼於市場需求，高瞻遠矚。憑借公司的實力，以及廣大商家和客戶的支持，贏得了業界和顧客的壹致好評和信任！</p>
                 <p>我們堅持自有的發展戰略，將成為移動互聯網的創新顛覆者。</p>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-md-6 d-none d-md-block text-center">
                 <img src="../../assets/img/about.png" alt="" class="img-fluid w-50">
             </div>
         </div>
     </div>
     <div id="product" class="pt-5 pb-5 bg-eee">
         <h1 class="text-center">產品介紹</h1>
-        <div class="row pb-5">
-            <div class="col-6 text-center">
+        <div class="row no-margin pb-5">
+            <div class="col-md-6 d-none d-md-block text-center">
                 <img src="../../assets/img/product.png" alt="" class="img-fluid w-50">
             </div>
-            <div class="col-6 pt-5 pr-5">
+            <div class="col-md-6 pt-4 pl-3 pr-3">
                 <h2>Get Aider 愛心服務平臺</h2>
                 <p>Get Aider 愛心服務平臺為用戶提供快速貼身線下到位、到點港式服務，為親人和子女建立溝通的橋梁，家人能知道使用者的最新健康資料和生活狀況。</p>
                 <p>為客戶篩選最佳的有償服務供貨商，用智能軟件加上我們的客服，有效地配套在我們的服務，為客戶提供更多的無償服務。</p>
@@ -53,13 +61,12 @@
             </div>
         </div>
         <div class="row no-margin pt-5 border-top">
-            <div class="col-6 pt-5 pl-5">
+            <div class="col-md-6 pt-4 pl-3 pr-3">
                 <h2>【喂喂喂】服務</h2>
-                <p>
-                    【喂喂喂】服務是“Wiseway”與“WAVI”共同推出的VoIP應用程式，無論您身處香港或世界各地，只須透過流動數據或WI-FI連線，便可有一個香港電話號碼的應用程式，免費接聽世界各地的來電，與親友或生意伙伴保持緊密聯繫，節省昂貴漫遊通話費和漫遊致電國際長途電話費！</p>
+                <p>【喂喂喂】服務是“Wiseway”與“WAVI”共同推出的VoIP應用程式，無論您身處香港或世界各地，只須透過流動數據或WI-FI連線，便可有一個香港電話號碼的應用程式，免費接聽世界各地的來電，與親友或生意伙伴保持緊密聯繫，節省昂貴漫遊通話費和漫遊致電國際長途電話費！</p>
                 <a href="weiweiwei.html">查看詳細介紹...</a>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-md-6 d-none d-md-block text-center">
                 <img src="../../assets/img/weiweiwei/weiweiwei.png" alt="" class="img-fluid w-50">
             </div>
         </div>
@@ -67,7 +74,7 @@
     <div id="contact" class="pt-5 pb-5">
         <h1 class="text-center">聯繫我們</h1>
         <div class="row mb-4">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">聯繫方式 Contact information</h5>
@@ -80,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center">公司地址 Company address</h5>
@@ -95,8 +102,6 @@
         <img src="../../assets/img/map.jpg" alt="" class="img-fluid">
     </div>
 </div>
-<footer class="pt-3 pb-3 border-top text-center" style="background: #333333;color: #fff">
-    版權所有：智威集團控股有限公司
-</footer>
+#include("../../assets/html/footer.html")
 </body>
 </html>

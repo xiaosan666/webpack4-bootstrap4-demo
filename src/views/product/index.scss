@@ -2,6 +2,10 @@
    background: #66ccfc;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #66ccfc;
+}
+
 .arrow-up {
     position: fixed;
     bottom: 15px;

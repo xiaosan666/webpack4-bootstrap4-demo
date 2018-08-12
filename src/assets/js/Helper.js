@@ -84,7 +84,7 @@ window.Helper = {
         $dg.datagrid('unselectAll').datagrid('doFilter');
     },
     backTop: function backTop(minHeight = 300) {
-        let backTopHtml = '<button type="button" id="backTopBtn" class="btn btn-outline-secondary" style="position:fixed;bottom:15px;right:15px;"><span class="fa fa-arrow-up"></span></button>';
+        let backTopHtml = '<button type="button" id="backTopBtn" class="btn btn-outline-secondary" style="position:fixed;bottom:15px;right:15px;display: none;"><span class="fa fa-arrow-up"></span></button>';
         $('body').append(backTopHtml);
         $('#backTopBtn').click(function () {
             $('html, body').animate({scrollTop: 0}, 700)

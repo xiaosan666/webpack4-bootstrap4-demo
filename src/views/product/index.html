@@ -9,18 +9,26 @@
     <!--针对ie,如果ie版本小于ie11则提示升级浏览器-->
     <script>/*@cc_on @*//*@ window.location.href="http://www.goody.com.cn/2014/updatebrowser/?referrer="+encodeURIComponent(window.location.href); @*/</script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>產品介紹</title>
+    <title>Get Aider 愛心服務平臺</title>
 </head>
 
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom">
     <img src="../../assets/img/logo.png" alt="" style="width: 50px;margin: 0 10px">
-    <h6 class="my-0 mr-md-auto font-weight-normal">智威集團控股有限公司<br>Wiseway Group Holdings Limited</h6>
+    <h6 class="my-0 mr-md-auto font-weight-normal text-center text-md-left">智威集團控股有限公司<br>Wiseway Group Holdings Limited</h6>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="index.html">首頁</a>
-        <a class="p-2 text-dark" href="index.html#about">關於我們</a>
-        <a class="p-2 text-dark" href="index.html#product">產品介紹</a>
-        <a class="p-2 text-dark" href="index.html#contact">聯繫我們</a>
+        <div class="btn-group">
+            <a class="pr-2 text-dark" href="index.html">首頁</a>
+            <a class="pr-2 text-dark" href="index.html#about">關於我們</a>
+            <a class="text-dark" href="index.html#product">產品介紹</a>
+            <a class="text-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false"></a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item active" href="product.html">Get Aider 愛心服務平臺</a>
+                <a class="dropdown-item" href="weiweiwei.html">【喂喂喂】服務</a>
+            </div>
+            <a class="text-dark" href="index.html#contact">聯繫我們</a>
+        </div>
     </nav>
 </div>
 <div class="product_introduction">
@@ -35,7 +43,7 @@
         <h2>人口老齡化趨勢</h2>
         <div class="border-top mt-3 pt-3">
             <img src="../../assets/img/aging.jpg" alt="" class="img-fluid w-75">
-            <p class="text-left ml-5 mr-5">
+            <p class="text-left ml-4 mr-4">
                 我國正處於人口老齡化快速發展期。數據顯示，60歲以上老年人口已經達到2.12億， 占總人口的15.5%，失能和部分失能老年人近4000萬人，其中完全失能的老年人有
                 1200萬人。65周歲以上人口13755萬人，占總人口比例為10.1%。2020年全國老年 人口將達2.48億，老齡化水平為17%。
             </p>
@@ -44,19 +52,19 @@
     <div class="mt-5">
         <h2 class="text-center">養老現狀</h2>
         <div class="row border-top mt-3 pt-3">
-            <div class="col-3">
+            <div class="col-md-3">
                 <img src="../../assets/img/pension_status_1.png" alt="" class="img-fluid">
                 <p>機構集中養老方便管理，但缺乏親情，無法給 老年人帶來生活水平的提升。</p>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 <img src="../../assets/img/pension_status_2.jpg" alt="" class="img-fluid">
                 <p>硬件設施與服務水平參差不齊。</p>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 <img src="../../assets/img/pension_status_3.jpg" alt="" class="img-fluid">
                 <p>中國現有養老機構床位僅覆蓋2%的老人。</p>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 <img src="../../assets/img/pension_status_4.jpg" alt="" class="img-fluid">
                 <p>對老人的心理情緒上的關懷不足，老人更需要 得到家庭親情與社會參與感，以及與年輕人的 有效互動，並發揮能力所長，展現自我價值。</p>
             </div>
@@ -90,8 +98,8 @@
     <div class="mt-5">
         <h2 class="text-center">合作模式</h2>
          <div class="row border-top mt-3 pt-3">
-             <div class="col-5 row">
-                 <div class="col text-right">
+             <div class="col-md-5 row">
+                 <div class="col-4 text-right">
                      <i class="fa fa-handshake-o" style="font-size: 30px;"></i>
                  </div>
                  <div class="col">
@@ -99,8 +107,8 @@
                      <p>可當壹級代理，經銷品牌的穿戴設備及關愛服務</p>
                  </div>
              </div>
-             <div class="col-6 row">
-                 <div class="col text-right">
+             <div class="col-md-6 row">
+                 <div class="col-4 text-right">
                      <i class="fa fa-group" style="font-size: 30px;"></i>
                  </div>
                  <div class="col">
@@ -129,8 +137,6 @@
         </div>
     </div>
 </div>
-<footer class="mt-5 pt-3 pb-3 border-top text-center" style="background: #333333;color: #fff">
-    版權所有：智威集團控股有限公司
-</footer>
+#include("../../assets/html/footer.html")
 </body>
 </html>

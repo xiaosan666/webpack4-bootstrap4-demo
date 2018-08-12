@@ -1,5 +1,9 @@
 .product_introduction {
-   background: #66ccfc;
+    background: #66ccfc;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #66ccfc;
 }
 
 .arrow-up {
