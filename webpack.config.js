@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === 'prod') {
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin()
         ],
-        // devtool: 'eval-source-map',
         devServer: {
             open: true, // 自动打开浏览器
             contentBase: path.join(__dirname, 'dist'),

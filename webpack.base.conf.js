@@ -45,14 +45,12 @@ module.exports = {
                 easyui: {
                     test: /[\\/]src[\\/]assets[\\/]libs[\\/]jquery-easyui[\\/]/,
                     priority: -5,
-                    name: 'easyui',
-                    reuseExistingChunk: true
+                    name: 'easyui'
                 },
                 vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    name: 'vendors',
-                    reuseExistingChunk: true
+                    test: /[\\/]src[\\/]assets[\\/]libs[\\/]js[\\/]/,
+                    priority: -5,
+                    name: 'vendors'
                 },
                 default: {
                     minChunks: 2,

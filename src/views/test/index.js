@@ -1,6 +1,7 @@
+import '../../assets/Easyui';
+import '../../assets/Common';
 import './index.scss';
 import './index.html';
-
 
 $('#test').bind('click', () => {
     const arr = [1, 2, 3, 4, 5];
