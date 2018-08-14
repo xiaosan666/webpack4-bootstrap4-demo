@@ -22,5 +22,5 @@ cnpm i
 ```
 npm run dev
 ```
-* 效果展示
-![运行步骤展示](./doc/run.gif)
+* 效果展示.gif
+![效果展示](./doc/run.gif)
