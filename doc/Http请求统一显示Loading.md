@@ -61,8 +61,8 @@
     ```
     
 * 如第一种情况，发出多个请求，但不是同时发出，A请求完成需要处理一段时间，才发出B请求，可以使用setTimeout模拟
-  > A请求完成过了一会出发B请求，类似A请求完成用户点击了按钮出发了B，但是用户没有任何操作，此情况Http没办法处理，需要手动处理
-    所有请求isShowLoading设置为false，手动调用 Helper.showLoading();在用时最长的请求回调中关闭loading
+  > A请求完成过了一会出发B请求，类似A请求完成用户点击了按钮出发了B，但是用户没有任何操作，此情况Http没办法处理，需要手动处理；
+    把所有请求isShowLoading设置为false，手动调用 Helper.showLoading();在用时最长的请求回调中关闭loading
     ```javascript
     $('#test').bind('click', () => {
         // 打开loading
