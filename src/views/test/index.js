@@ -1,12 +1,33 @@
-import '../../assets/Easyui';
 import '../../assets/Common';
 import './index.scss';
 import './index.html';
 
 $('#test').bind('click', () => {
-    const arr = [1, 2, 3, 4, 5];
-    const newArr = arr.map(i => {
-        return i * i;
-    });
-    console.log(newArr);
+    // 打开loading
+    Helper.showLoading();
+    Http.config({
+        url: '/v1/demo/map_result_post',
+        isShowLoading: false,
+        success: function (data) {
+            // 延迟1秒
+            setTimeout(() => {
+                Http.config({
+                    url: '/v1/demo/map_result_post2',
+                    isShowLoading: false,
+                    success: function (data) {
+                        // 在最终的回调函数处关闭loading
+                        Helper.hideLoading();
+                    },
+                    error: function () {
+                        // 异常情况关闭loading
+                        Helper.hideLoading();
+                    }
+                }).post();
+            }, 1000)
+        },
+        error: function () {
+            // 异常情况关闭loading
+            Helper.hideLoading();
+        }
+    }).post();
 });

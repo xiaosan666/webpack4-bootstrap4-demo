@@ -104,7 +104,7 @@ Invoice.prototype = {
                     Http.config({
                         url: '/v1/invoice/view/page',
                         data: param,
-                        isShowLoader: false,
+                        isShowLoading: false,
                         success: function (data) {
                             success(data);
                         }

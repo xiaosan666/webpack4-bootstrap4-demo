@@ -1,7 +1,7 @@
 /**
  * 封装jquery Ajax
  * 1.统一异常处理
- * 2.添加默认api
+ * 2.default请求添加默认api，添加权限请求头
  * 3.注意post方法的请求头为application/json，不需要此请求头则调用postFormData()
  * 示例：
  Http.config({
@@ -23,8 +23,8 @@ window.Http = {
         this.success = opts.success;
         this.error = opts.error;
         this.complete = opts.complete;
-        this.isShowLoader = !(opts.isShowLoader === false);
-        this.isDefaultApiRequest = !(opts.isDefaultApiRequest === false);
+        this.isShowLoading = !(opts.isShowLoading === false); // 本次请求是否显示loading，默认显示
+        this.isDefaultApiRequest = !(opts.isDefaultApiRequest === false); // 是否使用默认api请求，默认请求会添加请求头，会添加默认api
         return this;
     },
     request: function () {
@@ -37,13 +37,13 @@ window.Http = {
             headers: this.headers,
             crossDomain: !(document.all),
             beforeSend: function (xhr) {
-                that.showLoader();
+                that.showLoading();
                 if (that.beforeSend && Object.prototype.toString.call(that.beforeSend) === "[object Function]") {
                     that.beforeSend(xhr);
                 }
             },
             complete: function (xhr, status) {
-                that.hideLoader();
+                that.hideLoading();
                 if (that.complete && Object.prototype.toString.call(that.complete) === "[object Function]") {
                     that.complete(xhr, status);
                 }
@@ -78,15 +78,15 @@ window.Http = {
         this.type = 'GET';
         this.isDefaultApiRequest ? this.defaultApiRequest() : this.request();
     },
-    requestCount: 0, //  记录未完成的请求数量,当请求数为0关闭loading,当不为0显示loading
-    showLoader: function () {
-        if (this.isShowLoader && ++this.requestCount > 0) {
-            Helper.showLoading();
-        }
+    requestCount: 0, //  记录未完成的请求数量,当请求数为0关闭loading,否则显示loading
+    // 关于统一显示loading的处理逻辑，请查看/doc/《Http请求统一显示Loading.md》
+    showLoading: function () {
+        ++this.requestCount;
+        this.isShowLoading && Helper.showLoading();
     },
-    hideLoader: function () {
-        if (this.isShowLoader && --this.requestCount === 0) {
-            Helper.hideLoading();
+    hideLoading: function () {
+        if (--this.requestCount === 0) {
+            this.isShowLoading && Helper.hideLoading();
         }
     }
 };

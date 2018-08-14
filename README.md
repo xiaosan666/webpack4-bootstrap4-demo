@@ -4,6 +4,7 @@
 * 由于使用bootstrap4，sweetalert2，使用ie10及以下版本的ie浏览器访问会跳转到浏览器升级页面
 
 # 如何运行？
+* 运行步骤参考图  
 ![运行步骤.png](./doc/run.png)
 * 确保已安装nodejs，最好是8.x以上，该项目在v8.9.4上测试。
 > 如果不会安装nodejs可以参考[这里](https://www.jianshu.com/p/81072e9be3e4),如果想安装多个nodejs版本可以参考[这里](https://www.jianshu.com/p/17d3249e0619),
