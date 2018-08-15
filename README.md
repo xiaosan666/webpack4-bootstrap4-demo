@@ -1,7 +1,8 @@
 # webpack4-bootstrap4-demo
-* 采用webpack多页面(多入口)配置，实现常用webpack配置
 * 本项目集成了bootstrap4，jquery，easyui(可配置)等
+* 采用webpack4多页面(多入口)配置，实现常用webpack配置
 * 由于使用bootstrap4，sweetalert2，使用ie10及以下版本的ie浏览器访问会跳转到浏览器升级页面
+* 更详细的项目说明，请查看我的简书 
 
 # 如何运行？
 * 运行步骤参考图  
