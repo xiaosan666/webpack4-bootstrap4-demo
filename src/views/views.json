@@ -1,15 +1,12 @@
 [
     {
         "url": "index",
-        "title": "首页",
         "excludeEasyui": true
     },
     {
-        "url": "invoice",
-        "title": "鉴票宝"
+        "url": "invoice"
     },
     {
-        "url": "test",
-        "title": "测试"
+        "url": "test"
     }
 ]

@@ -15,7 +15,6 @@ dirJSON.map(page => {
     }
     plugins.push(
         new htmlPlugin({
-            title: page.title,
             favicon: path.resolve(__dirname, `./src/assets/img/favicon.ico`),
             filename: path.resolve(__dirname, `./dist/${page.url}.html`),
             template: path.resolve(__dirname, `./src/views/${page.url}/index.html`),
