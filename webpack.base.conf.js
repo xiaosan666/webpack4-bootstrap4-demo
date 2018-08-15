@@ -67,16 +67,14 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
                 use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/' // &publicPath=/static/img/
-            },
-            {
+            }, {
                 test: /\.(css)$/,
                 use: [
                     'css-hot-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader'
                 ]
-            },
-            {
+            }, {
                 test: /\.(scss)$/,
                 use: [{
                     loader: 'css-hot-loader'
@@ -96,8 +94,7 @@ module.exports = {
                 }, {
                     loader: 'sass-loader'
                 }]
-            },
-            {
+            }, {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
