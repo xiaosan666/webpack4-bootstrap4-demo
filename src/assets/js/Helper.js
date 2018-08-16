@@ -16,7 +16,7 @@ window.Helper = {
             return;
         }
         let html = ['<div class="js-loading" style="position:absolute;left:0;right:0;width:100%;height:100%;z-index:10000;display:flex;justify-content:center;align-items:center;background:rgba(204, 204, 204, 0.2);">'];
-        html.push('<i class="fa fa-spinner fa-pulse fa-lg" style=" font-size:28px"></i>');
+        html.push('<i class="fa fa-spinner fa-pulse fa-lg" style=" font-size:28px;color: #1d96e8"></i>');
         html.push('</div>');
         $('body').prepend(html.join(''));
         window.LoadingIsShow = true;

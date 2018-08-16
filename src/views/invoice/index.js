@@ -104,7 +104,6 @@ Invoice.prototype = {
                     Http.config({
                         url: '/v1/invoice/view/page',
                         data: param,
-                        isShowLoading: false,
                         success: function (data) {
                             success(data);
                         }
@@ -140,7 +139,7 @@ Invoice.prototype = {
                 {field: 'salesTaxpayerNum', title: '销售方税号', width: 140},
                 {field: 'salesTaxpayerAddress', title: '销售方地址', width: 190},
                 {field: 'salesTaxpayerBankAccount', title: '销售方银行信息', width: 190},
-                {field: 'invoiceRemarks', title: '备注', width: 140},
+                {field: 'invoiceRemarks', title: '备注', width: 190},
                 // {field: 'taxDiskCode', title: '机器编号', width: 160},
                 // {field:'isBillMark',title:'是否为清单票  Y：是，N：否可以根据该字段展示清单票和正常票',width:160},
                 // {field:'tollSign',title:'收费标志字段（06：可抵扣通行费 07：不可抵扣通行费，08：成品油）',width:160},
@@ -241,7 +240,7 @@ Invoice.prototype = {
         let ms = 500; // 延迟500毫秒执行后续操作
         that.timer = setTimeout(function () {
             let val = that.$invoiceQRCode.val();
-            if (val.length < 60 || val.length > 80) {
+            if (val.length < 40 || val.length > 80) { // 二维码长度过短或过长
                 return;
             }
             that._createInvoice(val);
@@ -254,12 +253,12 @@ Invoice.prototype = {
         Http.config({
             url: '/v1/invoice/op/createByQrCode',
             data: {qrCode: qrCode},
+            beforeSend: function () {
+                that.$invoiceQRCode.attr('disabled', true);
+            },
             success: function () {
                 Helper.showToast('新增成功！');
                 that.$dg.datagrid('unselectAll').datagrid('reload');
-            },
-            beforeSend: function () {
-                that.$invoiceQRCode.attr('disabled', true);
             },
             complete: function () {
                 that.$invoiceQRCode.attr('disabled', false);
@@ -274,7 +273,7 @@ Invoice.prototype = {
         }
         let that = this;
         let formData = Utils.formSerialize(form);
-        if (formData.checkCode.length !== 6) {
+        if (formData.checkCode.length !== 0 && formData.checkCode.length !== 6) {
             swal('校验码必须为6位！', '', 'info');
             return false;
         }

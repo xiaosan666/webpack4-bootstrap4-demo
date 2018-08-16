@@ -50,3 +50,7 @@
 .window-body-noheader {
     font-size: 22px;
 }
+
+.panel-body label{
+    font-size: 14px;
+}

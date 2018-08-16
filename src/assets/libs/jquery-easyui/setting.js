@@ -31,6 +31,9 @@ $.fn.combobox.defaults.icons = [{
 $.fn.datagrid.defaults.pageSize = 20;
 $.fn.datagrid.defaults.pageList = [10, 20, 50, 100, 200];
 
+// easyui datagrid loading提示内容，设置为空则不会显示loading
+$.fn.datagrid.defaults.loadMsg = '';
+
 // easyui datagrid 日期范围过滤
 $.extend($.fn.datagrid.defaults.filters, {
     dateRange: {

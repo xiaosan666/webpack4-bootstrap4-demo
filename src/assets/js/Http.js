@@ -36,27 +36,13 @@ window.Http = {
             dataType: this.dataType,
             headers: this.headers,
             crossDomain: !(document.all),
-            beforeSend: function (xhr) {
-                that.showLoading();
-                if (that.beforeSend && Object.prototype.toString.call(that.beforeSend) === "[object Function]") {
-                    that.beforeSend(xhr);
-                }
-            },
-            complete: function (xhr, status) {
-                that.hideLoading();
-                if (that.complete && Object.prototype.toString.call(that.complete) === "[object Function]") {
-                    that.complete(xhr, status);
-                }
-            },
+            beforeSend: this.beforeSend,
+            complete: this.complete,
             error: function (xhr, status, error) {
-                if (that.error && Object.prototype.toString.call(that.error) === "[object Function]") {
-                    that.error(xhr, status, error);
-                }
+                that.error && that.error(xhr, status, error);
             },
             success: function (result, status, xhr) {
-                if (that.success && Object.prototype.toString.call(that.success) === "[object Function]") {
-                    that.success(that.isDefaultApiRequest ? result.data : result, status, xhr);
-                }
+                that.success && that.success(that.isDefaultApiRequest ? result.data : result, status, xhr);
             }
         });
     },
@@ -85,11 +71,16 @@ window.Http = {
         this.isShowLoading && Helper.showLoading();
     },
     hideLoading: function () {
-        if (--this.requestCount === 0) {
-            this.isShowLoading && Helper.hideLoading();
-        }
+        --this.requestCount === 0 && Helper.hideLoading();
     }
 };
+$(document).ajaxSend(function () {
+    Http.showLoading();
+});
+
+$(document).ajaxComplete(function () {
+    Http.hideLoading();
+});
 
 // Ajax统一异常处理
 $(document).ajaxError(function (event, xhr, settings, exception) {
@@ -123,7 +114,7 @@ $(document).ajaxError(function (event, xhr, settings, exception) {
                 swal(result.msg, '', "warning");
             }
         } else {
-            swal('请求发生异常', '', "error");
+            swal('请求发生异常，请联系管理员', '', "error");
         }
     } else {
         swal('请求发生异常', '', "error");
@@ -131,3 +122,4 @@ $(document).ajaxError(function (event, xhr, settings, exception) {
         console.warn(settings);
     }
 });
+

@@ -40,7 +40,7 @@
     ```
     
 * 有请求isShowLoading===false,有请求isShowLoading===true（默认情况）
-  > isShowLoading===false不调用Helper.showLoading();，也不调用Helper.hideLoading();
+  > isShowLoading===false不调用Helper.showLoading();
     ```javascript
     $('#test').bind('click', () => {
         Http.config({
