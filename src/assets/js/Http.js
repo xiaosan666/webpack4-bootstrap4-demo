@@ -25,8 +25,15 @@ window.Http = {
         this.complete = opts.complete;
         this.isShowLoading = !(opts.isShowLoading === false); // 本次请求是否显示loading，默认显示
         this.isDefaultApiRequest = !(opts.isDefaultApiRequest === false); // 是否使用默认api请求，默认请求会添加请求头，会添加默认api
-        return this;
-    },
+        return new JqueryAjax(this); // 如果不new一个新对象，第一次请求未完成紧接着第二次请求的话参数会污染
+    }
+};
+
+function JqueryAjax(config) {
+    Object.assign(this, config);
+}
+
+JqueryAjax.prototype = {
     request: function () {
         let that = this;
         $.ajax({
@@ -36,10 +43,49 @@ window.Http = {
             dataType: this.dataType,
             headers: this.headers,
             crossDomain: !(document.all),
-            beforeSend: this.beforeSend,
-            complete: this.complete,
+            beforeSend: function (xhr) {
+                that.showLoading();
+                that.beforeSend && that.beforeSend(xhr);
+            },
+            complete: function (xhr, status) {
+                that.hideLoading();
+                that.complete && that.complete(xhr, status);
+            },
             error: function (xhr, status, error) {
                 that.error && that.error(xhr, status, error);
+                let state = xhr.status;
+                if (state === 404) {
+                    swal('找不到页面', '', "error");
+                } else if (state === 500) {
+                    swal('服务器处理失败', '', "error");
+                } else if (state === 400) { // 业务异常
+                    let result = xhr.responseJSON;
+                    if (result && result.msg) {
+                        // 发票已存在
+                        if (result.code === 601) {
+                            let data = JSON.parse(result.msg);
+                            swal({
+                                title: '该发票已经存在',
+                                text: '发票号码：' + data.invoiceNumber + '，添加时间：' + Utils.dateFormat(data.createTime, 'yyyy-MM-dd HH:mm:ss'),
+                                type: 'warning'
+                            });
+                        } else if (result.code === 401) {
+                            swal({
+                                title: '认证失败，请重新登录',
+                                type: 'warning'
+                            }).then(function () {
+                                window.location.href = document.location.origin;
+                            });
+                        } else {
+                            swal(result.msg, '', "warning");
+                        }
+                    } else {
+                        swal('请求发生异常，请联系管理员', '', "error");
+                    }
+                } else {
+                    swal('请求发生异常', '', "error");
+                    console.warn(xhr);
+                }
             },
             success: function (result, status, xhr) {
                 that.success && that.success(that.isDefaultApiRequest ? result.data : result, status, xhr);
@@ -74,52 +120,3 @@ window.Http = {
         --this.requestCount === 0 && Helper.hideLoading();
     }
 };
-$(document).ajaxSend(function () {
-    Http.showLoading();
-});
-
-$(document).ajaxComplete(function () {
-    Http.hideLoading();
-});
-
-// Ajax统一异常处理
-$(document).ajaxError(function (event, xhr, settings, exception) {
-    if (exception === 'abort') {
-        return;
-    }
-    let state = xhr.status;
-    if (state === 404) {
-        swal('找不到页面', '', "error");
-    } else if (state === 500) {
-        swal('服务器处理失败', '', "error");
-    } else if (state === 400) { // 业务异常
-        let result = xhr.responseJSON;
-        if (result && result.msg) {
-            // 发票已存在
-            if (result.code === 601) {
-                let data = JSON.parse(result.msg);
-                swal({
-                    title: '该发票已经存在',
-                    text: '发票号码：' + data.invoiceNumber + '，添加时间：' + Utils.dateFormat(data.createTime, 'yyyy-MM-dd HH:mm:ss'),
-                    type: 'warning'
-                });
-            } else if (result.code === 401) {
-                swal({
-                    title: '认证失败，请重新登录',
-                    type: 'warning'
-                }).then(function () {
-                    window.location.href = document.location.origin;
-                });
-            } else {
-                swal(result.msg, '', "warning");
-            }
-        } else {
-            swal('请求发生异常，请联系管理员', '', "error");
-        }
-    } else {
-        swal('请求发生异常', '', "error");
-        console.warn(xhr);
-        console.warn(settings);
-    }
-});
-
