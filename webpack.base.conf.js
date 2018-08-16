@@ -65,14 +65,10 @@ module.exports = {
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/' // &publicPath=/static/img/
+                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/'
             }, {
                 test: /\.(css)$/,
-                use: [
-                    'css-hot-loader',
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
+                use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
             }, {
                 test: /\.(scss)$/,
                 use: [{
