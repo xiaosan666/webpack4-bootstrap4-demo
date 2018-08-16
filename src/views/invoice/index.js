@@ -101,7 +101,7 @@ Invoice.prototype = {
                 if (TEST) {
                     success(myData);
                 } else {
-                    Http.config({
+                    Http({
                         url: '/v1/invoice/view/page',
                         data: param,
                         success: function (data) {
@@ -217,7 +217,7 @@ Invoice.prototype = {
                             let row = rows[i];
                             ids.push(row.id);
                         }
-                        Http.config({
+                        Http({
                             url: '/v1/invoice/op/delete',
                             data: {id: ids[0]},
                             success: function () {
@@ -250,7 +250,7 @@ Invoice.prototype = {
     },
     _createInvoice: function (qrCode) {
         let that = this;
-        Http.config({
+        Http({
             url: '/v1/invoice/op/createByQrCode',
             data: {qrCode: qrCode},
             beforeSend: function () {
@@ -278,7 +278,7 @@ Invoice.prototype = {
             return false;
         }
         formData.billTime = Utils.toDate(formData.billTime).getTime();
-        Http.config({
+        Http({
             url: '/v1/invoice/op/create',
             data: formData,
             success: function () {

@@ -5,13 +5,13 @@ import './index.html';
 $('#test').bind('click', () => {
     // 打开loading
     Helper.showLoading();
-    Http.config({
+    Http({
         url: '/v1/demo/map_result_post',
         isShowLoading: false,
         success: function (data) {
             // 延迟1秒
             setTimeout(() => {
-                Http.config({
+                Http({
                     url: '/v1/demo/map_result_post2',
                     isShowLoading: false,
                     success: function (data) {

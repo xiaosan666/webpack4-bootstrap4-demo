@@ -4,7 +4,7 @@
  * 2.default请求添加默认api，添加权限请求头
  * 3.注意post方法的请求头为application/json，不需要此请求头则调用postFormData()
  * 示例：
- Http.config({
+ Http({
     url: '',
     data: {},
     success: function (data) {
@@ -12,25 +12,22 @@
     }
  }).post();
  */
-window.Http = {
-    config: function (opts) {
-        this.url = opts.url;
-        this.type = opts.type || 'POST';
-        this.data = opts.data || {};
-        this.dataType = opts.dataType || 'json';
-        this.headers = opts.headers || {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"};
-        this.beforeSend = opts.beforeSend;
-        this.success = opts.success;
-        this.error = opts.error;
-        this.complete = opts.complete;
-        this.isShowLoading = !(opts.isShowLoading === false); // 本次请求是否显示loading，默认显示
-        this.isDefaultApiRequest = !(opts.isDefaultApiRequest === false); // 是否使用默认api请求，默认请求会添加请求头，会添加默认api
-        return new JqueryAjax(this); // 如果不new一个新对象，第一次请求未完成紧接着第二次请求的话参数会污染
-    }
+window.Http = function (opts) {
+    return new JqueryAjax(opts); // 如果不new一个新对象，第一次请求未完成紧接着第二次请求的话参数会污染
 };
 
-function JqueryAjax(config) {
-    Object.assign(this, config);
+function JqueryAjax(opts) {
+    this.url = opts.url;
+    this.type = opts.type || 'POST';
+    this.data = opts.data || {};
+    this.dataType = opts.dataType || 'json';
+    this.headers = opts.headers || {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"};
+    this.beforeSend = opts.beforeSend;
+    this.success = opts.success;
+    this.error = opts.error;
+    this.complete = opts.complete;
+    this.isShowLoading = !(opts.isShowLoading === false); // 本次请求是否显示loading，默认显示
+    this.isDefaultApiRequest = !(opts.isDefaultApiRequest === false); // 是否使用默认api请求，默认请求会添加请求头，会添加默认api
 }
 
 JqueryAjax.prototype = {

@@ -9,7 +9,7 @@ window.Login = function (username, password) {
         window.location.href = 'invoice.html';
         return false;
     }
-    Http.config({
+    Http({
         url: '/v1/login',
         data: {
             username: username,
@@ -20,7 +20,7 @@ window.Login = function (username, password) {
             window.token = token;
             Utils.setSessionStorage('token', token);
             window.location.href = 'invoice.html';
-            /*Http.config({
+            /*Http({
                 url: '/v1/public/user/self',
                 success: function (user) {
                     debugger;

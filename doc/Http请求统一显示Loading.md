@@ -3,14 +3,14 @@
   > Helper.showLoading()判断loading已经打开则不再打开，当请求计数等于0才去关闭loading（requestCount===0）
     ```javascript
     $('#test').bind('click', () => {
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             success: function (data) {
     
             }
         }).post();
       
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             success: function (data) {
     
@@ -25,10 +25,10 @@
    此时requestCount===2，于是A打开的loading不会关闭，直到B请求完成去关闭
     ```javascript
     $('#test').bind('click', () => {
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             success: function (data) {
-                Http.config({
+                Http({
                     url: '/v1/demo/map_result_post',
                     success: function (data) {
     
@@ -43,7 +43,7 @@
   > isShowLoading===false不调用Helper.showLoading();
     ```javascript
     $('#test').bind('click', () => {
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             isShowLoading: false,
             success: function (data) {
@@ -51,7 +51,7 @@
             }
         }).post();
     
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             success: function (data) {
     
@@ -67,7 +67,7 @@
     $('#test').bind('click', () => {
         // 打开loading
         Helper.showLoading();
-        Http.config({
+        Http({
             url: '/v1/demo/map_result_post',
             isShowLoading: false,
             success: function (data) {
@@ -81,7 +81,7 @@
     
         // 延迟1秒
         setTimeout(() => {
-            Http.config({
+            Http({
                 url: '/v1/demo/map_result_post2',
                 isShowLoading: false,
                 success: function (data) {
@@ -100,13 +100,13 @@
     $('#test').bind('click', () => {
             // 打开loading
             Helper.showLoading();
-            Http.config({
+            Http({
                 url: '/v1/demo/map_result_post',
                 isShowLoading: false,
                 success: function (data) {
                     // 延迟1秒
                     setTimeout(() => {
-                        Http.config({
+                        Http({
                             url: '/v1/demo/map_result_post2',
                             isShowLoading: false,
                             success: function (data) {
