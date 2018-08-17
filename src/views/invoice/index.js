@@ -297,6 +297,7 @@ Invoice.prototype = {
             complete: function () {
                 that.$invoiceQRCode.attr('disabled', false);
                 that.$invoiceQRCode.focus();
+                form.reset();
             }
         }).post();
     }

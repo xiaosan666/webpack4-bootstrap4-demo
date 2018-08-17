@@ -51,6 +51,12 @@
     font-size: 22px;
 }
 
+/* panel中使用label字体大小，一般是在panel中使用form，form内容有label*/
 .panel-body label{
+    font-size: 14px;
+}
+
+/* 表格头部字体大小 */
+.datagrid-header .datagrid-cell span {
     font-size: 14px;
 }
