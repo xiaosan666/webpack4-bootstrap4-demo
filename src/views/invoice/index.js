@@ -45,7 +45,7 @@ Invoice.prototype = {
         that.$logout.on('click', function () {
             window.token = '';
             Utils.setSessionStorage('token', '');
-            window.location.href = document.location.origin;
+            window.location.href = 'index.html';
         });
         that.$btnAdd.on('click', function () {
             that.$dg.datagrid('uncheckAll');
@@ -77,6 +77,7 @@ Invoice.prototype = {
             striped: true,
             singleSelect: true,
             nowrap: false,
+            pageSize: 10,
             pagination: true,
             rownumbers: true,
             toolbar: '#tb',
