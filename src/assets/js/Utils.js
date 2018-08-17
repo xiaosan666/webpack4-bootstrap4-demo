@@ -100,6 +100,7 @@ window.Utils = {
      */
     formSerialize: function (form) {
         typeof form === 'string' && (form = document.getElementById(form));
+        form instanceof $ && (form = form[0]);
         let arr = {};
         for (let i = 0; i < form.elements.length; i++) {
             let feled = form.elements[i];

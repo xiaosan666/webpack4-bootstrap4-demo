@@ -12,8 +12,9 @@
     </div>
     <div class="col-xl-5 col-12 d-flex justify-content-center align-items-center right">
         <img src="../../assets/img/logo.png" alt="" class="logo">
-        <form name="form" onsubmit="return Login(form.username.value,form.password.value)">
+        <form>
             <h3 class="text-center mb-5">登录鉴票宝</h3>
+            <input type="hidden" class="form-control" id="client_id" name="client_id" value="web">
             <div class="form-group">
                 <label for="username">用户名</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required

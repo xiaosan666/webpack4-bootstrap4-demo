@@ -3,31 +3,21 @@ import '../../assets/libs/myjs.min';
 import './index.scss';
 import './index.html';
 
-// 因为要触发html5的表单验证，此事件在form的onsubmit方法下调用，所以这个方法返回必须是“return false”,而不是“return”
-window.Login = function (username, password) {
+$('form').on('submit', function () {
     if (TEST) {
         window.location.href = 'invoice.html';
         return false;
     }
+    let data = Utils.formSerialize(this);
+    data.password = hex_md5(data.password);
     Http({
         url: '/v1/login',
-        data: {
-            username: username,
-            password: hex_md5(password),
-            client_id: 'web'
-        },
+        data: data,
         success: function (token) {
             window.token = token;
             Utils.setSessionStorage('token', token);
             window.location.href = 'invoice.html';
-            /*Http({
-                url: '/v1/public/user/self',
-                success: function (user) {
-                    debugger;
-                }
-            }).get();*/
         }
     }).post();
     return false;
-};
-
+});

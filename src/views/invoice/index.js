@@ -64,6 +64,11 @@ Invoice.prototype = {
                 excelName: '发票信息列表-' + Utils.dateFormat(new Date(), 'yyyy年MM月dd日HH时mm分ss秒')
             });
         });
+
+        that.$form.on('submit', function () {
+            that._createByForm(this);
+            return false;
+        });
     },
     _grid: function () {
         let that = this;
@@ -243,12 +248,12 @@ Invoice.prototype = {
             if (val.length < 40 || val.length > 80) { // 二维码长度过短或过长
                 return;
             }
-            that._createInvoice(val);
+            that._createByQrCode(val);
             that.$invoiceQRCode.val('');
             that.$invoiceQRCode.focus();
         }, ms);
     },
-    _createInvoice: function (qrCode) {
+    _createByQrCode: function (qrCode) {
         let that = this;
         Http({
             url: '/v1/invoice/op/createByQrCode',
@@ -266,16 +271,16 @@ Invoice.prototype = {
             }
         }).postFormData();
     },
-    create: function (form) {
+    _createByForm: function (form) {
         if (TEST) {
             swal('测试模式，不能新增！', '', 'warning');
-            return false;
+            return;
         }
         let that = this;
         let formData = Utils.formSerialize(form);
         if (formData.checkCode.length !== 0 && formData.checkCode.length !== 6) {
             swal('校验码必须为6位！', '', 'info');
-            return false;
+            return;
         }
         formData.billTime = Utils.toDate(formData.billTime).getTime();
         Http({
@@ -294,9 +299,8 @@ Invoice.prototype = {
                 that.$invoiceQRCode.focus();
             }
         }).post();
-        return false;
     }
 };
 
-window.Invoice = new Invoice();
+new Invoice();
 
