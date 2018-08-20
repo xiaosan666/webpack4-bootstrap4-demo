@@ -9,7 +9,7 @@ let entry = {};
 let plugins = [];
 dirJSON.map(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
-    let chunks = ['vendors', 'easyui', 'default', page.url];
+    let chunks = ['easyui', 'vendors', 'default', page.url];
     if (page.excludeEasyui) {
         chunks.splice(chunks.indexOf('easyui'), 1)
     }
@@ -34,22 +34,27 @@ module.exports = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, './dist'),
-        filename: 'static/js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
-        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
+        filename: 'static/js/' + (isProd ? '[name].[contenthash:8].min.js' : '[name].js'),
+        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[contenthash:8].min.js' : '[name].chunk.js'),
     },
     optimization: {
+        namedModules: true,
+        runtimeChunk: 'single',
         splitChunks: {
             chunks: 'initial',
+            minSize: 0,
             cacheGroups: {
                 easyui: {
                     test: /[\\/]src[\\/]assets[\\/]libs[\\/]jquery-easyui[\\/]/,
-                    priority: -5,
-                    name: 'easyui'
+                    priority: -1,
+                    name: 'easyui',
+                    reuseExistingChunk: true
                 },
                 vendors: {
-                    test: /[\\/]src[\\/]assets[\\/]libs[\\/]js[\\/]/,
-                    priority: -5,
-                    name: 'vendors'
+                    test: /[\\/]src[\\/]assets[\\/]/,
+                    priority: -10,
+                    name: 'vendors',
+                    reuseExistingChunk: true
                 },
                 default: {
                     minChunks: 2,
@@ -65,16 +70,16 @@ module.exports = {
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: 'url-loader?limit=8192&name=[name].[ext]&outputPath=static/img/'
+                use: ['url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=static/img/', 'image-webpack-loader']
             }, {
                 test: /\.(css)$/,
-                use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
+                use: ['css-hot-loader', isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
             }, {
                 test: /\.(scss)$/,
                 use: [{
                     loader: 'css-hot-loader'
                 }, {
-                    loader: MiniCssExtractPlugin.loader
+                    loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader'
                 }, {
                     loader: 'css-loader'
                 }, {

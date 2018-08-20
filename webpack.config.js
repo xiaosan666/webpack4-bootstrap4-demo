@@ -4,13 +4,21 @@ const path = require('path');
 const merge = require('webpack-merge');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin")
 
 if (process.env.NODE_ENV === 'prod') {
     module.exports = merge(baseWebpackConfig, {
         mode: 'production',
         plugins: [
             new CleanWebpackPlugin(['dist']),
+            new webpack.HashedModuleIdsPlugin(),
             new OptimizeCssAssetsPlugin(),
+            new CompressionPlugin({
+                asset: "[path].gz[query]",
+                algorithm: "gzip",
+                test: /\.(js|css)$/,
+                threshold: 10240
+            }),
             new webpack.BannerPlugin('CopyRight © 2015-2028 All Right Reserved GuangzhouYan Technology Co.,Ltd')
         ]
     });
