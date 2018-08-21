@@ -9,7 +9,7 @@ let entry = {};
 let plugins = [];
 dirJSON.map(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
-    let chunks = ['easyui', 'vendors', 'default', page.url];
+    let chunks = ['vendors', 'easyui', 'common', page.url];
     if (page.excludeEasyui) {
         chunks.splice(chunks.indexOf('easyui'), 1)
     }
@@ -38,29 +38,26 @@ module.exports = {
         chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[contenthash:8].min.js' : '[name].chunk.js'),
     },
     optimization: {
+        minimize: isProd,
         namedModules: true,
-        runtimeChunk: 'single',
         splitChunks: {
             chunks: 'initial',
             minSize: 0,
             cacheGroups: {
                 easyui: {
-                    test: /[\\/]src[\\/]assets[\\/]libs[\\/]jquery-easyui[\\/]/,
+                    test: path.resolve(__dirname, './src/assets/libs/jquery-easyui'),
                     priority: -1,
-                    name: 'easyui',
-                    reuseExistingChunk: true
+                    name: 'easyui'
+                },
+                common: {
+                    test: path.resolve(__dirname, './src/assets'),
+                    priority: -10,
+                    name: 'common'
                 },
                 vendors: {
-                    test: /[\\/]src[\\/]assets[\\/]/,
-                    priority: -10,
-                    name: 'vendors',
-                    reuseExistingChunk: true
-                },
-                default: {
-                    minChunks: 2,
+                    test: path.resolve(__dirname, './node_modules'),
                     priority: -20,
-                    name: 'default',
-                    reuseExistingChunk: true
+                    name: 'vendors'
                 }
             }
         }
@@ -73,13 +70,13 @@ module.exports = {
                 use: ['url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=static/img/', 'image-webpack-loader']
             }, {
                 test: /\.(css)$/,
-                use: ['css-hot-loader', isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
+                use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
             }, {
                 test: /\.(scss)$/,
                 use: [{
                     loader: 'css-hot-loader'
                 }, {
-                    loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader'
+                    loader: MiniCssExtractPlugin.loader
                 }, {
                     loader: 'css-loader'
                 }, {

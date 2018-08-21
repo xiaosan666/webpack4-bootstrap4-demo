@@ -4,7 +4,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin")
 
 if (process.env.NODE_ENV === 'prod') {
     module.exports = merge(baseWebpackConfig, {
@@ -13,12 +12,6 @@ if (process.env.NODE_ENV === 'prod') {
             new CleanWebpackPlugin(['dist']),
             new webpack.HashedModuleIdsPlugin(),
             new OptimizeCssAssetsPlugin(),
-            new CompressionPlugin({
-                asset: "[path].gz[query]",
-                algorithm: "gzip",
-                test: /\.(js|css)$/,
-                threshold: 10240
-            }),
             new webpack.BannerPlugin('CopyRight © 2015-2028 All Right Reserved GuangzhouYan Technology Co.,Ltd')
         ]
     });
@@ -27,8 +20,9 @@ if (process.env.NODE_ENV === 'prod') {
         mode: 'development',
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin()
+            new webpack.NoEmitOnErrorsPlugin(),
         ],
+        // devtool: 'eval-source-map',
         devServer: {
             open: true, // 自动打开浏览器
             contentBase: path.join(__dirname, 'dist'),
@@ -41,6 +35,14 @@ if (process.env.NODE_ENV === 'prod') {
                 warnings: false,
                 errors: true
             }
+        },
+        watchOptions: {
+            //检测修改的时间，以毫秒为单位
+            poll: 1000,
+            //防止重复保存而发生重复编译错误。这里设置的500是半秒内重复保存，不进行打包操作
+            aggregateTimeout: 500,
+            //不监听的目录
+            ignored: /node_modules/,
         }
     });
 } else if (process.env.NODE_ENV === 'devBuild') {
