@@ -34,12 +34,11 @@ module.exports = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, './dist'),
-        filename: 'static/js/' + (isProd ? '[name].[contenthash:8].min.js' : '[name].js'),
-        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[contenthash:8].min.js' : '[name].chunk.js'),
+        filename: 'static/js/' + (isProd ? '[name].[chunkhash].min.js' : '[name].js'),
+        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash].min.js' : '[name].chunk.js'),
     },
     optimization: {
         minimize: isProd,
-        namedModules: true,
         splitChunks: {
             chunks: 'initial',
             minSize: 0,
@@ -67,7 +66,7 @@ module.exports = {
             {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: ['url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=static/img/', 'image-webpack-loader']
+                use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=static/img/', 'image-webpack-loader']
             }, {
                 test: /\.(css)$/,
                 use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
