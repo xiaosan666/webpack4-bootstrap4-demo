@@ -9,9 +9,9 @@ let entry = {};
 let plugins = [];
 dirJSON.map(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
-    let chunks = ['vendors', 'easyui', 'common', page.url];
-    if (page.excludeEasyui) {
-        chunks.splice(chunks.indexOf('easyui'), 1)
+    let chunks = [page.url];
+    if (isProd) {
+        chunks = ['vendors', 'assets', page.url];
     }
     plugins.push(
         new htmlPlugin({
@@ -40,23 +40,23 @@ module.exports = {
     optimization: {
         minimize: isProd,
         splitChunks: {
-            chunks: 'initial',
+            chunks: isProd ? 'initial' : 'async',
             minSize: 0,
             cacheGroups: {
-                easyui: {
-                    test: path.resolve(__dirname, './src/assets/libs/jquery-easyui'),
-                    priority: -1,
-                    name: 'easyui'
-                },
-                common: {
-                    test: path.resolve(__dirname, './src/assets'),
-                    priority: -10,
-                    name: 'common'
-                },
                 vendors: {
                     test: path.resolve(__dirname, './node_modules'),
-                    priority: -20,
+                    priority: -1,
                     name: 'vendors'
+                },
+                libs: {
+                    test: path.resolve(__dirname, './src/assets/libs'),
+                    priority: -5,
+                    name: 'vendors'
+                },
+                assets: {
+                    test: path.resolve(__dirname, './src/assets'),
+                    priority: -10,
+                    name: 'assets'
                 }
             }
         }

@@ -1,9 +1,10 @@
 import 'jquery';
 import 'bootstrap';
+import './libs/bootstrap/bootstrap.scss';
+import './setting/sweetalert2';
+import './setting/easyui';
+
 import './css/app.scss';
-
-import './libs/sweetalert2/sweetalert2.js';
-
 import './js/Constants.js';
 import './js/Utils.js';
 import './js/Helper.js';

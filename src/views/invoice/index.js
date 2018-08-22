@@ -1,8 +1,7 @@
-import '../../assets/Easyui';
 import '../../assets/Common';
 import './index.scss';
 import './index.html';
-import myData from '../../assets/libs/data.json';
+import myData from './data.json';
 
 function Invoice() {
     this._init();

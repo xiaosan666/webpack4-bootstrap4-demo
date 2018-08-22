@@ -22,9 +22,11 @@ if (process.env.NODE_ENV === 'prod') {
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.NamedModulesPlugin()
         ],
-        // devtool: 'eval-source-map',
+        devtool: 'eval-source-map',
         devServer: {
+            inline: true,
             open: true, // 自动打开浏览器
             contentBase: path.join(__dirname, 'dist'),
             publicPath: '',
@@ -36,14 +38,6 @@ if (process.env.NODE_ENV === 'prod') {
                 warnings: false,
                 errors: true
             }
-        },
-        watchOptions: {
-            //检测修改的时间，以毫秒为单位
-            poll: 1000,
-            //防止重复保存而发生重复编译错误。这里设置的500是半秒内重复保存，不进行打包操作
-            aggregateTimeout: 500,
-            //不监听的目录
-            ignored: /node_modules/,
         }
     });
 } else if (process.env.NODE_ENV === 'devBuild') {

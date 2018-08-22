@@ -1,3 +1,6 @@
+/**
+ * 覆盖easyui默认样式
+ */
 .window-mask {
     opacity: 1.05;
 }

@@ -1,8 +1,15 @@
+import '../libs/jquery-easyui/1.5.5.4/themes/bootstrap/easyui.css';
+import '../libs/jquery-easyui/1.5.5.4/themes/icon.css';
+import '../libs/jquery-easyui/1.5.5.4/jquery.easyui.min.js';
+import '../libs/jquery-easyui/1.5.5.4/extension/datagrid-filter.js';
+import '../libs/jquery-easyui/1.5.5.4/extension/jquery.base64.js';
+import '../libs/jquery-easyui/1.5.5.4/extension/datagrid-ExportExcel.js';
+import '../libs/jquery-easyui/1.5.5.4/locale/easyui-lang-zh_CN.js';
+import './easyui.css';
+
 /**
- * 覆盖easyui默认样式或属性
+ * 覆盖easyui默认设置
  */
-
-
 var dateboxButtons = $.extend([], $.fn.datebox.defaults.buttons);
 dateboxButtons.splice(1, 0, {
     text: '清空',

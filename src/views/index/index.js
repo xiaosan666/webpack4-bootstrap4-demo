@@ -1,5 +1,5 @@
 import '../../assets/Common';
-import '../../assets/libs/myjs.min';
+import './myjs.min';
 import './index.scss';
 import './index.html';
 

@@ -1,7 +1,7 @@
 /**
- * 定义swal默认属性和处理swal ie 兼容性问题
+ * 定义swal默认属性
  */
-import './setting.css';
+import './sweetalert2.css';
 import swal from 'sweetalert2';
 
 swal.setDefaults({
