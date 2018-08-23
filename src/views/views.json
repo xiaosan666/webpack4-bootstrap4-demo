@@ -1,7 +1,6 @@
 [
     {
-        "url": "index",
-        "excludeEasyui": true
+        "url": "index"
     },
     {
         "url": "invoice"

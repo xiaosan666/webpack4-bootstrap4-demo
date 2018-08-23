@@ -63,14 +63,18 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]},
+            {
+                test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]
+            },
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
                 use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=static/img/', 'image-webpack-loader']
-            }, {
+            },
+            {
                 test: /\.(css)$/,
                 use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
-            }, {
+            },
+            {
                 test: /\.(scss)$/,
                 use: [{
                     loader: 'css-hot-loader'
@@ -90,7 +94,8 @@ module.exports = {
                 }, {
                     loader: 'sass-loader'
                 }]
-            }, {
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
