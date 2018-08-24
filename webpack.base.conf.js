@@ -32,34 +32,10 @@ dirJSON.forEach(page => {
 module.exports = {
     entry: entry,
     output: {
-        publicPath: '/',
+        publicPath: './',
         path: path.resolve(__dirname, './dist'),
-        filename: 'static/js/' + (isProd ? '[name].[chunkhash].min.js' : '[name].js'),
-        chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash].min.js' : '[name].chunk.js'),
-    },
-    optimization: {
-        minimize: isProd,
-        splitChunks: {
-            chunks: isProd ? 'initial' : 'async',
-            minSize: 0,
-            cacheGroups: {
-                vendors: {
-                    test: path.resolve(__dirname, './node_modules'),
-                    priority: -1,
-                    name: 'vendors'
-                },
-                libs: {
-                    test: path.resolve(__dirname, './src/assets/libs'),
-                    priority: -5,
-                    name: 'vendors'
-                },
-                assets: {
-                    test: path.resolve(__dirname, './src/assets'),
-                    priority: -10,
-                    name: 'assets'
-                }
-            }
-        }
+        filename: 'js/' + (isProd ? '[name].[chunkhash].min.js' : '[name].js'),
+        chunkFilename: 'js/' + (isProd ? '[name].chunk.[chunkhash].min.js' : '[name].chunk.js'),
     },
     module: {
         rules: [
@@ -68,7 +44,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
-                use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=static/img/', 'image-webpack-loader']
+                use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=img/', 'image-webpack-loader']
             },
             {
                 test: /\.(css)$/,
@@ -79,7 +55,10 @@ module.exports = {
                 use: [{
                     loader: 'css-hot-loader'
                 }, {
-                    loader: MiniCssExtractPlugin.loader
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../'
+                    }
                 }, {
                     loader: 'css-loader'
                 }, {
@@ -121,8 +100,8 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new MiniCssExtractPlugin({
-            filename: 'static/css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
-            chunkFilename: 'static/css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
+            filename: 'css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
+            chunkFilename: 'css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
     ])
 };

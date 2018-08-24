@@ -9,6 +9,30 @@ const HashOutput = require('webpack-plugin-hash-output');
 if (process.env.NODE_ENV === 'prod') {
     module.exports = merge(baseWebpackConfig, {
         mode: 'production',
+        optimization: {
+            minimize: true,
+            splitChunks: {
+                chunks: 'initial',
+                minSize: 0,
+                cacheGroups: {
+                    vendors: {
+                        test: path.resolve(__dirname, './node_modules'),
+                        priority: -1,
+                        name: 'vendors'
+                    },
+                    libs: {
+                        test: path.resolve(__dirname, './src/assets/libs'),
+                        priority: -5,
+                        name: 'vendors'
+                    },
+                    assets: {
+                        test: path.resolve(__dirname, './src/assets'),
+                        priority: -10,
+                        name: 'assets'
+                    }
+                }
+            }
+        },
         plugins: [
             new CleanWebpackPlugin(['dist']),
             new OptimizeCssAssetsPlugin(),
@@ -32,7 +56,7 @@ if (process.env.NODE_ENV === 'prod') {
             publicPath: '',
             compress: true,
             hot: true,
-            host: 'localhost',// 0.0.0.0 localhost
+            host: 'localhost', // 0.0.0.0 localhost
             port: 9000,
             overlay: {
                 warnings: false,
