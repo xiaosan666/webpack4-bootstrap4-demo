@@ -23,7 +23,7 @@ $('#test').bind('click', () => {
                         Helper.hideLoading();
                     }
                 }).post();
-            }, 1000)
+            }, 1000);
         },
         error: function () {
             // 异常情况关闭loading

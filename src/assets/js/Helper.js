@@ -44,7 +44,7 @@ window.Helper = {
                 backdrop: false,
                 width: '420px',
                 timer: timeout || 3000
-            })
+            });
         } else {
             let html = ['<div class="js-message-warp" style="position:absolute;right:0;bottom:0;height:150px;width:300px;overflow:hidden;">'];
             html.push('<div class="js-message" style="position:absolute;right:-100%;bottom:-100%;height:100%;width:100%;border:1px solid #ccc;background:rgb(250, 250, 250);font-size:24px;padding:16px;">');
@@ -52,10 +52,11 @@ window.Helper = {
             html.push('</div>');
             html.push('</div>');
             $('body').append(html.join(''));
-            let $message = $('.js-message'), $warp = $('.js-message-warp');
-            $message.animate({right: 0, bottom: 0}, 2000, function () {
+            let $message = $('.js-message'); let
+                $warp = $('.js-message-warp');
+            $message.animate({ right: 0, bottom: 0 }, 2000, function () {
                 setTimeout(() => {
-                    $message.animate({right: '-100%', bottom: '-100%'}, 1500, function () {
+                    $message.animate({ right: '-100%', bottom: '-100%' }, 1500, function () {
                         $warp.remove();
                     });
                 }, timeout || 2000);
@@ -82,5 +83,4 @@ window.Helper = {
         $dg.datagrid('unselectAll').datagrid('doFilter');
     },
 };
-
 

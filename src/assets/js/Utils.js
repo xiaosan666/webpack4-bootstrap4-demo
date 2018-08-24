@@ -18,33 +18,31 @@ window.Utils = {
      * @example  Utils.dateFormat(new Date(),'MMM','en')                 "Aug"
      *
      */
-    dateFormat: function (date = new Date(), sFormat = 'yyyy-MM-dd', sLanguage) {
-        date = Utils.toDate(date);
+    dateFormat: function (obj = new Date(), sFormat = 'yyyy-MM-dd', sLanguage) {
+        let date = Utils.toDate(obj);
         let time = {};
         time.Year = date.getFullYear();
-        time.TYear = ("" + time.Year).substr(2);
+        time.TYear = (String(time.Year)).substr(2);
         time.Month = date.getMonth() + 1;
-        time.TMonth = time.Month < 10 ? "0" + time.Month : time.Month;
+        time.TMonth = time.Month < 10 ? '0' + time.Month : time.Month;
         time.Day = date.getDate();
-        time.TDay = time.Day < 10 ? "0" + time.Day : time.Day;
+        time.TDay = time.Day < 10 ? '0' + time.Day : time.Day;
         time.Hour = date.getHours();
-        time.THour = time.Hour < 10 ? "0" + time.Hour : time.Hour;
+        time.THour = time.Hour < 10 ? '0' + time.Hour : time.Hour;
         time.hour = time.Hour < 13 ? time.Hour : time.Hour - 12;
-        time.Thour = time.hour < 10 ? "0" + time.hour : time.hour;
+        time.Thour = time.hour < 10 ? '0' + time.hour : time.hour;
         time.Minute = date.getMinutes();
-        time.TMinute = time.Minute < 10 ? "0" + time.Minute : time.Minute;
+        time.TMinute = time.Minute < 10 ? '0' + time.Minute : time.Minute;
         time.Second = date.getSeconds();
-        time.TSecond = time.Second < 10 ? "0" + time.Second : time.Second;
+        time.TSecond = time.Second < 10 ? '0' + time.Second : time.Second;
         time.Millisecond = date.getMilliseconds();
         time.Week = date.getDay();
-
-        let MMMArrEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            MMMArr = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-            WeekArrEn = ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"],
-            WeekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-            oNumber = time.Millisecond / 1000;
-
-        if (sLanguage === "en") {
+        let MMMArrEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let MMMArr = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+        let WeekArrEn = ['Sun', 'Mon', 'Tue', 'Web', 'Thu', 'Fri', 'Sat'];
+        let WeekArr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        let oNumber = time.Millisecond / 1000;
+        if (sLanguage === 'en') {
             MMMArr = MMMArrEn.slice(0);
             WeekArr = WeekArrEn.slice(0);
         }
@@ -76,13 +74,14 @@ window.Utils = {
      * @example  Utils.toDate('2018-08-09')
      */
     toDate: function (obj) {
+        /* eslint-disable no-param-reassign */
         if (!obj) {
             throw new Error('obj参数不允许为空');
         }
         // 将时间毫秒数string类型转为number类型
         !isNaN(obj) && (obj = Number(obj));
         // 兼容Safari和ie8处理，详情：https://www.jianshu.com/p/dc83b45a9480
-        typeof obj === 'string' && obj.indexOf('-') && (obj = obj.replace(/-/g, "\/"));
+        typeof obj === 'string' && obj.indexOf('-') && (obj = obj.replace(/-/g, '\/'));
         try {
             obj = new Date(obj);
             // 判断obj是否为Invalid Date
@@ -93,18 +92,25 @@ window.Utils = {
         } catch (e) {
             throw new Error('obj参数格式不正确');
         }
+        /* eslint-enable */
     },
     /**
      * 表单数据序列化，返回数据对象
-     * @param form：字符串格式表示表单id，否则表示表单对象
+     * @param obj：字符串格式表示表单id，否则表示表单对象
      */
-    formSerialize: function (form) {
-        typeof form === 'string' && (form = document.getElementById(form));
-        form instanceof $ && (form = form[0]);
+    formSerialize: function (obj) {
+        let form = obj;
+        if (typeof obj === 'string') {
+            form = document.getElementById(obj);
+        }
+        if (obj instanceof $) {
+            form = form[0];
+        }
         let arr = {};
         for (let i = 0; i < form.elements.length; i++) {
             let feled = form.elements[i];
             switch (feled.type) {
+                /* eslint-disable-next-line  no-undefined */
                 case undefined:
                 case 'button':
                 case 'file':
@@ -116,6 +122,7 @@ window.Utils = {
                     if (!feled.checked) {
                         break;
                     }
+                /* eslint-disable-next-line  no-fallthrough */
                 default:
                     if (arr[feled.name]) {
                         arr[feled.name] = arr[feled.name] + ',' + feled.value;
@@ -124,7 +131,7 @@ window.Utils = {
                     }
             }
         }
-        return arr
+        return arr;
     },
     /**
      * 获得字符串的长度，中文字符默认按2个长度
@@ -138,7 +145,7 @@ window.Utils = {
         } else {
             let chineseRegex = /[\u4E00-\u9FA5\uf900-\ufa2d]/g;
             if (chineseRegex.test(str)) {
-                return str.replace(chineseRegex, "zz").length;
+                return str.replace(chineseRegex, 'zz').length;
             }
             return str.length;
         }
@@ -147,29 +154,27 @@ window.Utils = {
      * 去除字符串两边空格
      */
     trim: function (str) {
-        str = Utils.lTrim(str);
-        str = Utils.rTrim(str);
-        return str;
+        return Utils.rTrim(Utils.lTrim(str));
     },
     /**
      * 去除字符串左边空格
      */
     lTrim: function (str) {
-        if (!str) return "";
-        return str.replace(/^\s*/ig, "");
+        if (!str) return '';
+        return str.replace(/^\s*/ig, '');
     },
     /**
      * 去除字符串右边空格
      */
     rTrim: function (str) {
-        if (!str) return "";
-        return str.replace(/\s*$/ig, "");
+        if (!str) return '';
+        return str.replace(/\s*$/ig, '');
     },
     /**
      * 将html代码的html修饰去除。
      */
     htmlDecode: function (html) {
-        let div = this.document.createElement("div");
+        let div = this.document.createElement('div');
         div.innerHTML = html;
         return div.innerText || div.textContent;
     },
@@ -179,14 +184,14 @@ window.Utils = {
      */
     createUuid: function () {
         let s = [];
-        let hexDigits = "0123456789abcdef";
+        let hexDigits = '0123456789abcdef';
         for (let i = 0; i < 32; i++) {
             s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
         }
-        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[14] = '4'; // bits 12-15 of the time_hi_and_version field to 0010
         s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
-        //s[8] = s[13] = s[18] = s[23] = "-";
-        return s.join("");
+        // s[8] = s[13] = s[18] = s[23] = "-";
+        return s.join('');
     },
     /**
      * 保存数据到Cookie中
@@ -194,10 +199,9 @@ window.Utils = {
      */
     setCookie: function (key, value, expireSeconds) {
         if (key && value) {
-            expireSeconds = expireSeconds ? expireSeconds : 60 * 60 * 24 * 30;
             let expireDate = new Date();
-            expireDate.setTime(expireDate.getTime() + expireSeconds * 1000);
-            this.document.cookie = key + "=" + JSON.stringify(value) + ";expires=" + expireDate.toGMTString() + ";";
+            expireDate.setTime(expireDate.getTime() + (expireSeconds || 60 * 60 * 24 * 30) * 1000);
+            this.document.cookie = key + '=' + JSON.stringify(value) + ';expires=' + expireDate.toGMTString() + ';';
         }
     },
     /**
@@ -207,10 +211,10 @@ window.Utils = {
         if (key) {
             let cookie = document.cookie;
             if (cookie.length > 0) {
-                let startIndex = cookie.indexOf(key + "=");
+                let startIndex = cookie.indexOf(key + '=');
                 if (startIndex !== -1) {
                     startIndex = startIndex + key.length + 1;
-                    let endIndex = cookie.indexOf(";", startIndex);
+                    let endIndex = cookie.indexOf(';', startIndex);
                     if (endIndex === -1) {
                         endIndex = cookie.length;
                     }
@@ -246,7 +250,7 @@ window.Utils = {
         if (key) {
             let result = '';
             if (window.localStorage) {
-                result = localStorage.getItem(key)
+                result = localStorage.getItem(key);
             }
             return result ? JSON.parse(result) : this.getCookie(key);
         }
@@ -307,5 +311,4 @@ window.Utils = {
     }
 
 };
-
 

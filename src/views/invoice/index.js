@@ -10,11 +10,11 @@ function Invoice() {
 Invoice.prototype = {
     _init: function () {
         let that = this;
-        that._cacheParam();//缓存变量
-        that._initData();//初始化需要的数据
+        that._cacheParam();// 缓存变量
+        that._initData();// 初始化需要的数据
         that._grid();
         that._enableGridFilter();
-        that._bindEven();//绑定事件
+        that._bindEven();// 绑定事件
     },
     _cacheParam: function () {
         let that = this;
@@ -33,7 +33,7 @@ Invoice.prototype = {
     },
     _initData: function () {
         let that = this;
-        that.ListYesOrNo = [{text: '作废', value: '1'}, {text: '正常', value: '0'}];
+        that.ListYesOrNo = [{ text: '作废', value: '1' }, { text: '正常', value: '0' }];
         $('#billTime').val(Utils.dateFormat());
     },
     _bindEven: function () {
@@ -85,8 +85,7 @@ Invoice.prototype = {
             remoteFilter: !TEST,
             onBeforeLoad: function (param) {
                 let rules = param.filterRules ? JSON.parse(param.filterRules) : [];
-                for (let i in rules) {
-                    let rule = rules[i];
+                for (let rule of rules) {
                     param[rule.field] = $.trim(rule.value);
                     if (rule.op === 'equal') {
                         param[rule.field + 'Op'] = '=';
@@ -117,39 +116,39 @@ Invoice.prototype = {
             },
             columns: [[
                 // {field: 'ck', checkbox: true},
-                {field: 'id', hidden: true},
+                { field: 'id', hidden: true },
                 // {field:'invoiceTypeCode',title:'发票类型',width:100},
-                {field: 'invoiceTypeName', title: '发票名称', width: 100},
-                {field: 'invoiceCode', title: '发票代码', width: 100},
-                {field: 'invoiceNumber', title: '发票号码', width: 100},
+                { field: 'invoiceTypeName', title: '发票名称', width: 100 },
+                { field: 'invoiceCode', title: '发票代码', width: 100 },
+                { field: 'invoiceNumber', title: '发票号码', width: 100 },
                 {
                     field: 'billTime', title: '开票时间', width: 100, sortable: true, formatter: function (value) {
                         return value ? Utils.dateFormat(new Date(value), 'yyyy年MM月dd日') : null;
                     }
                 },
-                {field: 'checkCode', title: '校验码', width: 150},
-                {field: 'invoiceAmount', title: '开具金额(元)', width: 100, sortable: true},
-                {field: 'totalTaxNum', title: '税额(元)', width: 100, sortable: true},
-                {field: 'totalTaxSum', title: '价税合计(元)', width: 100, sortable: true},
+                { field: 'checkCode', title: '校验码', width: 150 },
+                { field: 'invoiceAmount', title: '开具金额(元)', width: 100, sortable: true },
+                { field: 'totalTaxNum', title: '税额(元)', width: 100, sortable: true },
+                { field: 'totalTaxSum', title: '价税合计(元)', width: 100, sortable: true },
                 {
                     field: 'voidMark', title: '状态(正常/作废)', width: 100, formatter: function (value) {
                         return value ? (value === '1' ? '作废' : '正常') : null;
                     }
                 },
-                {field: 'purchaserName', title: '购买方', width: 140},
-                {field: 'taxpayerNumber', title: '购买方税号', width: 140},
+                { field: 'purchaserName', title: '购买方', width: 140 },
+                { field: 'taxpayerNumber', title: '购买方税号', width: 140 },
                 // {field:'taxpayerAddressOrId',title:'购买方地址',width:160},
                 // {field:'taxpayerBankAccount',title:'购买方银行信息',width:160},
-                {field: 'salesName', title: '销售方名称', width: 140},
-                {field: 'salesTaxpayerNum', title: '销售方税号', width: 140},
-                {field: 'salesTaxpayerAddress', title: '销售方地址', width: 190},
-                {field: 'salesTaxpayerBankAccount', title: '销售方银行信息', width: 190},
-                {field: 'invoiceRemarks', title: '备注', width: 190},
+                { field: 'salesName', title: '销售方名称', width: 140 },
+                { field: 'salesTaxpayerNum', title: '销售方税号', width: 140 },
+                { field: 'salesTaxpayerAddress', title: '销售方地址', width: 190 },
+                { field: 'salesTaxpayerBankAccount', title: '销售方银行信息', width: 190 },
+                { field: 'invoiceRemarks', title: '备注', width: 190 },
                 // {field: 'taxDiskCode', title: '机器编号', width: 160},
                 // {field:'isBillMark',title:'是否为清单票  Y：是，N：否可以根据该字段展示清单票和正常票',width:160},
                 // {field:'tollSign',title:'收费标志字段（06：可抵扣通行费 07：不可抵扣通行费，08：成品油）',width:160},
                 // {field:'tollSignName',title:'收费标志名称',width:160}，
-                {field: 'createTime', title: '记录创建时间', width: 140, sortable: true}
+                { field: 'createTime', title: '记录创建时间', width: 140, sortable: true }
             ]]
         });
     },
@@ -199,7 +198,9 @@ Invoice.prototype = {
         }]);
     },
     _delete: function () {
-        let that = this, rows = that.$dg.datagrid('getSelections');
+        let that = this;
+        let
+            rows = that.$dg.datagrid('getSelections');
         if (rows.length > 0) {
             swal({
                 title: '确定删除吗？',
@@ -209,7 +210,9 @@ Invoice.prototype = {
                 confirmButtonColor: '#DD6B55'
             }).then(function (result) {
                 if (result.value) {
-                    let rows = that.$dg.datagrid('getSelections'), ids = [];
+                    let rows = that.$dg.datagrid('getSelections');
+                    let
+                        ids = [];
                     if (TEST) {
                         const rs = myData.rows;
                         for (let row of rows) {
@@ -218,13 +221,12 @@ Invoice.prototype = {
                         that.$dg.datagrid('unselectAll').datagrid('loadData', rs);
                         Helper.showToast('删除成功！');
                     } else {
-                        for (let i in rows) {
-                            let row = rows[i];
+                        for (let row of rows) {
                             ids.push(row.id);
                         }
                         Http({
                             url: '/v1/invoice/op/delete',
-                            data: {id: ids[0]},
+                            data: { id: ids[0] },
                             success: function () {
                                 Helper.showToast('删除成功！');
                                 that.$dg.datagrid('unselectAll').datagrid('reload');
@@ -257,7 +259,7 @@ Invoice.prototype = {
         let that = this;
         Http({
             url: '/v1/invoice/op/createByQrCode',
-            data: {qrCode: qrCode},
+            data: { qrCode: qrCode },
             beforeSend: function () {
                 that.$invoiceQRCode.attr('disabled', true);
             },

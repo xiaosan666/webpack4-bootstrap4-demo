@@ -1,20 +1,20 @@
 const webpack = require('webpack');
 const dirJSON = require('./src/views/views.json');
 const path = require('path');
-const htmlPlugin = require('html-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = (process.env.NODE_ENV === 'prod');
 
 let entry = {};
 let plugins = [];
-dirJSON.map(page => {
+dirJSON.forEach(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
     let chunks = [page.url];
     if (isProd) {
         chunks = ['vendors', 'assets', page.url];
     }
     plugins.push(
-        new htmlPlugin({
+        new HtmlPlugin({
             favicon: path.resolve(__dirname, `./src/assets/img/favicon.ico`),
             filename: path.resolve(__dirname, `./dist/${page.url}.html`),
             template: path.resolve(__dirname, `./src/views/${page.url}/index.html`),
@@ -64,7 +64,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(html|htm)$/, use: [{loader: 'html-withimg-loader'}]
+                test: /\.(html|htm)$/, use: ['html-withimg-loader']
             },
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
@@ -94,6 +94,12 @@ module.exports = {
                 }, {
                     loader: 'sass-loader'
                 }]
+            },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                include: [path.resolve(__dirname, 'src/views'), path.resolve(__dirname, 'assets/js')], // 指定eslint检查的目录
+                loader: 'eslint-loader'
             },
             {
                 test: /\.js$/,

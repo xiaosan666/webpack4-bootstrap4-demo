@@ -21,7 +21,7 @@ function JqueryAjax(opts) {
     this.type = opts.type || 'POST';
     this.data = opts.data || {};
     this.dataType = opts.dataType || 'json';
-    this.headers = opts.headers || {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"};
+    this.headers = opts.headers || { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
     this.beforeSend = opts.beforeSend;
     this.success = opts.success;
     this.error = opts.error;
@@ -52,9 +52,9 @@ JqueryAjax.prototype = {
                 that.error && that.error(xhr, status, error);
                 let state = xhr.status;
                 if (state === 404) {
-                    swal('找不到页面', '', "error");
+                    swal('找不到页面', '', 'error');
                 } else if (state === 500) {
-                    swal('服务器处理失败', '', "error");
+                    swal('服务器处理失败', '', 'error');
                 } else if (state === 400) { // 业务异常
                     let result = xhr.responseJSON;
                     if (result && result.msg) {
@@ -74,13 +74,13 @@ JqueryAjax.prototype = {
                                 window.location.href = document.location.origin;
                             });
                         } else {
-                            swal(result.msg, '', "warning");
+                            swal(result.msg, '', 'warning');
                         }
                     } else {
-                        swal('请求发生异常，请联系管理员', '', "error");
+                        swal('请求发生异常，请联系管理员', '', 'error');
                     }
                 } else {
-                    swal('请求发生异常', '', "error");
+                    swal('请求发生异常', '', 'error');
                     console.warn(xhr);
                 }
             },
@@ -96,7 +96,7 @@ JqueryAjax.prototype = {
         this.request();
     },
     post: function () {
-        this.headers = {"Content-Type": "application/json; charset=UTF-8"};
+        this.headers = { 'Content-Type': 'application/json; charset=UTF-8' };
         this.data = JSON.stringify(this.data);
         this.isDefaultApiRequest ? this.defaultApiRequest() : this.request();
     },
