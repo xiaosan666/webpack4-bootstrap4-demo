@@ -32,7 +32,7 @@ dirJSON.forEach(page => {
 module.exports = {
     entry: entry,
     output: {
-        publicPath: './',
+        publicPath: isProd ? './' : '',
         path: path.resolve(__dirname, './dist'),
         filename: 'js/' + (isProd ? '[name].[chunkhash].min.js' : '[name].js'),
         chunkFilename: 'js/' + (isProd ? '[name].chunk.[chunkhash].min.js' : '[name].chunk.js'),
