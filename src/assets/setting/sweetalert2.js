@@ -4,6 +4,10 @@
 import './sweetalert2.css';
 import swal from 'sweetalert2';
 
+if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+    /* Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support */
+    document.write('<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>');
+}
 swal.setDefaults({
     allowOutsideClick: true,
     confirmButtonText: '确定',
