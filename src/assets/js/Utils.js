@@ -308,6 +308,9 @@ window.Utils = {
             index = 7;
         }
         return url.substring(0, index) + url.substring(index).replace(/\/\/*/g, '/');
+    },
+    isIE: function () {
+        return !!window.ActiveXObject || 'ActiveXObject' in window;
     }
 
 };

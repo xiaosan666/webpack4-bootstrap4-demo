@@ -57,6 +57,10 @@ Invoice.prototype = {
             that.$dlg.dialog('close');
         });
         that.$btnExport.on('click', function () {
+            if (Utils.isIE()) {
+                swal('导出失败，请更换浏览器', '您使用的ie浏览器不支持导出功能', 'info');
+                return;
+            }
             that.$dg.datagrid('ExportExcel', {
                 type: 'excel',
                 ignoreField: [],
