@@ -1,0 +1,343 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>使用html5自带表单验证并且用ajax提交的说明 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="http_show_loading.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    项目介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    webpack配置相关
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="webpack_project_description.html">
+            
+                <a href="webpack_project_description.html">
+            
+                    
+                    webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    代码说明/开发相关
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="use_html5_form_validation.html">
+            
+                <a href="use_html5_form_validation.html">
+            
+                    
+                    使用html5自带表单验证并且用ajax提交的说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="http_show_loading.html">
+            
+                <a href="http_show_loading.html">
+            
+                    
+                    Http/Ajax统一显示Loading的说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >使用html5自带表单验证并且用ajax提交的说明</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;html&#x9ED8;&#x8BA4;&#x7684;&#x8868;&#x5355;&#x9A8C;&#x8BC1;&#x7136;&#x540E;&#x7528;ajax&#x63D0;&#x4EA4;&#x6570;&#x636E;&#xFF1F;">&#x5982;&#x4F55;&#x4F7F;&#x7528;html&#x9ED8;&#x8BA4;&#x7684;&#x8868;&#x5355;&#x9A8C;&#x8BC1;&#x7136;&#x540E;&#x7528;ajax&#x63D0;&#x4EA4;&#x6570;&#x636E;&#xFF1F;</h1>
+<h2 id="&#x65B9;&#x6CD5;&#x4E00;">&#x65B9;&#x6CD5;&#x4E00;</h2>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!--onsubmit&#x4E2D;&#x7684;return&#x4E0D;&#x80FD;&#x7701;&#x7565;--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;form&quot;</span> <span class="hljs-attr">onsubmit</span>=<span class="hljs-string">&quot;return login(form.username.value,form.password.value)&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;&#x8BF7;&#x8F93;&#x5165;&#x7528;&#x6237;&#x540D;&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;&#x8BF7;&#x8F93;&#x5165;&#x5BC6;&#x7801;&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--type&#x5FC5;&#x987B;&#x662F;submit--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>&#x767B;&#x5F55;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-built_in">window</span>.login=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">username, password</span>)</span>{
+    Http({
+        url: <span class="hljs-string">&apos;/v1/login&apos;</span>,
+        data: data, <span class="hljs-comment">// &#x8868;&#x5355;&#x6570;&#x636E;</span>
+        success: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">token</span>) </span>{
+            <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&apos;invoice.html&apos;</span>;
+        }
+    }).post();
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5FC5;&#x987B;return false</span>
+}
+</code></pre>
+<h2 id="&#x65B9;&#x6CD5;&#x4E8C;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;">&#x65B9;&#x6CD5;&#x4E8C;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;</h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;&#x8BF7;&#x8F93;&#x5165;&#x7528;&#x6237;&#x540D;&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;&#x8BF7;&#x8F93;&#x5165;&#x5BC6;&#x7801;&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--type&#x5FC5;&#x987B;&#x662F;submit--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>&#x767B;&#x5F55;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-javascript">$(<span class="hljs-string">&apos;form&apos;</span>).on(<span class="hljs-string">&apos;submit&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ev</span>) </span>{
+    Http({
+        url: <span class="hljs-string">&apos;/v1/login&apos;</span>,
+        data: data, <span class="hljs-comment">// &#x8868;&#x5355;&#x6570;&#x636E;</span>
+        success: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">token</span>) </span>{
+            <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&apos;invoice.html&apos;</span>;
+        }
+    }).post();
+    <span class="hljs-comment">// &#x963B;&#x6B62;submit&#x8868;&#x5355;&#x63D0;&#x4EA4;</span>
+    <span class="hljs-comment">// ev.preventDefault();</span>
+    <span class="hljs-comment">// &#x6216;&#x8005;return false</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+});
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="http_show_loading.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Http/Ajax统一显示Loading的说明">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"使用html5自带表单验证并且用ajax提交的说明","level":"1.3.1","depth":2,"next":{"title":"Http/Ajax统一显示Loading的说明","level":"1.3.2","depth":2,"path":"doc/http_show_loading.md","ref":"./doc/http_show_loading.md","articles":[]},"previous":{"title":"代码说明/开发相关","level":"1.3","depth":1,"ref":"","articles":[{"title":"使用html5自带表单验证并且用ajax提交的说明","level":"1.3.1","depth":2,"path":"doc/use_html5_form_validation.md","ref":"./doc/use_html5_form_validation.md","articles":[]},{"title":"Http/Ajax统一显示Loading的说明","level":"1.3.2","depth":2,"path":"doc/http_show_loading.md","ref":"./doc/http_show_loading.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/use_html5_form_validation.md","mtime":"2018-08-28T07:05:07.488Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-28T08:38:38.778Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

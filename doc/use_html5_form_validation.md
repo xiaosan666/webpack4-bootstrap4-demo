@@ -1,4 +1,4 @@
-# 用ajax提交数据并用html默认的表单验证
+# 如何使用html默认的表单验证然后用ajax提交数据？
 
 ## 方法一
 ```html
@@ -23,7 +23,7 @@ window.login=function(username, password){
 }
 ```
 
-## 方法二
+## 方法二，建议使用
 ```html
 <form>
     <input type="text" name="username" placeholder="请输入用户名" required>

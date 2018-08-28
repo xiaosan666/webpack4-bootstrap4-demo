@@ -1,0 +1,65 @@
+/**
+ * 覆盖easyui默认样式
+ */
+.window-mask {
+    opacity: 1.05;
+}
+
+.window-proxy-mask,
+.window-mask {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.easyui-dialog {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.easyui-dialog .row {
+    margin: 0;
+}
+
+.required > label:after {
+    content: '*';
+    color: #DB2828;
+    padding-left: 3px;
+}
+
+.datagrid-row-selected {
+    background: #3c8dbc;
+}
+
+.datagrid-editable {
+    color: #333;
+}
+
+.datagrid-header-row {
+    height: 40px;
+}
+
+.datagrid-row {
+    height: 45px;
+}
+
+.datagrid-filter-row {
+    height: 35px;
+}
+
+.datagrid-row-selected {
+    background: #77c0f1;
+    color: #000;
+}
+
+.window-body-noheader {
+    font-size: 22px;
+}
+
+/* panel中使用label字体大小，一般是在panel中使用form，form内容有label*/
+.panel-body label{
+    font-size: 14px;
+}
+
+/* 表格头部字体大小 */
+.datagrid-header .datagrid-cell span {
+    font-size: 14px;
+}

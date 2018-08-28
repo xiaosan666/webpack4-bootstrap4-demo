@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #include("../../assets/html/head.html")
+    <title>鉴票宝</title>
+</head>
+<body>
+<aside class="d-none d-sm-block"></aside>
+<section>
+    <nav>
+        <div class="form-group row">
+            <label for="invoiceQRCode" class="col title">
+                <span>鉴票宝</span>
+            </label>
+            <div class="col-6 d-none d-md-block">
+                <input id="invoiceQRCode" class="form-control form-control-lg invoice-code" type="text"
+                       placeholder="添加发票-请用扫描器扫描发票二维码" autofocus autocomplete="off">
+            </div>
+            <div class="col avatar">
+                <img src="../../assets/img/avatar.png" alt="头像" title="这只是logo">
+                <button type="button" class="btn btn-link" id="logout">退出</button>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <!--DataGrid ToolBar-->
+        <div id="tb" style="padding: 5px 10px">
+            <button type="button" class="btn btn-danger" id="btnDelete"><i class="fa fa-fw fa-trash-o"></i>&nbsp;删除
+            </button>
+            <button type="button" class="btn btn-success" id="btnAdd"><i class="fa fa-fw fa-plus"></i>&nbsp;新增
+            </button>
+            <button type="button" class="btn btn-info" id="btnExport"><i class="fa fa-fw fa-file-excel-o"></i>&nbsp;导出
+            </button>
+        </div>
+
+        <!--DataGrid-->
+        <div id="dg"></div>
+
+        <!--dialog-->
+        <div id="dlg" class="easyui-dialog" data-options="closed:true,border:false,modal:true,title:'添加发票'"
+             style="display: none;width:400px;height:450px;padding: 15px 10px 0 10px">
+            <form role="form" id="form">
+                <div class="form-group row mb-3 required">
+                    <label class="col-form-label col-sm-3" for="invoiceCode">发票代码</label>
+                    <input class="form-control col-sm-9" type="number" id="invoiceCode" name="invoiceCode"
+                           placeholder="发票代码（长度10位或者12位）" required>
+                </div>
+                <div class="form-group row mb-3 required">
+                    <label class="col-form-label col-sm-3" for="invoiceNumber">发票号码</label>
+                    <input class="form-control col-sm-9" type="number" id="invoiceNumber" name="invoiceNumber"
+                           placeholder="发票号码（长度8位）" required>
+                </div>
+                <div class="form-group row mb-3 required">
+                    <label class="col-form-label col-sm-3" for="billTime">开票日期</label>
+                    <input class="form-control col-sm-9" type="date" id="billTime" name="billTime"
+                           placeholder="请选择开票日期" required>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-form-label col-sm-3" for="checkCode">校验码</label>
+                    <input class="form-control col-sm-9" type="number" id="checkCode" name="checkCode"
+                           placeholder="检验码必须是后六位或不填">
+                    <span class="text-danger col-sm-9 offset-sm-3 p-0">注：增值税专用发票，增值税机动车发票，二手车统一发票可以不传</span>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-form-label col-sm-3" for="checkCode">开具金额</label>
+                    <input class="form-control col-sm-9" type="number" min="0" step="0.01" id="invoiceAmount"
+                           name="invoiceAmount"
+                           placeholder="开具金额、不含税价">
+                    <span class="text-danger col-sm-9 offset-sm-3 p-0">增值税普通发票，增值税电子发票，卷式发票，电子普通[通行费]发票可以不传</span>
+                </div>
+                <div align="center" style="padding: 10px;">
+                    <button type="button" class="btn btn-sm" id="btnClose"><i class="fa fa-fw fa-close"></i>&nbsp;取消
+                    </button>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-save"></i>&nbsp;提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
+</body>
+</html>
