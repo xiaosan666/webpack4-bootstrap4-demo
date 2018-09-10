@@ -1,6 +1,0 @@
-/**
- * 覆盖sweetalert2默认样式
- */
-.swal2-container {
-    z-index: 9999 !important;
-}
