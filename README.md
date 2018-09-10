@@ -1,9 +1,10 @@
 # webpack4-bootstrap4-demo
-* [在线demo](http://114.55.231.32/yanxiaojun617/webpack4-bootstrap4-demo/)
 * 本项目集成了bootstrap4，jquery，easyui(可配置)等
 * 采用webpack4多页面(多入口)配置，实现常用webpack配置
 * 由于使用bootstrap4，sweetalert2，使用ie10及以下版本的ie浏览器访问会跳转到[浏览器升级提示页面](http://www.goody.com.cn/2014/updatebrowser/)
-* 更详细的项目说明，请查看我的[简书](https://www.jianshu.com/p/4574baf78447) 
+* [在线demo](http://114.55.231.32/yanxiaojun617/webpack4-bootstrap4-demo/)
+* [项目源码](https://github.com/yanxiaojun617/webpack4-bootstrap4-demo)
+* [项目文档](https://yanxiaojun617.gitbook.io/webpack4-bootstrap4-demo/) 
 
 # 如何运行？
 * 运行步骤参考图  
