@@ -1,4 +1,3 @@
-# webpack4-bootstrap4-demo
 * 本项目集成了bootstrap4，jquery，easyui(可配置)等
 * 采用webpack4多页面(多入口)配置，实现常用webpack配置
 * [在线demo](http://114.55.231.32/yanxiaojun617/webpack4-bootstrap4-demo/)

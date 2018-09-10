@@ -1,4 +1,3 @@
-# 关于本项目webpack配置说明
 * 如果你刚开始学习webpack请先阅读[官网文档](https://www.webpackjs.com/concepts/)，了解基本的概念和配置
 * 本章只讲解本项目中的配置及遇到过的问题
 * 本项目webpack配置文件是[webpack.base.conf.js](https://github.com/yanxiaojun617/webpack4-bootstrap4-demo/blob/master/webpack.base.conf.js)和[webpack.config.js](https://github.com/yanxiaojun617/webpack4-bootstrap4-demo/blob/master/webpack.config.js)
