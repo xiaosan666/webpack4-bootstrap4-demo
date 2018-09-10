@@ -37,3 +37,4 @@ npm run build
 ```
 > 打包后资源放在dist目录下
 
+* 了解更多请阅读[项目文档](https://yanxiaojun617.gitbook.io/webpack4-bootstrap4-demo/) 
