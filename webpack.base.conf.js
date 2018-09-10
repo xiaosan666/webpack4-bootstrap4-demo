@@ -40,7 +40,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(html|htm)$/, use: ['html-withimg-loader']
+                test: /\.(html|htm)$/,
+                use: ['html-withimg-loader']
             },
             {
                 test: /\.(png|jpg|jpe?g|gif|svg)$/,
@@ -48,7 +49,16 @@ module.exports = {
             },
             {
                 test: /\.(css)$/,
-                use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader']
+                use: [{
+                    loader: 'css-hot-loader'
+                }, {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../'
+                    }
+                }, {
+                    loader: 'css-loader'
+                }]
             },
             {
                 test: /\.(scss)$/,
