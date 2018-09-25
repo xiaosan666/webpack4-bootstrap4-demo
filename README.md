@@ -3,7 +3,7 @@
 * [在线demo](http://114.55.231.32/yanxiaojun617/webpack4-bootstrap4-demo/)
 * [项目源码](https://github.com/yanxiaojun617/webpack4-bootstrap4-demo)
 * [项目文档](https://yanxiaojun617.gitbook.io/webpack4-bootstrap4-demo/) 
-* 资源直连——[Bootstrap](https://getbootstrap.com/)、 [jQuery](https://www.jquery123.com/)、[Font Awesome](http://fontawesome.dashgame.com/)、[EasyUi](http://www.jeasyui.com/demo/main/index.php)、[sass/scss](https://www.sass.hk/)， [webpack](https://www.webpackjs.com/configuration/)
+* 链接——[Bootstrap](https://getbootstrap.com/)、 [jQuery](https://www.jquery123.com/)、[Font Awesome](http://fontawesome.dashgame.com/)、[EasyUi](http://www.jeasyui.com/demo/main/index.php)、[sass/scss](https://www.sass.hk/)， [webpack](https://www.webpackjs.com/configuration/)
 
 # 项目适用于哪些人
 * 想使用bootstrap、jquery开发项目，尤其是简单的门户网站，宣传页面等小项目
