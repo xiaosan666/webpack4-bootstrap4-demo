@@ -40,6 +40,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: require.resolve('jquery'),
+                use: [{
+                    loader: 'expose-loader',
+                    options: 'jQuery'
+                }, {
+                    loader: 'expose-loader',
+                    options: '$'
+                }]
+            },
+            {
                 test: /\.(html|htm)$/,
                 use: ['html-withimg-loader']
             },
@@ -104,11 +114,6 @@ module.exports = {
         ]
     },
     plugins: plugins.concat([
-        new webpack.ProvidePlugin({
-            '$': 'jquery',
-            'jQuery': 'jquery',
-            'window.jQuery': 'jquery'
-        }),
         new MiniCssExtractPlugin({
             filename: 'css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
             chunkFilename: 'css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
