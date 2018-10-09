@@ -94,13 +94,13 @@ module.exports = {
                     loader: 'sass-loader'
                 }]
             },
-            {
+           /* {
                 enforce: 'pre',
                 test: /\.js$/,
                 include: [path.resolve(__dirname, 'src/views'), path.resolve(__dirname, 'assets/js')], // 指定eslint检查的目录
                 loader: 'eslint-loader'
-            },
-            /*{
+            },*/
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -110,7 +110,7 @@ module.exports = {
                         plugins: ['transform-runtime']
                     }
                 }
-            }*/
+            }
         ]
     },
     plugins: plugins.concat([

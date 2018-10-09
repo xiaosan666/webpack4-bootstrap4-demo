@@ -25,25 +25,31 @@
 
         <div class="col-md-9 col-lg-10 main">
             <div id="statisticalCost">
-                <h2 class="text-center">车辆运行成本分析</h2>
-                <div>
+                <h3 class="text-center">车辆运行成本分析</h3>
+                <div class="py-2">
                     <span class="mr-5">时间：2018-09-01至2018-09-30</span>
                     <span class="mr-5">性质：全部/公务车/生产车</span>
                     <span class="mr-5">车牌号码：粤A L1432</span>
+                    <button type="button" class="btn btn-primary btn-sm"><span class="px-2">查询</span></button>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         用车费
                     </div>
-                    <div class="card-body row">
-                        <div class="col-md-6">
-                            <div id="chart1_1" style="width: 500px;height:260px;"></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="chart1_1" style="width: 500px;height:260px;"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="chart2_1" style="width: 500px;height:260px;"></div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div id="chart2_1" style="width: 500px;height:260px;"></div>
-                        </div>
+                        <div id="dg1"></div>
                     </div>
                 </div>
+
+
             </div>
 
             <div id="home">
@@ -634,5 +640,6 @@
         <!--/main col-->
     </div>
 </div>
+<script src="./echarts.min.js"></script>
 </body>
 </html>

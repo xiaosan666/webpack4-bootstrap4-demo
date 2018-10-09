@@ -1,5 +1,7 @@
 import '../../assets/Common';
-import './myjs.min';
+
+let echarts = require('echarts');
+import './datagrid'
 import './index.scss';
 import './index.html';
 
@@ -264,8 +266,8 @@ let option8 = {
                 }
             },
             data: [
-                { value: 50, name: '已完成' },
-                { value: 10, name: '未完成' }
+                {value: 50, name: '已完成'},
+                {value: 10, name: '未完成'}
             ]
         }
     ]
