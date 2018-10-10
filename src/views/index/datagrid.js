@@ -3,7 +3,7 @@ import myData from './data.json';
 let $dg1 = $('#dg1');
 
 $dg1.datagrid({
-    title:'成本明细',
+    title: '成本明细',
     striped: true,
     singleSelect: true,
     nowrap: false,

@@ -1,0 +1,41 @@
+<aside class="col-md-3 col-lg-2 bg-light" id="asideNavBar">
+    <nav class="nav flex-column">
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse1">菜单1</a>
+        <div class="collapse pl-4" id="collapse1">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="test.html" id="test">Test</a>
+                <a class="nav-link disabled" href="statistics_cost.html" id="statistics_cost">Cost</a>
+                <a class="nav-link disabled" href="load.html" id="load1" link="220749cd394c4eddb7ca1d1bc2cd3802.jpg">img1</a>
+                <a class="nav-link disabled" href="load.html" id="load2" link="0ce03a1b04e2437081b7d42e1cfacdf5.jpg">img2</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse2">菜单2</a>
+        <div class="collapse pl-4" id="collapse2">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="index.html">index</a>
+                <a class="nav-link disabled" href="invoice.html">invoice</a>
+            </nav>
+        </div>
+    </nav>
+</aside>
+
+<script>
+
+    document.getElementById('asideNavBar').onclick = function (ev) {
+        sessionStorage.setItem('menu_id', ev.target.id);
+        sessionStorage.setItem('menu_link', ev.target.getAttribute('link'));
+    };
+
+    /* 判断选中的菜单 */
+    let menuId = sessionStorage.getItem('menu_id');
+    document.querySelectorAll('a.nav-link').forEach(function (target) {
+        if (menuId === target.id) {
+            target.classList.remove('disabled');
+            target.classList.add('active');
+            let collapse = target.parentNode.parentNode;
+            collapse.classList.add('show');
+            collapse.previousElementSibling.classList.remove('disabled');
+            collapse.previousElementSibling.classList.add('active');
+        }
+    });
+</script>

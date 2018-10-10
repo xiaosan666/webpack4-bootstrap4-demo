@@ -7,6 +7,12 @@
     },
     {
         "url": "test"
+    },
+    {
+        "url": "load"
+    },
+    {
+        "url": "statistics/cost"
     }
 ]
 

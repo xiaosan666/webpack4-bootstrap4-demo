@@ -9,11 +9,14 @@
     #include("../../assets/html/nav.html")
     <section class="flex-grow-1 d-flex row m-0">
         #include("../../assets/html/aside.html")
-        <section class="col-md-9 col-lg-10 flex-grow-1 page-section">
-            <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
-            https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/220749cd394c4eddb7ca1d1bc2cd3802.jpg
+        <section class="col-md-9 col-lg-10 flex-grow-1 page-section" id="content">
+
         </section>
     </section>
 </div>
+<script>
+    let link = `https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/` + sessionStorage.getItem('menu_link');
+    document.getElementById('content').innerHTML = '<img src="' + link + '" alt="">'
+</script>
 </body>
 </html>

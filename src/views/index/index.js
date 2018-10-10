@@ -1,7 +1,7 @@
 import '../../assets/Common';
 
 let echarts = require('echarts');
-import './datagrid'
+import './datagrid';
 import './index.scss';
 import './index.html';
 
