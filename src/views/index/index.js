@@ -1,10 +1,7 @@
 import '../../assets/Common';
-
 let echarts = require('echarts');
-import './datagrid';
 import './index.scss';
 import './index.html';
-
 
 let option1 = {
     tooltip: {
@@ -45,7 +42,6 @@ let option1 = {
     ]
 };
 echarts.init(document.getElementById('chart1')).setOption(option1);
-echarts.init(document.getElementById('chart1_1')).setOption(option1);
 
 let option2 = {
     tooltip: {
@@ -89,7 +85,6 @@ let option2 = {
     ]
 };
 echarts.init(document.getElementById('chart2')).setOption(option2);
-echarts.init(document.getElementById('chart2_1')).setOption(option2);
 
 
 let option3 = {

@@ -1,21 +1,66 @@
 <aside class="col-md-3 col-lg-2 bg-light" id="asideNavBar">
     <nav class="nav flex-column">
-        <a class="nav-link disabled" data-toggle="collapse" href="#collapse1">菜单1</a>
+        <a class="nav-link disabled" href="index.html" id="index">首页</a>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse1">统计分析</a>
         <div class="collapse pl-4" id="collapse1">
             <nav class="nav flex-column">
-                <a class="nav-link disabled" href="test.html" id="test">Test</a>
-                <a class="nav-link disabled" href="statistics_cost.html" id="statistics_cost">Cost</a>
-                <a class="nav-link disabled" href="load.html" id="load1" link="220749cd394c4eddb7ca1d1bc2cd3802.jpg">img1</a>
-                <a class="nav-link disabled" href="load.html" id="load2" link="0ce03a1b04e2437081b7d42e1cfacdf5.jpg">img2</a>
+                <a class="nav-link disabled" href="statistics_cost.html" id="statistics_cost">运营成本分析</a>
+                <a class="nav-link disabled" href="statistics_repair.html" id="statistics_repair">车辆维修情况</a>
+                <a class="nav-link disabled" href="statistics_violation.html" id="statistics_violation">车辆违章情况</a>
+                <a class="nav-link disabled" href="statistics_task.html" id="statistics_task">任务情况分析</a>
             </nav>
         </div>
-        <a class="nav-link disabled" data-toggle="collapse" href="#collapse2">菜单2</a>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse2">车辆台帐</a>
         <div class="collapse pl-4" id="collapse2">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="vehicle_data" link="vehicle_data.png">车辆台帐信息</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse3">维修/年审</a>
+        <div class="collapse pl-4" id="collapse3">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="repair_application"
+                   link="repair_application.png">维修申请</a>
+                <a class="nav-link disabled" href="load.html" id="repair_review" link="repair_review.png">维修审核</a>
+                <a class="nav-link disabled" href="load.html" id="repair_quote" link="repair_quote.png">维修报价</a>
+                <a class="nav-link disabled" href="load.html" id="repair_settle" link="repair_settle.png">维修结算</a>
+                <a class="nav-link disabled" href="load.html" id="repair_part" link="repair_part.png">零配件报价</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse4">任务管理</a>
+        <div class="collapse pl-4" id="collapse4">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="task_release" link="task_release.png">任务发布</a>
+                <a class="nav-link disabled" href="load.html" id="task_my" link="task_my.png">我的任务</a>
+                <a class="nav-link disabled" href="load.html" id="task_review" link="task_review.png">完成审核</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse5">综合登记</a>
+        <div class="collapse pl-4" id="collapse5">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="register_violation"
+                   link="register_violation.png">违章登记</a>
+                <a class="nav-link disabled" href="load.html" id="register_vehicle" link="register_vehicle.png">天车维护</a>
+                <a class="nav-link disabled" href="load.html" id="register_insurance"
+                   link="register_insurance.png">保险登记</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse6">费用管理</a>
+        <div class="collapse pl-4" id="collapse6">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="cost_bind_oil_ard"
+                   link="cost_bind_oil_ard.png">油卡绑定</a>
+                <a class="nav-link disabled" href="load.html" id="cost_record_oil_ard" link="cost_record_oil_ard.png">油卡消费记录导入</a>
+                <a class="nav-link disabled" href="load.html" id="violation_record" link="violation_record.png">违章记录</a>
+            </nav>
+        </div>
+        <!--<a class="nav-link disabled" data-toggle="collapse" href="#collapse">菜单</a>
+        <div class="collapse pl-4" id="collapse">
             <nav class="nav flex-column">
                 <a class="nav-link disabled" href="index.html">index</a>
                 <a class="nav-link disabled" href="invoice.html">invoice</a>
             </nav>
-        </div>
+        </div>-->
     </nav>
 </aside>
 
@@ -27,15 +72,18 @@
     };
 
     /* 判断选中的菜单 */
-    let menuId = sessionStorage.getItem('menu_id');
-    document.querySelectorAll('a.nav-link').forEach(function (target) {
-        if (menuId === target.id) {
-            target.classList.remove('disabled');
-            target.classList.add('active');
-            let collapse = target.parentNode.parentNode;
-            collapse.classList.add('show');
-            collapse.previousElementSibling.classList.remove('disabled');
-            collapse.previousElementSibling.classList.add('active');
-        }
-    });
+    let menuId = sessionStorage.getItem('menu_id') || 'index';
+    if (menuId) {
+        document.querySelectorAll('a.nav-link').forEach(function (target) {
+            if (menuId === target.id) {
+                target.classList.remove('disabled');
+                target.classList.add('active');
+                let collapse = target.parentNode.parentNode;
+                collapse && collapse.classList.add('show');
+                collapse.previousElementSibling && collapse.previousElementSibling.classList.remove('disabled');
+                collapse.previousElementSibling && collapse.previousElementSibling.classList.add('active');
+            }
+        });
+    }
+
 </script>

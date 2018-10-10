@@ -13,6 +13,15 @@
     },
     {
         "url": "statistics/cost"
+    },
+    {
+        "url": "statistics/repair"
+    },
+    {
+        "url": "statistics/task"
+    },
+    {
+        "url": "statistics/violation"
     }
 ]
 
