@@ -64,7 +64,7 @@
 </aside>
 
 <script>
-    // 缓存菜单id，每次打开新页面根据缓存的id选中菜单
+    /* 缓存菜单id，每次打开新页面根据缓存的id选中菜单 */
     document.getElementById('asideNavBar').onclick = function (ev) {
         sessionStorage.setItem('menu_id', ev.target.id);
         sessionStorage.setItem('menu_link', ev.target.getAttribute('link'));
