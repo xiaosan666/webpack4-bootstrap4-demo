@@ -5,15 +5,40 @@
     <title>测试</title>
 </head>
 <body>
+
+<!--<div style="height: 100%;display: flex;flex-direction: column">
+    <div style="height: 56px;background: #3c8dbc">1</div>
+    <div style="display: flex;height: 100%;">
+        <div style="background: #89dd91;width: 200px;">1</div>
+        <div style="background: #ddd;height: 100%;width:100%;overflow: auto">
+            <div>
+                <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
+            </div>
+            <div>
+                <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>-->
+
 <div class="h-100 d-flex flex-column">
     #include("../../assets/html/nav.html")
-    <section class="flex-grow-1 d-flex row m-0">
-        #include("../../assets/html/aside.html")
-        <section class="col-md-9 col-lg-10 flex-grow-1 page-section">
-            <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
+    <section class="h-100 d-flex row m-0">
+        #include("../../assets/html/aside_test.html")
+        <section class="h-100 col-md-9 col-lg-10 page-section" style="overflow: auto">
+            <div>
+                <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
+            </div>
+            <div>
+                <a href="javascript:sessionStorage.removeItem('menu_id');location.href = '/';">测试</a>
+            </div>
+            <div>
+                <img src="https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/0ce03a1b04e2437081b7d42e1cfacdf5.jpg" alt="">
+            </div>
             https://www.yanxiaojun617.com/fileService/file/version-admin/20181008/220749cd394c4eddb7ca1d1bc2cd3802.jpg
         </section>
     </section>
 </div>
+
 </body>
 </html>

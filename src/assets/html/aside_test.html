@@ -1,0 +1,46 @@
+<style>
+    a.nav-link:hover{
+        background-color: #ddd;
+    }
+</style>
+<aside class="col-md-3 col-lg-2 bg-light" id="asideNavBar">
+    <nav class="nav flex-column">
+        <a class="nav-link disabled" href="index.html" id="index">首页</a>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse1">菜单1</a>
+        <div class="collapse pl-4" id="collapse1">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="test.html" id="test">test</a>
+            </nav>
+        </div>
+        <a class="nav-link disabled" data-toggle="collapse" href="#collapse2">菜单2</a>
+        <div class="collapse pl-4" id="collapse2">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled" href="load.html" id="vehicle_data" link="vehicle_data.png">test2</a>
+            </nav>
+        </div>
+    </nav>
+</aside>
+
+<script>
+
+    document.getElementById('asideNavBar').onclick = function (ev) {
+        sessionStorage.setItem('menu_id', ev.target.id);
+        sessionStorage.setItem('menu_link', ev.target.getAttribute('link'));
+    };
+
+    /* 判断选中的菜单 */
+    let menuId = sessionStorage.getItem('menu_id') || 'index';
+    if (menuId) {
+        document.querySelectorAll('a.nav-link').forEach(function (target) {
+            if (menuId === target.id) {
+                target.classList.remove('disabled');
+                target.classList.add('active');
+                let collapse = target.parentNode.parentNode;
+                collapse && collapse.classList.add('show');
+                collapse.previousElementSibling && collapse.previousElementSibling.classList.remove('disabled');
+                collapse.previousElementSibling && collapse.previousElementSibling.classList.add('active');
+            }
+        });
+    }
+
+</script>

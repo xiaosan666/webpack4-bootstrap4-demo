@@ -1,3 +1,9 @@
+<style>
+    a.nav-link:hover {
+        background-color: #ddd;
+    }
+</style>
+
 <aside class="col-md-3 col-lg-2 bg-light" id="asideNavBar">
     <nav class="nav flex-column">
         <a class="nav-link disabled" href="index.html" id="index">首页</a>
@@ -54,18 +60,11 @@
                 <a class="nav-link disabled" href="load.html" id="violation_record" link="violation_record.png">违章记录</a>
             </nav>
         </div>
-        <!--<a class="nav-link disabled" data-toggle="collapse" href="#collapse">菜单</a>
-        <div class="collapse pl-4" id="collapse">
-            <nav class="nav flex-column">
-                <a class="nav-link disabled" href="index.html">index</a>
-                <a class="nav-link disabled" href="invoice.html">invoice</a>
-            </nav>
-        </div>-->
     </nav>
 </aside>
 
 <script>
-
+    // 缓存菜单id，每次打开新页面根据缓存的id选中菜单
     document.getElementById('asideNavBar').onclick = function (ev) {
         sessionStorage.setItem('menu_id', ev.target.id);
         sessionStorage.setItem('menu_link', ev.target.getAttribute('link'));

@@ -7,13 +7,13 @@
 <body>
 <div class="h-100 d-flex flex-column">
     #include("../../../assets/html/nav.html")
-    <section class="flex-grow-1 d-flex row m-0">
+    <section class="h-100 d-flex row m-0">
         #include("../../../assets/html/aside.html")
-        <section class="col-md-9 col-lg-10 flex-grow-1 page-section">
+        <section class="h-100 col-md-9 col-lg-10 page-section" style="overflow: auto">
             <div id="statisticalCost">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">首页</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:sessionStorage.removeItem('menu_id');location.href = '/';">首页</a></li>
                         <li class="breadcrumb-item active">统计分析</li>
                         <li class="breadcrumb-item active" aria-current="page">任务情况</li>
                     </ol>
