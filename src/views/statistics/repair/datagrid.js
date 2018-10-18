@@ -27,6 +27,7 @@ $dg1.datagrid({
         {field: 'field3', title: '维修时间', width: 100, align: 'center'},
         {field: 'field4', title: '维修原因', width: 100, align: 'center'},
         {field: 'field5', title: '维修厂', width: 100, align: 'center'},
+        {field: 'field51', title: '维修项目', width: 100, align: 'center'},
         {field: 'field6', title: '出厂时间', width: 100, align: 'center'},
         {field: 'field7', title: '维修费用', width: 100, align: 'center'},
         {
