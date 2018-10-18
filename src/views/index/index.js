@@ -1,4 +1,5 @@
 import '../../assets/Common';
+
 let echarts = require('echarts');
 import './index.scss';
 import './index.html';
@@ -88,9 +89,14 @@ echarts.init(document.getElementById('chart2')).setOption(option2);
 
 
 let option3 = {
-    color: ['#93cddd'],
+    color: ['#93cddd', '#fac090'],
     tooltip: {
         trigger: 'axis'
+    },
+    legend: {
+        orient: 'horizontal',
+        left: 'right',
+        data: ['公务车', '生产车']
     },
     xAxis: {
         type: 'category',
@@ -101,6 +107,11 @@ let option3 = {
     },
     series: [{
         data: [5, 10, 6, 6, 7, 9, 12, 5, 10, 6, 9, 12],
+        name: '公务车',
+        type: 'line'
+    }, {
+        data: [10, 6, 6, 7, 9, 9, 5, 10, 6, 9, 9, 5],
+        name: '生产车',
         type: 'line'
     }]
 };
@@ -149,10 +160,15 @@ let option4 = {
 echarts.init(document.getElementById('chart4')).setOption(option4);
 
 let option5 = {
+    color: ['#93cddd', '#fac090'],
     tooltip: {
         trigger: 'axis'
     },
-    color: ['#dfa7a6'],
+    legend: {
+        orient: 'horizontal',
+        left: 'right',
+        data: ['公务车', '生产车']
+    },
     xAxis: {
         type: 'category',
         data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
@@ -161,7 +177,12 @@ let option5 = {
         type: 'value'
     },
     series: [{
-        data: [3, 1, 3, 6, 3, 3, 5, 3, 3, 3, 1, 3],
+        data: [3, 2, 3, 3, 2, 3, 3, 2, 3, 3, 2, 1],
+        name: '公务车',
+        type: 'line'
+    }, {
+        data: [3, 4, 3, 5, 3, 3, 5, 3, 4, 3, 4, 3],
+        name: '生产车',
         type: 'line'
     }]
 };

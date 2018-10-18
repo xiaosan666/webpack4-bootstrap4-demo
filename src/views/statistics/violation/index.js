@@ -6,10 +6,15 @@ import './index.html';
 
 
 let option5 = {
+    color: ['#93cddd', '#fac090'],
     tooltip: {
         trigger: 'axis'
     },
-    color: ['#dfa7a6'],
+    legend: {
+        orient: 'horizontal',
+        left: 'right',
+        data: ['公务车', '生产车']
+    },
     xAxis: {
         type: 'category',
         data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
@@ -18,7 +23,12 @@ let option5 = {
         type: 'value'
     },
     series: [{
-        data: [3, 1, 3, 6, 3, 3, 5, 3, 3, 3, 1, 3],
+        data: [3, 2, 3, 3, 2, 3, 3, 2, 3, 3, 2, 1],
+        name: '公务车',
+        type: 'line'
+    }, {
+        data: [3, 4, 3, 5, 3, 3, 5, 3, 4, 3, 4, 3],
+        name: '生产车',
         type: 'line'
     }]
 };

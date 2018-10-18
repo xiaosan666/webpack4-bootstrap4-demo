@@ -6,9 +6,14 @@ import './index.html';
 
 
 let option3 = {
-    color: ['#93cddd'],
+    color: ['#93cddd', '#fac090'],
     tooltip: {
         trigger: 'axis'
+    },
+    legend: {
+        orient: 'horizontal',
+        left: 'right',
+        data: ['公务车', '生产车']
     },
     xAxis: {
         type: 'category',
@@ -19,6 +24,11 @@ let option3 = {
     },
     series: [{
         data: [5, 10, 6, 6, 7, 9, 12, 5, 10, 6, 9, 12],
+        name: '公务车',
+        type: 'line'
+    }, {
+        data: [10, 6, 6, 7, 9, 9, 5, 10, 6, 9, 9, 5],
+        name: '生产车',
         type: 'line'
     }]
 };
