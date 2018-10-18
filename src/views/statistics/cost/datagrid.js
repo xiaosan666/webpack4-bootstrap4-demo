@@ -29,6 +29,7 @@ $dg1.datagrid({
         {field: 'field5', title: '用油量（升）', width: 100, align: 'center'},
         {field: 'field6', title: '加油费', width: 100, align: 'center'},
         {field: 'field7', title: '路桥费', width: 100, align: 'center'},
+        {field: 'field71', title: '保管费', width: 100, align: 'center'},
         {field: 'field8', title: '维修费', width: 100, align: 'center'},
         {field: 'field9', title: '总费用', width: 100, align: 'center'},
         {field: 'field10', title: '每公里成本', width: 100, align: 'center'},
