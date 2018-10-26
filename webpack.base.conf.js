@@ -54,8 +54,12 @@ module.exports = {
                 use: ['html-withimg-loader']
             },
             {
-                test: /\.(png|jpg|jpe?g|gif|svg)$/,
+                test: /\.(png|jpg|jpe?g|gif)$/,
                 use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=img/', 'image-webpack-loader']
+            },
+            {
+                test: /\.(svg|woff|woff2|ttf|eot)(\?.*$|$)/,
+                loader: 'file-loader?name=font/[name].[hash:8].[ext]'
             },
             {
                 test: /\.(css)$/,

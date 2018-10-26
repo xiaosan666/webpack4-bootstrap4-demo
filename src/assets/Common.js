@@ -1,6 +1,7 @@
 import 'jquery';
 import 'bootstrap';
-import './libs/bootstrap/bootstrap.scss';
+import 'bootstrap/scss/bootstrap.scss';
+import 'font-awesome/scss/font-awesome.scss';
 import './setting/sweetalert2';
 import './setting/easyui';
 

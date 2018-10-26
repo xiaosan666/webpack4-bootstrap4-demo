@@ -1,3 +1,26 @@
 body {
     font-size: 1rem;
 }
+
+.test:after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: '';
+}
+
+.test > div {
+    float: left;
+}
+
+.t2 {
+    width: 100px;
+    height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.t3{
+    font-size: 100px;
+}
