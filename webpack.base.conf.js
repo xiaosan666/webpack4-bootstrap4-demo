@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const dirJSON = require('./src/views/views.json');
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
@@ -11,7 +10,7 @@ dirJSON.forEach(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
     let chunks = [page.url];
     if (isProd) {
-        chunks = ['vendors', 'assets', page.url];
+        chunks = ['vendors', 'libs', 'assets', page.url];
     }
     plugins.push(
         new HtmlPlugin({

@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'prod') {
                     libs: {
                         test: path.resolve(__dirname, './src/assets/libs'),
                         priority: -5,
-                        name: 'vendors'
+                        name: 'libs'
                     },
                     assets: {
                         test: path.resolve(__dirname, './src/assets'),
