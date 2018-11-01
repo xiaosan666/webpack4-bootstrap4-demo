@@ -10,7 +10,7 @@ dirJSON.forEach(page => {
     entry[page.url] = path.resolve(__dirname, `./src/views/${page.url}/index.js`);
     let chunks = [page.url];
     if (isProd) {
-        chunks = ['vendors', 'libs', 'assets', page.url];
+        chunks = ['vendors', 'assets', page.url];
     }
     plugins.push(
         new HtmlPlugin({
