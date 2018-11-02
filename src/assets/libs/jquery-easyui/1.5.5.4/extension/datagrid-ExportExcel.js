@@ -25,7 +25,7 @@
                 params.rows = 66000; //excel的最大限度
                 // 排序条件
                 if (opts.sortName) {
-                    $.extend(params, {sort: opts.sortName, order: opts.sortOrder});
+                    $.extend(params, { sort: opts.sortName, order: opts.sortOrder });
                 }
                 // 过滤条件
                 var rules = opts.filterRules ? opts.filterRules : [];
@@ -76,9 +76,9 @@
                                 var field = cols[j].field;
                                 var value = row[field];
                                 if (cols[j].formatter) {
-                                    var colFormat = cols[j].formatter(value, row, j);  //formatter API的参数最多3个
-                                    if (value) {
-                                        //判断是时间格式，就添加一个空白避免excel对时间的格式化
+                                    var colFormat = cols[j].formatter(value, row, j);  // formatter API的参数最多3个
+                                    if (value != null && vallue != undefined) {
+                                        // 判断是时间格式，就添加一个空白避免excel对时间的格式化
                                         excel += '<td>' + (typeof value == 'number' && String(value).length == 13 ? '　' + colFormat : colFormat);
                                     } else {
                                         excel += '<td></td>';
@@ -122,7 +122,7 @@
                         var link = 'data:application/vnd.ms-excel;filename=exportData.doc;' + base64data;
                         var fileName = (defaults.excelName ? defaults.excelName : '下载') + '.xls';
                         var $a = $('<a></a>');
-                        $a.attr({download: fileName, href: link});
+                        $a.attr({ download: fileName, href: link });
                         $a.appendTo($dg);
                         $a[0].click();
                         $a.remove();
