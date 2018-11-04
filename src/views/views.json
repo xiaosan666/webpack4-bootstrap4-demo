@@ -3,7 +3,8 @@
         "url": "index"
     },
     {
-        "url": "invoice"
+        "url": "invoice",
+        "easyui": true
     },
     {
         "url": "test"

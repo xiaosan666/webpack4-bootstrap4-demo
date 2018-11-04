@@ -3,7 +3,6 @@ import 'bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
 import 'font-awesome/scss/font-awesome.scss';
 import './setting/sweetalert2';
-import './setting/easyui';
 
 import './css/app.scss';
 import './js/Constants.js';
