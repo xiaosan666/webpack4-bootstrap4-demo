@@ -12,25 +12,28 @@ if (process.env.NODE_ENV === 'prod') {
         optimization: {
             minimize: true,
             splitChunks: {
-                chunks: 'all',
                 minSize: 0,
                 minChunks: 1,
                 maxAsyncRequests: 50,
                 maxInitialRequests: 30,
+                name: true,
                 cacheGroups: {
                     vendors: {
                         test: /[\\/]node_modules[\\/]/,
                         priority: -1,
+                        chunks: 'all',
                         name: 'vendors'
                     },
                     easyui: {
                         test: path.resolve(__dirname, './src/assets/libs/jquery-easyui'),
                         priority: -5,
+                        chunks: 'initial',
                         name: 'easyui'
                     },
                     assets: {
                         test: path.resolve(__dirname, './src/assets'),
                         priority: -10,
+                        chunks: 'all',
                         name: 'assets'
                     }
                 }
