@@ -30,6 +30,12 @@ if (process.env.NODE_ENV === 'prod') {
                         chunks: 'initial',
                         name: 'easyui'
                     },
+                    echarts: {
+                        test: path.resolve(__dirname, './src/assets/libs/echarts'),
+                        priority: -6,
+                        chunks: 'initial',
+                        name: 'echarts'
+                    },
                     assets: {
                         test: path.resolve(__dirname, './src/assets'),
                         priority: -10,

@@ -12,6 +12,7 @@ dirJSON.forEach(page => {
     if (isProd) {
         chunks.splice(0, 0, 'assets');
         page.easyui && chunks.splice(0, 0, 'easyui');
+        page.echarts && chunks.splice(0, 0, 'echarts');
         chunks.splice(0, 0, 'vendors');
     }
     plugins.push(
