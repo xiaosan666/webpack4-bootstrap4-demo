@@ -1,6 +1,6 @@
 * 本项目集成了bootstrap4，jquery，easyui(可配置)等
 * 采用webpack4多页面(多入口)配置，实现常用webpack配置
-* [在线demo](http://114.55.231.32/yanxiaojun617/webpack4-bootstrap4-demo/)
+* [在线demo](https://www.yanxiaojun617.com/webpack4-bootstrap4-demo/)
 * [项目源码](https://github.com/yanxiaojun617/webpack4-bootstrap4-demo)
 * [项目文档](https://yanxiaojun617.gitbook.io/webpack4-bootstrap4-demo/) 
 * 链接——[Bootstrap](https://getbootstrap.com/)、 [jQuery](https://www.jquery123.com/)、[Font Awesome](http://fontawesome.dashgame.com/)、[EasyUi](http://www.jeasyui.com/demo/main/index.php)、[sass/scss](https://www.sass.hk/)， [webpack](https://www.webpackjs.com/configuration/)

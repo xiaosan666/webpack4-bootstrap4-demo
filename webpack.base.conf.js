@@ -119,10 +119,11 @@ module.exports = {
             }
         ]
     },
-    plugins: plugins.concat([
+    plugins: [
+        ...plugins,
         new MiniCssExtractPlugin({
             filename: 'css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
             chunkFilename: 'css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
         })
-    ])
+    ]
 };
