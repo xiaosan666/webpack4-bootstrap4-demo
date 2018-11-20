@@ -21,3 +21,8 @@ $('form').on('submit', function () {
     }).post();
     return false;
 });
+
+/* 动态加载首页背景图，让移动端不加载 */
+if (window.navigator.userAgent.indexOf('Mobile') === -1) {
+    $('#loginImg').html('<img src="' + require('../../assets/img/login.png') + '" alt="">');
+}
