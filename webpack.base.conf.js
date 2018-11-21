@@ -25,8 +25,7 @@ dirJSON.forEach(page => {
             minify: isProd ? {
                 collapseWhitespace: true,
                 removeComments: true
-            } : false,
-            xhtml: true
+            } : false
         })
     );
 });
@@ -58,6 +57,10 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpe?g|gif)$/,
                 use: ['url-loader?limit=4096&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=img/', 'image-webpack-loader']
+            },
+            {
+                test: /\.(webp)$/,
+                use: ['file-loader?&name=[name]' + (isProd ? '.[hash:8]' : '') + '.[ext]&outputPath=img/']
             },
             {
                 test: /\.(svg|woff|woff2|ttf|eot)(\?.*$|$)/,

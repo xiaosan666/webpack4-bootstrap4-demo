@@ -22,7 +22,14 @@ $('form').on('submit', function () {
     return false;
 });
 
-/* 动态加载首页背景图，让移动端不加载 */
-if (window.navigator.userAgent.indexOf('Mobile') === -1) {
-    $('#loginImg').html('<img src="' + require('../../assets/img/login.png') + '" alt="">');
+/* 动态加载首页背景图，让移动端不加载，让chrome加载webp格式 */
+const u = window.navigator.userAgent;
+const isMobile = u.indexOf('Mobile') !== -1;
+const isChrome = u.indexOf('Chrome') !== -1;
+if (!isMobile) {
+    let src = require('../../assets/img/login.webp');
+    if (!isChrome) {
+        src = require('../../assets/img/login.png');
+    }
+    $('#loginImg').html('<img src="' + src + '" alt="">');
 }
