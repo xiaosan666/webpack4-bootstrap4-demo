@@ -30,6 +30,15 @@ dirJSON.forEach(page => {
     );
 });
 
+if (isProd) {
+    plugins.push(
+        new MiniCssExtractPlugin({
+            filename: 'css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
+            chunkFilename: 'css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
+        })
+    );
+}
+
 module.exports = {
     entry: entry,
     output: {
@@ -68,29 +77,21 @@ module.exports = {
             },
             {
                 test: /\.(css)$/,
-                use: [{
-                    loader: 'css-hot-loader'
-                }, {
+                use: [isProd ? ({
                     loader: MiniCssExtractPlugin.loader,
                     options: {
                         publicPath: '../'
                     }
-                }, {
-                    loader: 'css-loader'
-                }]
+                }) : 'style-loader', 'css-loader']
             },
             {
                 test: /\.(scss)$/,
-                use: [{
-                    loader: 'css-hot-loader'
-                }, {
+                use: [isProd ? ({
                     loader: MiniCssExtractPlugin.loader,
                     options: {
                         publicPath: '../'
                     }
-                }, {
-                    loader: 'css-loader'
-                }, {
+                }) : 'style-loader', 'css-loader', {
                     loader: 'postcss-loader',
                     options: {
                         plugins: function () {
@@ -99,9 +100,7 @@ module.exports = {
                             ];
                         }
                     }
-                }, {
-                    loader: 'sass-loader'
-                }]
+                }, 'sass-loader']
             },
             {
                 enforce: 'pre',
@@ -123,10 +122,6 @@ module.exports = {
         ]
     },
     plugins: [
-        ...plugins,
-        new MiniCssExtractPlugin({
-            filename: 'css/' + (isProd ? '[name].[contenthash:8].min.css' : '[name].css'),
-            chunkFilename: 'css/' + (isProd ? '[name].chunk.[contenthash:8].min.css' : '[name].chunk.css'),
-        })
+        ...plugins
     ]
 };
