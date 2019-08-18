@@ -44,8 +44,8 @@ module.exports = {
     output: {
         publicPath: isProd ? './' : '',
         path: path.resolve(__dirname, './dist'),
-        filename: 'js/' + (isProd ? '[name].[chunkhash].min.js' : '[name].js'),
-        chunkFilename: 'js/' + (isProd ? '[name].chunk.[chunkhash].min.js' : '[name].chunk.js'),
+        filename: 'js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
+        chunkFilename: 'js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
     },
     module: {
         rules: [

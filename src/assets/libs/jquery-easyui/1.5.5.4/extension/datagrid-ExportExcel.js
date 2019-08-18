@@ -77,7 +77,7 @@
                                 var value = row[field];
                                 if (cols[j].formatter) {
                                     var colFormat = cols[j].formatter(value, row, j);  // formatter API的参数最多3个
-                                    if (value != null && vallue != undefined) {
+                                    if (value != null && value != undefined) {
                                         // 判断是时间格式，就添加一个空白避免excel对时间的格式化
                                         excel += '<td>' + (typeof value == 'number' && String(value).length == 13 ? '　' + colFormat : colFormat);
                                     } else {
