@@ -2,32 +2,63 @@
 <html lang="zh-CN">
 <head>
     #include("../../assets/html/head.html")
-    <title>鉴票宝</title>
+    <title>广东电能</title>
 </head>
-
-<body class="container-fluid">
-<div class="row h-100">
-    <div class="h-100 d-none d-xl-block col-xl-7 p-0">
-        <div class="h-100 d-flex align-items-center" id="loginImg"></div>
+<body>
+<div class="navbar-warp">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 navbar-logo">
+                广东电能
+            </div>
+            <div class="col-sm-12 col-md-9">
+                <div class="navbar-menu">
+                    <a href="/">首页</a>
+                    <a href="/">产品中心</a>
+                    <a href="/">关于我们</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-xl-5 col-12 d-flex justify-content-center align-items-center right">
-        <form>
-            <h3 class="text-center mb-5">登录鉴票宝</h3>
-            <input type="hidden" class="form-control" id="client_id" name="client_id" value="web">
-            <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required
-                       value="GPES01">
-            </div>
-            <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required
-                       value="GPES01">
-            </div>
-            <div class="pt-3">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
-            </div>
-        </form>
+</div>
+<div class="page-banner">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 banner-content">
+            <h1>
+                多渠道助力企业，降低能源消耗费用
+            </h1>
+            <br/>
+            <h3>
+                售电 · 节能 · 能效 · 储能
+            </h3>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <img src="../../assets/img/banner-pic1.png" alt="" class="banner-img">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1 class="text-center m-5">主营业务</h1>
+    <div class="row">
+        <div class="col-4">
+            <div class="business-type bg1">售电</div>
+        </div>
+        <div class="col-4">
+            <div class="business-type bg2">能效<br/>管理</div>
+        </div>
+        <div class="col-4">
+            <div class="business-type bg3">电能<br/>替代</div>
+        </div>
+        <div class="w-100 m-2"></div>
+        <div class="col-4">
+            <div class="business-type bg4">储能</div>
+        </div>
+        <div class="col-4">
+            <div class="business-type bg5">调频<br/>发电</div>
+        </div>
+        <div class="col-4">
+            <div class="business-type bg6">合同<br/>能源</div>
+        </div>
     </div>
 </div>
 </body>
