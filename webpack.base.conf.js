@@ -33,7 +33,7 @@ dirJSON.map(page => {
 module.exports = {
     entry: entry,
     output: {
-        publicPath: '/',
+        publicPath: isProd ? './' : '',
         path: path.resolve(__dirname, './dist'),
         filename: 'static/js/' + (isProd ? '[name].[chunkhash:8].min.js' : '[name].js'),
         chunkFilename: 'static/js/' + (isProd ? '[name].chunk.[chunkhash:8].min.js' : '[name].chunk.js'),
