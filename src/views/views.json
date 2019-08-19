@@ -3,10 +3,6 @@
         "url": "index"
     },
     {
-        "url": "invoice",
-        "easyui": true
-    },
-    {
         "url": "charts",
         "echarts": true
     },
