@@ -52,7 +52,8 @@ window.Helper = {
             html.push('</div>');
             html.push('</div>');
             $('body').append(html.join(''));
-            let $message = $('.js-message'); let
+            let $message = $('.js-message');
+            let
                 $warp = $('.js-message-warp');
             $message.animate({ right: 0, bottom: 0 }, 2000, function () {
                 setTimeout(() => {
@@ -82,5 +83,27 @@ window.Helper = {
         }
         $dg.datagrid('unselectAll').datagrid('doFilter');
     },
+    backTop: function backTop(minHeight = 300) {
+        let backTopHtml = '<button type="button" id="backTopBtn" class="btn btn-outline-danger" style="position:fixed;bottom:100px;right:15px;display: none;"><span class="fa fa-arrow-up"></span></button>';
+        $('body').append(backTopHtml);
+        $('#backTopBtn').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 700);
+        }).hover(
+            function () {
+                $(this).addClass('hover');
+            },
+            function () {
+                $(this).removeClass('hover');
+            }
+        );
+        $(window).scroll(function () {
+            let s = $(window).scrollTop();
+            if (s > minHeight) {
+                $('#backTopBtn').fadeIn(100);
+            } else {
+                $('#backTopBtn').fadeOut(100);
+            }
+        });
+    }
 };
 

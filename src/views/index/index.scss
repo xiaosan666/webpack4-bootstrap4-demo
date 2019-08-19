@@ -1,7 +1,6 @@
 .navbar-warp {
     position: fixed;
     width: 100%;
-    background-color: rgba(255, 255, 255, 1);
     z-index: 1;
 }
 
@@ -9,6 +8,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    img{
+        height: 60px;
+    }
 }
 
 .navbar-menu {
@@ -29,10 +31,11 @@
     }
 }
 
-.content-title{
+.content-title {
     padding-top: 60px;
     margin-bottom: 40px;
 }
+
 .page-banner {
     background: url("../../assets/img/banner-bg.jpg") no-repeat top left;
     background-size: 100% 550px;
@@ -50,6 +53,18 @@
             margin-bottom: 20px;
         }
     }
+}
+
+.banner-inner-img {
+    animation: bannerInnerImgMove 5s infinite linear;
+}
+
+@keyframes bannerInnerImgMove {
+    0%   {transform: translateY(0);}
+    25%  {transform: translateY(20px);}
+    50%  {transform: translateY(40px);}
+    75%  {transform: translateY(20px);}
+    100% {transform: translateY(0);}
 }
 
 .business-type {
@@ -76,7 +91,6 @@
         font-size: 40px;
     }
 }
-
 
 .bg1 {
     background: #a14874;
