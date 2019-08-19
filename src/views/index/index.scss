@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    img{
+    img {
         height: 60px;
     }
 }
@@ -44,13 +44,30 @@
     .row {
         margin: 0;
     }
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 24px;
+        padding-top: 150px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
     .banner-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        h2 {
-            margin-bottom: 20px;
+        h1 {
+            font-size: 40px;
+            padding-top: 0;
+        }
+        h3 {
+            font-size: 30px;
         }
     }
 }
@@ -60,11 +77,21 @@
 }
 
 @keyframes bannerInnerImgMove {
-    0%   {transform: translateY(0);}
-    25%  {transform: translateY(20px);}
-    50%  {transform: translateY(40px);}
-    75%  {transform: translateY(20px);}
-    100% {transform: translateY(0);}
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(20px);
+    }
+    50% {
+        transform: translateY(40px);
+    }
+    75% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .business-type {
