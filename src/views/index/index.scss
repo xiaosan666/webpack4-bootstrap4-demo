@@ -12,27 +12,32 @@
 }
 
 .navbar-menu {
-    height: 60px;
     text-align: right;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     > a {
+        line-height: 60px;
         font-size: 16px;
         color: #ed4700;
         text-decoration: none;
         white-space: nowrap;
         &:hover {
-            border-bottom: 2px solid #ed4700;
+            //border-bottom: 2px solid #ed4700;
+            box-shadow: inset 0 -2px 0 #ed4700;
         }
     }
 }
 
+.content-title{
+    padding-top: 60px;
+    margin-bottom: 40px;
+}
 .page-banner {
     background: url("../../assets/img/banner-bg.jpg") no-repeat top left;
-    background-size: 100% 500px;
+    background-size: 100% 550px;
     width: 100%;
-    height: 500px;
+    height: 550px;
     .row {
         margin: 0;
     }
@@ -44,10 +49,6 @@
         h2 {
             margin-bottom: 20px;
         }
-    }
-    .banner-img {
-        max-width: 100%;
-        margin-top: 70px;
     }
 }
 

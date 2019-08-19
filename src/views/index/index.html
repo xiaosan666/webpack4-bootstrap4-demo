@@ -6,23 +6,23 @@
 </head>
 <body>
 <div class="navbar-warp">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-md-3 navbar-logo">
+            <div class="col-sm-12 col-md-5 navbar-logo">
                 广东电能
             </div>
-            <div class="col-sm-12 col-md-9">
+            <div class="col-sm-12 col-md-7">
                 <div class="navbar-menu">
-                    <a href="/">首页</a>
-                    <a href="/">主营业务</a>
-                    <a href="/">关于我们</a>
-                    <a href="/">联系我们</a>
+                    <a href="#home">首页</a>
+                    <a href="#main-business">主营业务</a>
+                    <a href="#about">关于我们</a>
+                    <a href="#contact">联系我们</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="page-banner">
+<div id="home" class="page-banner">
     <div class="row">
         <div class="col-sm-12 col-md-6 banner-content">
             <h1>
@@ -34,12 +34,12 @@
             </h3>
         </div>
         <div class="col-sm-12 col-md-6">
-            <img src="../../assets/img/banner-pic1.png" alt="" class="banner-img">
+            <img src="../../assets/img/banner-pic1.png" alt="" class="img-fluid">
         </div>
     </div>
 </div>
-<div class="container">
-    <h1 class="text-center m-4">主营业务</h1>
+<div id="main-business" class="container">
+    <h1 class="text-center content-title">主营业务</h1>
     <div class="row">
         <div class="col-6 col-md-4">
             <div class="business-type bg1">售电</div>
@@ -60,11 +60,48 @@
             <div class="business-type bg6">合同<br/>能源</div>
         </div>
     </div>
+    <div id="about">
+        <h1 class="text-center content-title">关于我们</h1>
+        <p>
+            广东电能销售有限公司是一家为互联网互联互通提供技术和服务的高科技企业，通过聚合厂商优势资源和自主研发，为用户设计和交付“交钥匙（Turn-key）系统集成方案”，满足用户在等级保护、安全合规、智能化数据中心、弱电集成、定制化应用开发等方面的咨询和建设需求。
+        </p>
+    </div>
+    <div id="contact">
+        <h1 class="text-center content-title">联系我们</h1>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body ">
+                        <h5 class="card-title">联系方式 Contact information</h5>
+                        <p class="card-text">
+                            <i class="fa fa-phone mr-3"></i>020-38917333-1616　　
+                        </p>
+                        <p class="card-text">
+                            <i class="fa fa-envelope mr-3"></i>energy.supply@qq.com
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">公司地址 Company address</h5>
+                        <p class="card-text">
+                            <i class="fa fa-location-arrow mr-1"></i> 广州市天河区珠江新城金穗路62号侨鑫国际附楼1616
+                            <br>
+                            1616, Overseas Chinese Building, No. 62 Jinsui
+                            Road,
+                            Zhujiang New Town, Tianhe District, Guangzhou
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center m-2">
+            <!--https://restapi.amap.com/v3/staticmap?location=113.322242,23.122817&zoom=16&size=700*350&markers=mid,,A:113.322242,23.122817&scale=2&key=9a659f2b1824a66a4e70534efc905c75-->
+            <img src="../../assets/img/map.png" alt="" class="img-fluid">
+        </div>
+    </div>
 </div>
-<div>
-    <h1 class="text-center m-4">联系我们</h1>
-    <img src="https://restapi.amap.com/v3/staticmap?location=113.322242,23.122817&zoom=16&size=1000*500&markers=mid,,A:113.322242,23.122817&key=9a659f2b1824a66a4e70534efc905c75" alt="">
-</div>
+
 #include("../../assets/html/footer.html")
 </body>
 </html>
